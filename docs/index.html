@@ -9,8 +9,19 @@
   <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css">
 </head>
 <body>
-  <div id="app">正在加载。。。</div>
+  <div id="app">loading ...</div>
+
+  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+  <script src="https://cdn.bootcss.com/react/16.7.0-alpha.2/umd/react.production.min.js"></script>
+  <script src="https://cdn.bootcss.com/react-dom/16.7.0-alpha.2/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+  <script src="//unpkg.com/docsify-demo-box-react@1.0.1/dist/docsify-demo-box-react.min.js"></script>
   <script>
+    var jsResources = '<scr' + 'ipt src="//cdn.bootcss.com/react/16.7.0-alpha.2/umd/react.production.min.js"></scr' + 'ipt>\n' +
+    '<scr' + 'ipt src="//cdn.bootcss.com/react-dom/16.7.0-alpha.2/umd/react-dom.production.min.js"></scr' + 'ipt>'
+    // var cssResources = '@import url("//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css");'
+    // var bootCode = 'var globalVariable = "leon"'
+    var globalVariable = "zet"
     window.$docsify = {
       search: 'auto', // 默认值
       search : [
@@ -22,9 +33,15 @@
       loadSidebar: true,
       name: 'zet components',
       subMaxLevel: 2,
-      repo: ''
+      repo: 'https://github.com/9-web/zet-component',
+      markdown: {
+        gfm: true,
+        tables: true,
+      },
+      plugins: [
+        DemoBoxReact.create(jsResources)
+      ],
     }
   </script>
-  <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
 </body>
 </html>
