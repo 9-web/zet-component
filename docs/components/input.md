@@ -9,6 +9,7 @@
 ```jsx
 /*react*/
 <script>
+ import { Button } from 'antd';
  export default class Application extends React.Component {
     constructor(props) {
       super(props)
@@ -22,7 +23,6 @@
         <div>
           <div className='wrapper' ref={el => this.el = el}>
             <div>
-            <p class='author'>author: {this.globalVariable}</p>
             <button style={{color: this.state.color}} className='test' onClick={e => {alert('author: ' + this.globalVariable); this.setState({color: 'red'})}}>test</button>
             </div>
           </div>
