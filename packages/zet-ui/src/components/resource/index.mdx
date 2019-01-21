@@ -1,0 +1,81 @@
+---
+name: Resource (资源)
+menu: Components
+order: 2
+---
+
+import { Playground, PropsTable } from 'docz';
+import { State, Toggle } from 'react-powerplug'
+import { Row, Col } from 'antd';
+import Resource from './index.js'
+const { ResourceGroup } = Resource;
+
+### Resource
+
+## 基本
+<Playground>
+    <Resource value={20} title='CPU(Cores)'></Resource>
+</Playground>
+
+## 禁用
+<Playground>
+    <Resource disabled={true} value={20} title='CPU(Cores)'></Resource>
+</Playground>
+
+## onChange
+<Playground>
+  <State>
+     {({ state, setState }) => (
+      <React.Fragment>
+        <Resource value={state.value} title='CPU(Cores)' onChange={(value) => (setState({ value }))}></Resource>
+        <span>
+          change value: {state.value}
+        </span>
+      </React.Fragment>
+    )}
+  </State>
+</Playground>
+
+## Group
+
+<Playground>
+  <Resource.ResourceGroup title='数据处理'>
+    <Row>
+      <Col span={8}>
+        <Resource value={20} title='CPU(Cores)' />
+      </Col>
+      <Col span={8}>
+        <Resource value={20} title='CPU(Cores)' />
+      </Col>
+      <Col span={8}>
+        <Resource value={20} title='CPU(Cores)' />
+      </Col>
+    </Row>
+  </Resource.ResourceGroup>
+</Playground>
+
+## Group 禁用
+<Playground>
+  <Resource.ResourceGroup disabled={true} title='数据处理'>
+    <Row>
+      <Col span={8}>
+        <Resource value={20} title='CPU(Cores)' />
+      </Col>
+      <Col span={8}>
+        <Resource value={20} title='CPU(Cores)' />
+      </Col>
+      <Col span={8}>
+        <Resource value={20} title='CPU(Cores)' />
+      </Col>
+    </Row>
+  </Resource.ResourceGroup>
+</Playground>
+
+
+## API
+
+### ResourceGroup
+<PropsTable of={ResourceGroup}/>
+
+### Resource
+<PropsTable of={Resource}/>

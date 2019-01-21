@@ -2,9 +2,12 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "server": "docsify serve ./docs"
+    "doc": "docsify serve ./docs",
+    "bootstrap": "lerna bootstrap"
   },
   "devDependencies": {
-    "lerna": "^3.9.0"
+    "lerna": "^3.9.0",
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1"
   }
 }

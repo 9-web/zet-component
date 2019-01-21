@@ -1,15 +1,30 @@
 {
   "name": "zet-ui",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "version": "0.0.1",
+  "description": "zet-ui",
+  "main": "dist/zet-ui.js",
+  "module": "dist/zet-ui.esm.js",
+  "unpkg": "dist/zet-ui.umd.js",
+  "authors": {
+    "name": "wangqj",
+    "email": "qiaojienet@163.com"
   },
-  "keywords": [],
-  "author": "",
-  "description": "",
+  "repository": "/zet-ui",
+  "scripts": {
+    "dev": "umi doc dev",
+    "build": "umi lib build"
+  },
+  "devDependencies": {
+    "react-powerplug": "^1.0.0",
+    "umi": "^2.0.0",
+    "umi-plugin-library": "^1.0.1"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "antd": "^3.12.4"
+  },
   "dependencies": {
-    "antd": "^3.12.3"
+    "antd": "^3.12.4",
+    "classnames": "^2.2.6"
   }
 }
