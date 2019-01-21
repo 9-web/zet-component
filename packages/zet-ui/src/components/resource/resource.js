@@ -3,6 +3,7 @@ import { ResourceContext } from './resourceContext';
 import { InputNumber, Slider, Row, Col} from 'antd';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
+import { isNumber } from '../../utils/utils';
 import styles from './index.less';
 
 class Resource extends Component {
@@ -26,6 +27,9 @@ class Resource extends Component {
 
   onChange = (value) => {
     const { onChange } = this.props;
+    if (!isNumber(value)) {
+      return;
+    }
     this.setState({
       value,
     }, () => {

@@ -12,6 +12,7 @@
   "repository": "/zet-ui",
   "scripts": {
     "dev": "umi doc dev",
+    "build:doc": "umi doc build",
     "build": "umi lib build"
   },
   "devDependencies": {

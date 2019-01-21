@@ -3,7 +3,12 @@
   "private": true,
   "scripts": {
     "doc": "docsify serve ./docs",
-    "bootstrap": "lerna bootstrap"
+    "bootstrap": "lerna bootstrap",
+    "dev": "cd packages/zet-ui && npm run dev",
+    "build": "cd packages/zet-ui && npm run build",
+    "build:doc": "cd packages/zet-ui && npm run build:doc",
+    "publish": "lerna publish",
+    "deploy": "npm run build && npm run publish"
   },
   "devDependencies": {
     "lerna": "^3.9.0",
