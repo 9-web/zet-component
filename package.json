@@ -2,7 +2,6 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "doc": "docsify serve ./docs",
     "bootstrap": "lerna bootstrap",
     "dev": "cd packages/zet-component && npm run dev",
     "build": "cd packages/zet-component && npm run build",

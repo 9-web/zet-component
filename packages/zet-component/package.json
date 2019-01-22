@@ -13,7 +13,7 @@
   "scripts": {
     "dev": "umi doc dev",
     "build:doc": "umi doc build",
-    "deploy:doc": "umi doc deploy",
+    "deploy:doc": "npm run build:doc && umi doc deploy",
     "build": "umi lib build"
   },
   "devDependencies": {
