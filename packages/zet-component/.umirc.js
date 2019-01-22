@@ -10,9 +10,8 @@ export default {
           description: 'Modern UI library for React',
           wrapper: 'src/wrapper.js',
           // dest: '/dist',
-          // repository: 'https://github.com/smooth-code/smooth-ui',
+          repository: 'https://github.com/9-web/zet-component',
           themeConfig: {
-            // repository: 'https://github.com/smooth-code/smooth-ui',
             colors: {
               primary: '#bd4932',
               link: '#bd4932',
