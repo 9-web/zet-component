@@ -4,9 +4,10 @@
   "scripts": {
     "doc": "docsify serve ./docs",
     "bootstrap": "lerna bootstrap",
-    "dev": "cd packages/zet-ui && npm run dev",
-    "build": "cd packages/zet-ui && npm run build",
-    "build:doc": "cd packages/zet-ui && npm run build:doc",
+    "dev": "cd packages/zet-component && npm run dev",
+    "build": "cd packages/zet-component && npm run build",
+    "build:doc": "cd packages/zet-component && npm run build:doc",
+    "deploy:doc": "cd packages/zet-component && npm run deploy:doc",
     "publish": "lerna publish",
     "deploy": "npm run build && npm run publish"
   },

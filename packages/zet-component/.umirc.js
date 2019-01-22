@@ -9,6 +9,7 @@ export default {
           title: 'Zet UI',
           description: 'Modern UI library for React',
           wrapper: 'src/wrapper.js',
+          // dest: '/dist',
           // repository: 'https://github.com/smooth-code/smooth-ui',
           themeConfig: {
             // repository: 'https://github.com/smooth-code/smooth-ui',

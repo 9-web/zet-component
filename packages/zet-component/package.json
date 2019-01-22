@@ -1,5 +1,5 @@
 {
-  "name": "zet-ui",
+  "name": "zet-component",
   "version": "0.0.2",
   "description": "zet-ui",
   "main": "dist/zet-ui.js",
