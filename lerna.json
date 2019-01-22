@@ -2,5 +2,16 @@
   "packages": [
     "packages/*"
   ],
-  "version": "independent"
+  "command": {
+    "publish": {
+      "ignoreChanges": [
+      ]
+    },
+    "bootstrap": {
+      "ignore": "component-*",
+      "npmClientArgs": ["--no-package-lock"]
+    }
+  },
+  "version": "independent",
+  "npmClient": "yarn"
 }
