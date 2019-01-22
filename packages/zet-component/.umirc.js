@@ -6,7 +6,7 @@ export default {
     [
       'umi-plugin-library', {
         doc: {
-          title: 'Zet UI',
+          title: 'Zet Component',
           description: 'Modern UI library for React',
           wrapper: 'src/wrapper.js',
           // dest: '/dist',
@@ -17,11 +17,11 @@ export default {
               primary: '#bd4932',
               link: '#bd4932',
             },
-            // logo: {
-            //   src:
-            //     'https://raw.githubusercontent.com/smooth-code/smooth-ui/master/resources/smooth-ui-logo-horizontal.png',
-            //   width: 200,
-            // },
+            logo: {
+              src:
+                'http://www.zetyun.com/img/icon/logo.svg',
+              width: 200,
+            },
           },
         },
       }
