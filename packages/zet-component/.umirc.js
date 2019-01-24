@@ -9,9 +9,12 @@ export default {
           title: 'Zet Component',
           description: 'Modern UI library for React',
           wrapper: 'src/wrapper.js',
+          // propsParser: false,
           // dest: '/dist',
           repository: 'https://github.com/9-web/zet-component',
+          hashRouter: true,
           themeConfig: {
+            repository: 'https://github.com/9-web/zet-component',
             colors: {
               primary: '#bd4932',
               link: '#bd4932',
