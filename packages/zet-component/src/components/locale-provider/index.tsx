@@ -7,7 +7,7 @@ import enUS from './en_US';
 
 export interface LocaleProviderProps{
   /** 语言包配置, 参数可为zh_CN || en_US*/
-  locale: string
+  locale?: string
 }
 
 class LocaleProvider extends React.Component<LocaleProviderProps, any> {

@@ -3,11 +3,10 @@ import { LocaleContext } from './localeContext';
 
 export interface LocaleReceiverProps{
     /** 组件名称 */
-    componentName: string,
+    componentName? : string,
     /** 组件内容是一个函数  */
-    children: (locale) => any,
+    children: (locale: object) => React.ReactElement<any>;
 }
-
 
 class LocaleReceiver extends React.Component<LocaleReceiverProps, any> {
   getLocale(locale: any = {}) {
