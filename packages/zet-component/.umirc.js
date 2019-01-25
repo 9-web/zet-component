@@ -7,8 +7,9 @@ export default {
       'umi-plugin-library', {
         doc: {
           title: 'Zet Component',
-          description: 'Modern UI library for React',
+          description: 'Zet Component UI library for React',
           wrapper: 'src/wrapper.js',
+          files: "(docs||src)/**/*.mdx",
           // propsParser: false,
           // dest: '/dist',
           repository: 'https://github.com/9-web/zet-component',

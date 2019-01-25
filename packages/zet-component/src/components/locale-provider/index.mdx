@@ -1,0 +1,57 @@
+---
+name: LocalProvider (国际化)
+menu: Other
+order: 80
+---
+
+import { Playground, PropsTable } from 'docz';
+import { State, Toggle } from 'react-powerplug';
+import { Button } from 'antd';
+import { LocaleProvider}  from '../../index.js';
+
+# LocalProvider
+
+## 使用
+LocaleProvider 使用 React 的 context 特性，只需在应用外围包裹一次即可全局生效。
+
+```
+  import { LocaleProvider } from 'zet-component';
+
+  return <LocaleProvider locale='en_US'><App /></LocaleProvider>;
+```
+
+## 内部组件
+内部组件用`LocalProvider.LocaleReceiver`去包裹，需要传一个 `componentName` 参数
+
+<Playground>
+  <State initial={{currLocale: 'en_US'}}>
+     {({ state, setState }) => {
+      function onClick() {
+        setState({
+          currLocale: state.currLocale === 'en_US' ? 'zh_CH' : 'en_US'
+        })
+      }
+
+      return <LocaleProvider locale={state.currLocale}>
+          <LocaleProvider.LocaleReceiver componentName='Test'>
+            {(locale) => {
+              return <div>
+                <div>当前国际化内容：{JSON.stringify(locale)}</div>
+                <div><Button onClick={onClick} type='primary'>改变</Button></div>
+              </div>
+            }}
+          </LocaleProvider.LocaleReceiver>
+      </LocaleProvider>
+    }}
+  </State>
+</Playground>
+
+
+## API
+
+### LocalProvider
+<PropsTable of={LocaleProvider}/>
+
+### LocalProvider.LocaleReceiver
+<PropsTable of={LocaleProvider.LocaleReceiver}/>
+
