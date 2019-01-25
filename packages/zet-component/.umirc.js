@@ -10,6 +10,7 @@ export default {
           description: 'Zet Component UI library for React',
           wrapper: 'src/wrapper.js',
           files: "(docs||src)/**/*.mdx",
+          typescript: true,
           // propsParser: false,
           // dest: '/dist',
           repository: 'https://github.com/9-web/zet-component',

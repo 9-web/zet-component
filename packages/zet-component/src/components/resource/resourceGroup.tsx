@@ -1,10 +1,21 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { ResourceContext } from './resourceContext';
 import classnames from 'classnames';
-import PropTypes from 'prop-types';
 import styles from './index.less';
 
-class ResourceGroup extends Component {
+
+export interface ResourceGroupProps{
+  /** 组件行行内样式 */
+  style: React.CSSProperties,
+  /** 自定义类名 */
+  className: string,
+  /** 资源项标题 */
+  title: string,
+  /** 是否禁用 */
+  disabled: boolean,
+}
+
+class ResourceGroup extends React.Component<ResourceGroupProps, any> {
   static defaultProps = {
     title: '',
     className: '',
@@ -39,15 +50,5 @@ class ResourceGroup extends Component {
   }
 }
 
-ResourceGroup.propTypes = {
-  /** 组件行行内样式 */
-  style: PropTypes.object,
-  /** 自定义类名 */
-  className: PropTypes.string,
-  /** 资源项标题 */
-  title: PropTypes.string,
-  /** 是否禁用 */
-  disabled: PropTypes.bool,
-}
 
 export default ResourceGroup;

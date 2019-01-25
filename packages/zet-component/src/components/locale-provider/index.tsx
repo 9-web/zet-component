@@ -1,12 +1,17 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { LocaleContext } from './localeContext';
 import LocaleReceiver from './localeReceiver';
 import zhCN from './zh_CN';
 import enUS from './en_US';
 
-class LocaleProvider extends Component {
 
+export interface LocaleProviderProps{
+  /** 语言包配置, 参数可为zh_CN || en_US*/
+  locale: string
+}
+
+class LocaleProvider extends React.Component<LocaleProviderProps, any> {
+  static LocaleReceiver: typeof LocaleReceiver;
   static defaultProps = {
     locale: 'zh_CN'
   }
@@ -22,11 +27,6 @@ class LocaleProvider extends Component {
       </LocaleContext.Provider>
     )
   }
-}
-
-LocaleProvider.propTypes = {
-  /** 语言包配置, 参数可为zh_CN || en_US*/
-  locale: PropTypes.string
 }
 
 LocaleProvider.LocaleReceiver = LocaleReceiver;

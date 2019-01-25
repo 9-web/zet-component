@@ -1,12 +1,42 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { ResourceContext } from './resourceContext';
 import { InputNumber, Slider, Row, Col} from 'antd';
 import classnames from 'classnames';
-import PropTypes from 'prop-types';
+import ResourceGroup from './resourceGroup';
 import { isNumber } from '../../utils/utils';
 import styles from './index.less';
 
-class Resource extends Component {
+export interface ResourceProps {
+    /** 组件行行内样式 */
+    style?: React.CSSProperties,
+    /** 自定义类名 */
+    className?: string,
+    /** 资源组件的宽度 */
+    width?: string | number,
+    /** 是否禁用 */
+    disabled?: boolean,
+    /** 资源项标题 */
+    title?: string,
+    /** 初始化资源值 */
+    defaultValue?: number,
+    /** 资源值 */
+    value?: number,
+    /** 步长，取值必须大于 0，并且可被 (max - min) 整除 */
+    step?: number,
+    /** 最大值 */
+    max?: number,
+    /** 最小值 */
+    min?: number,
+    /** 资源改变触发的回调 */
+    onChange?: (e: React.MouseEvent<any>) => void,
+    /** 滑动输入条的属性 */
+    sliderProps?: any,
+    /** 数字输入框的属性 */
+    inputNumberProps?: any,
+}
+
+class Resource extends React.Component<ResourceProps, any> {
+  static ResourceGroup: typeof ResourceGroup;
   static defaultProps = {
     width: '255px',
     onChange: () => {},
@@ -18,8 +48,8 @@ class Resource extends Component {
     inputNumberProps: {},
   }
 
-  constructor(props) {
-    super();
+  constructor(props: ResourceProps) {
+    super(props);
     this.state = {
       value: props.value || props.defaultValue || 0,
     };
@@ -57,7 +87,7 @@ class Resource extends Component {
               }
               return (
                 <React.Fragment>
-                  <Row span={12}>
+                  <Row>
                     <Col span={12}>{title}</Col>
                     <Col span={12}
                       style={{
@@ -102,38 +132,4 @@ class Resource extends Component {
   }
 }
 
-Resource.propTypes = {
-  /** 组件行行内样式 */
-  style: PropTypes.object,
-  /** 自定义类名 */
-  className: PropTypes.string,
-  /** 资源组件的宽度 */
-  width: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]),
-  /** 是否禁用 */
-  disabled: PropTypes.bool,
-  /** 资源项标题 */
-  title: PropTypes.string,
-  /** 初始化资源值 */
-  defaultValue: PropTypes.number,
-  /** 资源值 */
-  value: PropTypes.number,
-  /** 步长，取值必须大于 0，并且可被 (max - min) 整除 */
-  step: PropTypes.number,
-  /** 最大值 */
-  max: PropTypes.number,
-  /** 最小值 */
-  min: PropTypes.number,
-  /** 资源改变触发的回调 */
-  onChange: PropTypes.func,
-  /** 滑动输入条的属性 */
-  sliderProps: PropTypes.object,
-   /** 数字输入框的属性 */
-  inputNumberProps:  PropTypes.object,
-
-}
-
 export default Resource;
-

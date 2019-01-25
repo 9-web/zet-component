@@ -7,7 +7,7 @@ order: 70
 import { Playground, PropsTable } from 'docz';
 import { State, Toggle } from 'react-powerplug'
 import { Row, Col } from 'antd';
-import { Resource } from '../../index.js'
+import { Resource } from '../../index.tsx'
 const { ResourceGroup } = Resource;
 
 # Resource
@@ -74,8 +74,9 @@ const { ResourceGroup } = Resource;
 
 ## API
 
+### Resource
+<PropsTable of={Resource}/>
+
 ### ResourceGroup
 <PropsTable of={ResourceGroup}/>
 
-### Resource
-<PropsTable of={Resource}/>

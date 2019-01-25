@@ -1,9 +1,16 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { LocaleContext } from './localeContext';
-import PropTypes from 'prop-types';
-class LocaleReceiver extends Component {
 
-  getLocale(locale = {}) {
+export interface LocaleReceiverProps{
+    /** 组件名称 */
+    componentName: string,
+    /** 组件内容是一个函数  */
+    children: (locale) => any,
+}
+
+
+class LocaleReceiver extends React.Component<LocaleReceiverProps, any> {
+  getLocale(locale: any = {}) {
     const { componentName  } = this.props;
     return {
       ...locale[componentName],
@@ -21,11 +28,6 @@ class LocaleReceiver extends Component {
       </LocaleContext.Consumer>
     )
   }
-}
-
-LocaleReceiver.propTypes = {
-  /** 组件名称 */
-  componentName: PropTypes.string,
 }
 
 export default LocaleReceiver;

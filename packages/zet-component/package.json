@@ -9,7 +9,7 @@
     "name": "wangqj",
     "email": "qiaojienet@163.com"
   },
-  "repository": "/zet-ui",
+  "repository": "https://github.com/9-web/zet-component",
   "scripts": {
     "dev": "umi doc dev",
     "build:doc": "umi doc build",
@@ -19,7 +19,7 @@
   "devDependencies": {
     "react-powerplug": "^1.0.0",
     "umi": "^2.0.0",
-    "umi-plugin-library": "^1.0.1"
+    "umi-plugin-library": "^1.0.2"
   },
   "license": "MIT",
   "peerDependencies": {
