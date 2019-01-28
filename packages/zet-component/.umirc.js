@@ -5,6 +5,9 @@ export default {
   plugins: [
     [
       'umi-plugin-library', {
+        cssModules: {
+          camelCase: true
+        },
         doc: {
           title: 'Zet Component',
           description: 'Zet Component UI library for React',
