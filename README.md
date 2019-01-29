@@ -81,6 +81,7 @@ $ yarn dev
 * `yarn bootstrap` 安装项目依赖
 * `yarn dev` 启动开发环境
 * `yarn build` 构建组件产物
+* `yarn build:watch` 文件改变自动构建组件产物
 * `yarn build:doc` 构建组件文档产物
 * `yarn deploy:doc` 把文档产物发布到github pages上
 * `yarn publish` 发布组件到npm仓库上
