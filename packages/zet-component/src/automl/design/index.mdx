@@ -6,10 +6,36 @@ order: 70
 
 import { Playground, PropsTable } from 'docz';
 import { State, Toggle } from 'react-powerplug'
-import { } from '../../index.tsx'
+import { AutoML } from '../../index.tsx';
+import leftData from './_mock/leftData.js';
+
 
 # AutoML.Design (建模设计)
+自动建模建模设计时候用此组件
 
+
+## 基础展示
+我们需要定义`AutoML.Design`组件的`leftData`属性，数据格式如下：
+```
+[{
+  key: 'baseInfo',
+  value: '基础信息',
+  children: [
+    {
+      key: 'target',
+      value: '目标'
+    }
+  ]
+}]
+```
+引入组件
+```
+import { AutoML } from 'zet-component';
+```
 
 <Playground>
+  <AutoML.Design
+    leftData={leftData}
+  >
+  </AutoML.Design>
 </Playground>

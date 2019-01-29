@@ -1,0 +1,32 @@
+@import '../../style/minxins/index.less';
+@import '../../style/index.less';
+
+@resource-prefix-cls: ~'@{zet-prefix}-aml-design';
+
+.@{resource-prefix-cls} {
+  display: 1;
+  height: 100%;
+  &-sider {
+    border-right: 1px solid rgba(16, 38, 58, 0.15);
+    overflow: auto;
+    :global {
+      .ant-list-item {
+        padding: 0 !important;
+      }
+    }
+  }
+
+  &-header{
+    background-color: #fff;
+    border-bottom: 1px solid rgba(16, 38, 58, 0.15);
+    height: 54px;
+    padding: 0 20px;
+    line-height: 54px;
+  }
+
+  &-content{
+    background: #fff;
+    overflow-y: auto;
+    flex: 1;
+  }
+}
