@@ -112,7 +112,7 @@ class Resource extends React.Component<ResourceProps, any> {
                     </Col>
                   </Row>
                   <Slider
-                    className={styles.zetResource}
+                    className={styles.zetResourceSlider}
                     onChange={this.onChange}
                     value={value}
                     step={step}

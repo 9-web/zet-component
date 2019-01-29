@@ -19,7 +19,7 @@
   "devDependencies": {
     "react-powerplug": "^1.0.0",
     "umi": "^2.0.0",
-    "umi-plugin-library": "^1.0.2"
+    "umi-plugin-library": "^1.1.0"
   },
   "license": "MIT",
   "peerDependencies": {
