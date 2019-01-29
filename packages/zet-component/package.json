@@ -14,7 +14,8 @@
     "dev": "umi doc dev",
     "build:doc": "umi doc build",
     "deploy:doc": "npm run build:doc && umi doc deploy",
-    "build": "umi lib build"
+    "build": "umi lib build",
+    "build:watch": "umi lib build --watch"
   },
   "devDependencies": {
     "react-powerplug": "^1.0.0",

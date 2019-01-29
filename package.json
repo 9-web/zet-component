@@ -5,6 +5,7 @@
     "bootstrap": "lerna bootstrap",
     "dev": "cd packages/zet-component && npm run dev",
     "build": "cd packages/zet-component && npm run build",
+    "build:watch": "cd packages/zet-component && npm run build:watch",
     "build:doc": "cd packages/zet-component && npm run build:doc",
     "deploy:doc": "cd packages/zet-component && npm run deploy:doc",
     "publish": "lerna publish",

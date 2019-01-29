@@ -59,3 +59,4 @@ ReactDOM.render(<DatePicker>);
 * `yarn build:doc` 构建文档
 * `yarn deploy:doc` 构建文档并发布到github pages
 * `yarn build` 构建组件产物
+* `yarn build:watch` 文件改变自动构建组件产物
