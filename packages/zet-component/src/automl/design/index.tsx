@@ -31,7 +31,7 @@ export interface DesignProps {
 }
 
 export interface DesignState {
-  selectedKeys: Array<any>,
+  selectedKeys: Array<string>,
   selectedData: LeftDataItem,
 }
 
