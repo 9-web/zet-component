@@ -1,0 +1,63 @@
+@import '../../style/minxins/index.less';
+@import '../../style/index.less';
+
+@panel-prefix-cls: ~'@{zet-prefix}-achievement';
+
+
+.@{panel-prefix-cls}{
+  background-color: gray;
+  font-size:14px;
+  &-title{
+    height:50px;
+    line-height: 30px;
+    padding:10px 20px;
+    border-bottom: 2px solid rgba(0,0,0,0.2);
+    &-name{
+      float:left;
+    }
+    &-extra{
+      float:right
+    }
+  }
+  &-content{
+    padding:10px 20px;
+    transition: all 1.65s
+  }
+
+}
+
+@keyframes leftRight
+{
+  0% {-webkit-transform:rotateY(0deg);}
+  50% {-webkit-transform:rotateY(90deg);}
+  100% {-webkit-transform:rotateY(0deg);}
+}
+
+@keyframes rightLeft
+{
+  0% {-webkit-transform:rotateY(0deg);}
+  50% {-webkit-transform:rotateY(90deg);}
+  100% {-webkit-transform:rotateY(0deg);}
+}
+.rotateContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.rotateLeftRight{
+  -webkit-transform:translate3d(0,0,0);
+  -moz-transform:translate3d(0,0,0);
+  transform:translate3d(0,0,0);
+  -webkit-animation:leftRight 0.5s linear;
+  -moz-animation:leftRight 0.5s linear;
+  animation:leftRight 0.5s linear;
+}
+
+.rotateRightLeft{
+  -webkit-transform:translate3d(0,0,0);
+  -moz-transform:translate3d(0,0,0);
+  transform:translate3d(0,0,0);
+  -webkit-animation:rightLeft 0.5s linear;
+  -moz-animation:rightLeft 0.5s linear;
+  animation:rightLeft 0.5s linear;
+}
