@@ -6,3 +6,4 @@ TODO.md
 lerna-debug.log
 *.tsx/*.js
 *.tsx/*.js.map
+.idea/*
