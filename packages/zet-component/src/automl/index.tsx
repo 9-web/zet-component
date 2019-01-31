@@ -1,10 +1,10 @@
 
 import Design from './design';
-import Panel from './achievement';
+import Achievement from './achievement';
 
-export const AutoML = {
+const AutoML = {
   Design,
-  Panel
+  Achievement
 }
 
 export default AutoML;

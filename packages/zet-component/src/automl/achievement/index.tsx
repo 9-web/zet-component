@@ -1,6 +1,6 @@
 import Panel from './panel';
-import Group from './panelGroup';
+import Achievement from './achievement';
 
 
-Panel.Group = Group;
-export default Panel;
+Achievement.Panel = Panel;
+export default Achievement;

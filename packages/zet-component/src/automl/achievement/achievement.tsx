@@ -1,10 +1,12 @@
 import * as React from 'react';
 import classNames from 'classnames';
+import {Icon} from 'antd';
 import PropTypes from 'prop-types'
+import Panel from './panel'
 
 import styles from './index.less';
 
-export interface PanelGroupProps {
+interface AchievementProps {
   /** 组件行行内样式 */
   style?: React.CSSProperties,
   /** 自定义类名 */
@@ -22,19 +24,20 @@ export interface PanelGroupProps {
   /** 扩展操作的key  all：全部  */
   extraKeys?: string | Array<string>,
   /** 资源改变触发的回调 */
-  onChange?: (e: React.MouseEvent<any>) => void,
+  onChange?: (option:string,state:object) => void,
 }
 
-export interface PanelGroupState {
+interface AchievementState {
   /** 展开 关闭操作 open：展开  closed：关闭*/
   unfoldState:string,
   /** 旋转按钮 rotateRightLeft: 从右向左 rotateLeftRight：从左向右*/
   rotateState:string,
   /** 图形展示 chart: 图形 table: 表格*/
-  showShape:string
+  type:string
 }
 
-class PanelGroup extends React.Component<PanelGroupProps, PanelGroupState> {
+class Achievement extends React.Component<AchievementProps, AchievementState> {
+  static Panel: typeof Panel;
   // 声明Context对象属性
   static childContextTypes = {
     unfoldState: PropTypes.string,
@@ -49,25 +52,33 @@ class PanelGroup extends React.Component<PanelGroupProps, PanelGroupState> {
     }
   }
 
-  constructor(props: PanelGroupProps) {
+  constructor(props: AchievementProps) {
     super(props);
     this.state = {
       unfoldState:'open',
       rotateState:'',
-      showShape:'chart'
+      type:'chart'
     }
   }
   unfoldPanel = () => {
     const {unfoldState} = this.state;
+    const { onChange } = this.props;
+    const currentUnfoldState = unfoldState=='open'? 'closed':'open';
     this.setState({
-      unfoldState:unfoldState=='open'? 'closed':'open'
+      unfoldState:currentUnfoldState
+    },()=>{
+      onChange('unfold',{...this.state})
     })
   };
-  chartHandle = () => {
-    const {showShape} = this.state;
+  chartHandle = (e,type) => {
+    e.stopPropagation();
+    if(!type) return;
+    const { onChange } = this.props;
     this.setState({
-      rotateState:showShape=='chart'? 'rotateLeftRight' : 'rotateRightLeft',
-      showShape:showShape=='chart'? 'table':'chart'
+      rotateState:type=='chart'? 'rotateLeftRight' : 'rotateRightLeft',
+      type:type
+    },()=>{
+      onChange('rotate',{...this.state})
     })
   };
   getItemUnfoldCondition = (item) => {
@@ -85,19 +96,24 @@ class PanelGroup extends React.Component<PanelGroupProps, PanelGroupState> {
       width, height, children
     } = this.props;
     const styleProps = {width, height, ...style};
-    const { unfoldState, rotateState } = this.state;
-    const cNames = classNames(styles.zetPanelGroup, className);
+    const { unfoldState, rotateState, type } = this.state;
+    const cNames = classNames(styles.zetAchievement, className);
     return (
       <div className={`${cNames} ${styles[rotateState]}`} style={styleProps}>
-        <div className={styles['zet-panel-group-title']} style={headStyle}>
-          <span className={styles['zet-panel-group-title-name']} >{title}</span>
-          <span className={styles['zet-panel-group-title-chart']} onClick={this.chartHandle}>图形</span>
-          <span className={styles['zet-panel-group-title-table']} onClick={this.chartHandle}>表格</span>
-          <span className={styles['zet-panel-group-title-extra']}>
-            <span onClick={this.unfoldPanel}>{unfoldState=='open'? '关闭':'展开'}</span>
+        <div onClick={this.unfoldPanel} className={styles['zet-achievement-title']} style={headStyle}>
+          <span className={styles['zet-achievement-title-name']} >{title}</span>
+          <span className={styles['zet-achievement-title-option']} onClick={(e)=>{this.chartHandle(e,'')}} >
+            <span className={`${styles['zet-achievement-title-chart']} ${type=='chart' && styles['zet-achievement-title-checked']}`}
+                  onClick={(e)=>{this.chartHandle(e,'chart')}}><Icon type="line-chart" /></span>
+            <span className={`${styles['zet-achievement-title-table']} ${type=='table' && styles['zet-achievement-title-checked']}`}
+                  onClick={(e)=>{this.chartHandle(e,'table')}}><Icon type="table" /></span>
+          </span>
+
+          <span className={styles['zet-achievement-title-extra']}>
+            <span >{unfoldState=='open'? '关闭':'展开'}</span>
           </span>
         </div>
-        <div className={styles['zet-panel-group-content']}>
+        <div className={styles['zet-achievement-content']}>
           {React.Children.map(children,(item)=>{
             return item;
           })}
@@ -108,4 +124,4 @@ class PanelGroup extends React.Component<PanelGroupProps, PanelGroupState> {
 }
 
 
-export default PanelGroup
+export default Achievement

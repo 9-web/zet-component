@@ -1,30 +1,26 @@
 import * as React from 'react';
-import Group from './panelGroup'
 import PropTypes from 'prop-types'
 
 import styles from './index.less';
 
-export interface AchievementProps {
+export interface PanelProps {
   /** 组件行行内样式 */
   style?: React.CSSProperties,
-  /** key */
+  /** panel 选项  panelGroup 操作子项是使用 */
   option?: string,
   /** 宽度 */
   width?: string | number,
-  /** 自适应*/
+  /** 是否在高度上自适应*/
   flex?:boolean,
   /** 高度 */
   height?: string | number,
-  /** 资源改变触发的回调 */
-  onChange?: (e: React.MouseEvent<any>) => void,
 }
 
-export interface AchievementState {
+export interface PanelState {
 
 }
 
-class Achievement extends React.Component<AchievementProps, AchievementState> {
-  static Group: typeof Group;
+class Panel extends React.Component<PanelProps, PanelState> {
   static defaultProps = {
     width: '100%',
     onChange: () => {},
@@ -33,11 +29,11 @@ class Achievement extends React.Component<AchievementProps, AchievementState> {
     unfoldState: PropTypes.string,
     extraKeys:PropTypes.any,
   }
-  constructor(props: AchievementProps) {
+  constructor(props: PanelProps) {
     super(props);
     this.state = {}
   }
-  getItemUnfoldCondition = () => {
+  getPanelUnfoldCondition = () => {
     const {unfoldState,extraKeys} = this.context;
     const {option} = this.props;
     if(extraKeys === 'all' || extraKeys.indexOf(option)>-1){
@@ -52,18 +48,16 @@ class Achievement extends React.Component<AchievementProps, AchievementState> {
     if(this.props.flex){
       styleProps.flex = 1;
     }
-    if(!this.getItemUnfoldCondition()){
+    if(!this.getPanelUnfoldCondition()){
       styleProps.height = 0;
       delete styleProps.flex;
     }
     return (
-      <div className={styles.zetAchievement} style={styleProps}>
-        <div className={styles['zet-achievement-content']}>
-          {children}
-        </div>
+      <div className={styles['zet-panel']} style={styleProps}>
+        {children}
      </div>
     )
   }
 }
 
-export default Achievement
+export default Panel

@@ -5,29 +5,45 @@ order: 70
 ---
 
 import { Playground, PropsTable } from 'docz';
-import { State, Toggle } from 'react-powerplug'
+import { State, Toggle } from 'react-powerplug';
+import { Example1, Example2 } from './_mock/example'
 import { AutoML } from '../../index.tsx';
+const { Achievement } = AutoML;
 
-
-# AutoML.Achievement (模型成果)
+# Achievement (模型成果)
 
 引入组件
 ```
 import { AutoML } from 'zet-component';
 ```
 
-## Props
-<PropsTable  of = {AutoML.Panel}  />
 
 ## Basic usage
 
-<Playground>
-  {()=>{
-    const { Panel } = AutoML;
-    const { Group } = AutoML.Panel;
-    return <Group title='Test' extraKeys={['1']} style={{height:500}}>
-      <Panel option='1' height={300} style={{backgroundColor:'#ccc'}}></Panel>
-      <Panel option='2' flex style={{backgroundColor:'#999'}}></Panel>
-    </Group>
-  }}
+<Playground style={{backgroundColor:'aliceblue'}}>
+  <State initial={{ show:'chart' }}>
+    {({ state, setState }) => {
+      const { Achievement } = AutoML;
+      const { Panel } = Achievement;
+      const changeHandle = (option, record)=>{
+         console.log('record',option,record);
+         if(option=='rotate'){
+            setState({
+              show:record.type
+            })
+         }
+      }
+      const {show} = state;
+      return <Achievement title='Test' extraKeys={['1']} style={{height:500}} onChange={changeHandle}>
+        <Panel option='1' height={300}>{show=='chart' ? <Example1/> : <Example2/>}</Panel>
+        <Panel option='2' flex >{show=='chart' ? <Example1/> : <Example2/>}</Panel>
+      </Achievement>
+    }}
+  </State>
 </Playground>
+
+
+## API
+
+### Achievement
+<PropsTable of={ Achievement } />
