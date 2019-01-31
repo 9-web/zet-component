@@ -2,11 +2,20 @@
 @import '../../style/index.less';
 
 @panel-prefix-cls: ~'@{zet-prefix}-achievement';
-
+@panel-prefix-clsg: ~'@{zet-prefix}-panel-group';
 
 .@{panel-prefix-cls}{
-  background-color: gray;
   font-size:14px;
+  transition: all 0.45s;
+  &-content{
+    padding:10px 20px;
+  }
+}
+.@{panel-prefix-clsg}{
+  font-size:14px;
+  .zet-achievement{
+    margin-bottom:30px;
+  }
   &-title{
     height:50px;
     line-height: 30px;
@@ -15,16 +24,25 @@
     &-name{
       float:left;
     }
+    &-chart{
+      margin-left:20px;
+      margin-right:5px;
+    }
+    &-table{
+      margin-left:5px;
+      margin-right:20px;
+    }
     &-extra{
       float:right
     }
   }
   &-content{
-    padding:10px 20px;
-    transition: all 1.65s
+    display: flex;
+    flex-direction: column;
+    height:calc(~'100%' - 50px)
   }
-
 }
+
 
 @keyframes leftRight
 {
@@ -39,11 +57,7 @@
   50% {-webkit-transform:rotateY(90deg);}
   100% {-webkit-transform:rotateY(0deg);}
 }
-.rotateContainer {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
+
 .rotateLeftRight{
   -webkit-transform:translate3d(0,0,0);
   -moz-transform:translate3d(0,0,0);

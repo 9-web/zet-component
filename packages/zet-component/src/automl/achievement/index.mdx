@@ -8,6 +8,7 @@ import { Playground, PropsTable } from 'docz';
 import { State, Toggle } from 'react-powerplug'
 import { AutoML } from '../../index.tsx';
 
+
 # AutoML.Achievement (模型成果)
 
 引入组件
@@ -15,6 +16,18 @@ import { AutoML } from '../../index.tsx';
 import { AutoML } from 'zet-component';
 ```
 
+## Props
+<PropsTable  of = {AutoML.Panel}  />
+
+## Basic usage
+
 <Playground>
-  <AutoML.Achievement></AutoML.Achievement>
+  {()=>{
+    const { Panel } = AutoML;
+    const { Group } = AutoML.Panel;
+    return <Group title='Test' extraKeys={['1']} style={{height:500}}>
+      <Panel option='1' height={300} style={{backgroundColor:'#ccc'}}></Panel>
+      <Panel option='2' flex style={{backgroundColor:'#999'}}></Panel>
+    </Group>
+  }}
 </Playground>
