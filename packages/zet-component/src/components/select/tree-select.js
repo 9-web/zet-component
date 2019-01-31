@@ -14,19 +14,20 @@ class TreeSelect extends React.Component {
         };
     }
     render() {
-        const { style, className, treeData, showSearch, allowClear, treeDefaultExpandAll, ...rest } = this.props;
+        const { style, className, treeData, showSearch, allowClear, treeDefaultExpandAll, treeNodeFilterProp, ...treeSelectProps } = this.props;
         const classNames = classnames(styles.zetSelect, className);
         const defuleStyle = {
             width: 300,
             ...style,
         };
-        return (React.createElement(TreeSelect_, Object.assign({ style: defuleStyle, className: classNames, value: this.state.value, dropdownStyle: { maxHeight: 400, overflow: 'auto' }, placeholder: "Please select", onChange: this.onChange, treeData: treeData, showSearch: showSearch, allowClear: allowClear, treeNodeFilterProp: 'title', treeDefaultExpandAll: treeDefaultExpandAll }, rest)));
+        return (React.createElement(TreeSelect_, Object.assign({ style: defuleStyle, className: classNames, value: this.state.value, onChange: this.onChange, treeData: treeData, showSearch: showSearch, allowClear: allowClear, treeNodeFilterProp: treeNodeFilterProp, treeDefaultExpandAll: treeDefaultExpandAll }, treeSelectProps)));
     }
 }
 TreeSelect.defaultProps = {
     showSearch: true,
     allowClear: true,
     treeDefaultExpandAll: true,
+    treeNodeFilterProp: 'title',
 };
 export default TreeSelect;
 //# sourceMappingURL=tree-select.js.map

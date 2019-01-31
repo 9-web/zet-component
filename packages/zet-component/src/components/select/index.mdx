@@ -4,11 +4,13 @@ menu: Components
 order: 2
 ---
 
-import { Playground } from 'docz';
+import { Playground, PropsTable } from 'docz';
 import { Icon, Menu, Dropdown, Button } from 'antd';
 import { Select } from '../../index.tsx';
 import { styles } from './index.less';
 import treeData from './_mock/treeData.js';
+
+const TreeSelect = Select.TreeSelect;
 
 # Select (选择器)
 
@@ -65,6 +67,7 @@ import treeData from './_mock/treeData.js';
 
 ### API
 
+### Select
+<PropsTable of={Select}/>
 
 
-### tset

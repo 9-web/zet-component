@@ -1,5 +1,5 @@
 import * as React from "react";
-import { TreeSelect as TreeSelect_, Icon } from 'antd';
+import { TreeSelect as TreeSelect_ } from 'antd';
 import classnames from 'classnames';
 
 import styles from './index.less';
@@ -21,10 +21,17 @@ export interface TreeProps {
   style?: React.CSSProperties,
   /** 自定义类名 */
   className?: string,
+  /** 下拉框树形数组 */
   treeData: Array<TreeNode>;
+  /** 是否展示搜索匡 */
   showSearch?: boolean;
+  /** 是否显示清除按钮 */
   allowClear?: boolean;
+  /** 是否展开树 */
   treeDefaultExpandAll?: boolean;
+  /** 指定搜索属性 */
+  treeNodeFilterProp?: string;
+  /** 是否展开树 */
   treeSelectProps?: any;
 }
 
@@ -33,6 +40,7 @@ class TreeSelect  extends React.Component<TreeProps, any> {
     showSearch: true,
     allowClear: true,
     treeDefaultExpandAll: true,
+    treeNodeFilterProp: 'title',
   }
 
   constructor(props: TreeProps) {
@@ -49,7 +57,7 @@ class TreeSelect  extends React.Component<TreeProps, any> {
   }
 
   render() {
-    const { style, className, treeData, showSearch, allowClear, treeDefaultExpandAll, ...rest } = this.props;
+    const { style, className, treeData, showSearch, allowClear, treeDefaultExpandAll, treeNodeFilterProp, ...treeSelectProps } = this.props;
     const classNames = classnames(styles.zetSelect, className);
     const defuleStyle = {
       width: 300,
@@ -61,15 +69,13 @@ class TreeSelect  extends React.Component<TreeProps, any> {
         style={defuleStyle}
         className={classNames}
         value={this.state.value}
-        dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-        placeholder="Please select"
         onChange={this.onChange}
         treeData={treeData}
         showSearch={showSearch}
         allowClear={allowClear}
-        treeNodeFilterProp='title'
+        treeNodeFilterProp={treeNodeFilterProp}
         treeDefaultExpandAll={treeDefaultExpandAll}
-        {...rest}
+        {...treeSelectProps}
       />
     );
   }

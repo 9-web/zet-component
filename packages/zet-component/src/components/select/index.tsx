@@ -1,11 +1,12 @@
 import TreeSelect from './tree-select';
 import * as React from "react";
+export { TreeProps } from './tree-select';
 
-export interface TagProps {
+export interface SelectProps {
   title?: string;
 }
 
-class Select  extends React.Component<TagProps, any> {
+class Select extends React.Component<SelectProps, any> {
   static TreeSelect: typeof TreeSelect;
 
   render(){
