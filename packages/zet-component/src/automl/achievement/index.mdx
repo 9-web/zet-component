@@ -26,7 +26,6 @@ import { AutoML } from 'zet-component';
       const { Achievement } = AutoML;
       const { Panel } = Achievement;
       const changeHandle = (option, record)=>{
-         console.log('record',option,record);
          if(option=='rotate'){
             setState({
               show:record.type
@@ -47,3 +46,6 @@ import { AutoML } from 'zet-component';
 
 ### Achievement
 <PropsTable of={ Achievement } />
+
+### Panel
+<PropsTable of={ Achievement.Panel } />
