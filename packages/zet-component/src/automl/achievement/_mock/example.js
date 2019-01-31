@@ -10,7 +10,7 @@ export function Example1(props){
 }
 
 
-export function Example2(){
+export function Example2(props){
   const {style} = props;
   return (
     <div className={styles.example} style={style}>
