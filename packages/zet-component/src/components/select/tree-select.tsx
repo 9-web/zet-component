@@ -1,20 +1,9 @@
 import * as React from "react";
 import { TreeSelect as TreeSelect_ } from 'antd';
+import { TreeNodeNormal } from 'antd/lib/tree-select/interface';
 import classnames from 'classnames';
 
 import styles from './index.less';
-
-export interface TreeNode {
-  value: string | number;
-  label?: React.ReactNode;
-  title?: React.ReactNode;
-  key: string;
-  isLeaf?: boolean;
-  disabled?: boolean;
-  disableCheckbox?: boolean;
-  selectable?: boolean;
-  children?: TreeNode[];
-}
 
 export interface TreeProps {
   /** 组件行行内样式 */
@@ -22,7 +11,7 @@ export interface TreeProps {
   /** 自定义类名 */
   className?: string,
   /** 下拉框树形数组 */
-  treeData: Array<TreeNode>;
+  treeData: Array<TreeNodeNormal>;
   /** 是否展示搜索匡 */
   showSearch?: boolean;
   /** 是否显示清除按钮 */
@@ -52,12 +41,11 @@ class TreeSelect  extends React.Component<TreeProps, any> {
   }
 
   onChange = (value) => {
-    console.log(value);
     this.setState({ value });
   }
 
   render() {
-    const { style, className, treeData, showSearch, allowClear, treeDefaultExpandAll, treeNodeFilterProp, ...treeSelectProps } = this.props;
+    const { style, className, treeData, showSearch, allowClear, treeDefaultExpandAll, treeNodeFilterProp, treeSelectProps } = this.props;
     const classNames = classnames(styles.zetSelect, className);
     const defuleStyle = {
       width: 300,
