@@ -34,9 +34,9 @@ import { AutoML } from 'zet-component';
          }
       }
       const {show} = state;
-      return <Achievement title='Test' extraKeys={['1']} style={{height:500}} onChange={changeHandle}>
-        <Panel option='1' height={300}>{show=='chart' ? <Example1/> : <Example2/>}</Panel>
-        <Panel option='2' flex >{show=='chart' ? <Example1/> : <Example2/>}</Panel>
+      return <Achievement title='Test' extraKeys={['1']} style={{height:800}} onChange={changeHandle}>
+        <Panel option='1' height={300}>{show=='chart' ? <Example1 /> : <Example2/>}</Panel>
+        <Panel option='2' flex >{show=='chart' ? <Example1 style={{height:600}}/> : <Example2 style={{height:600}}/>}</Panel>
       </Achievement>
     }}
   </State>

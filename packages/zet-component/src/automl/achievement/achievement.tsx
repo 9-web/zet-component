@@ -19,9 +19,9 @@ interface AchievementProps {
   headStyle?: React.CSSProperties,
   /** 标题 */
   title: string,
-  /** 扩展 */
-  extra?: Array<any>,
-  /** 扩展操作的key  all：全部  */
+  /** 收缩 展开按钮 默认为true 不需要显示是 需设置 extra={false} */
+  extra?: boolean,
+  /** 扩展操作的key  all：ß全部  */
   extraKeys?: string | Array<string>,
   /** 资源改变触发的回调 */
   onChange?: (option:string,state:object) => void,
@@ -93,7 +93,7 @@ class Achievement extends React.Component<AchievementProps, AchievementState> {
   render() {
     const {
       style, className, headStyle, title,
-      width, height, children
+      width, height, children, extra
     } = this.props;
     const styleProps = {width, height, ...style};
     const { unfoldState, rotateState, type } = this.state;
@@ -109,9 +109,11 @@ class Achievement extends React.Component<AchievementProps, AchievementState> {
                   onClick={(e)=>{this.chartHandle(e,'table')}}><Icon type="table" /></span>
           </span>
 
-          <span className={styles['zet-achievement-title-extra']}>
+          {
+            extra!==false &&  <span className={styles['zet-achievement-title-extra']}>
             <span >{unfoldState=='open'? '关闭':'展开'}</span>
           </span>
+          }
         </div>
         <div className={styles['zet-achievement-content']}>
           {React.Children.map(children,(item)=>{
