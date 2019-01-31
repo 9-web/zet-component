@@ -1,0 +1,89 @@
+@import '../../style/minxins/index.less';
+@import '../../style/index.less';
+
+@panel-prefix-cls: ~'@{zet-prefix}-panel';
+@panel-prefix-clsg: ~'@{zet-prefix}-achievement';
+
+.@{panel-prefix-cls}{
+  background-color: #fff;
+  font-size:14px;
+  transition: all 0.45s;
+  overflow: auto;
+}
+.@{panel-prefix-clsg}{
+  font-size:14px;
+  .zet-panel{
+    margin-bottom:20px;
+  }
+  &-title{
+    background-color: #fff;
+    height:50px;
+    line-height: 30px;
+    padding:10px 30px;
+    border-bottom: 1px solid rgba(0,0,0,.1);
+
+    &-name{
+      font-size: 18px;
+      font-weight: 200;
+      float:left;
+      cursor:pointer;
+    }
+    &-chart{
+      margin-left:30px;
+      margin-right:10px;
+      font-size: 18px;
+      cursor:pointer;
+    }
+    &-table{
+      margin-left:10px;
+      margin-right:20px;
+      font-size: 18px;
+      cursor:pointer;
+    }
+    &-checked{
+      background-color: gray;
+    }
+    &-extra{
+      float:right;
+      cursor:pointer;
+    }
+  }
+  &-content{
+    display: flex;
+    flex-direction: column;
+    height:calc(~'100%' - 50px)
+  }
+}
+
+
+@keyframes leftRight
+{
+  0% {-webkit-transform:rotateY(0deg);}
+  50% {-webkit-transform:rotateY(90deg);}
+  100% {-webkit-transform:rotateY(0deg);}
+}
+
+@keyframes rightLeft
+{
+  0% {-webkit-transform:rotateY(0deg);}
+  50% {-webkit-transform:rotateY(90deg);}
+  100% {-webkit-transform:rotateY(0deg);}
+}
+
+.rotateLeftRight{
+  -webkit-transform:translate3d(0,0,0);
+  -moz-transform:translate3d(0,0,0);
+  transform:translate3d(0,0,0);
+  -webkit-animation:leftRight 0.5s linear;
+  -moz-animation:leftRight 0.5s linear;
+  animation:leftRight 0.5s linear;
+}
+
+.rotateRightLeft{
+  -webkit-transform:translate3d(0,0,0);
+  -moz-transform:translate3d(0,0,0);
+  transform:translate3d(0,0,0);
+  -webkit-animation:rightLeft 0.5s linear;
+  -moz-animation:rightLeft 0.5s linear;
+  animation:rightLeft 0.5s linear;
+}
