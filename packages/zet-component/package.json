@@ -25,10 +25,10 @@
   "typings": "dist/index.d.ts",
   "license": "MIT",
   "peerDependencies": {
-    "antd": "^3.12.4"
+    "antd": "3.13.0"
   },
   "dependencies": {
-    "antd": "^3.12.4",
+    "antd": "3.13.0",
     "classnames": "^2.2.6"
   },
   "gitHead": "4fc6290749504292d4c362e914db1ce3ca9aff5a"
