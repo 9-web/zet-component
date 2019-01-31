@@ -4,5 +4,6 @@
 /.docz
 /node_modules
 .rpt2_cache
+.idea/*
 /*.tsx/*.js
 /*.tsx/*.js.map
