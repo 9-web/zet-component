@@ -1,21 +1,53 @@
 ---
-name: Alogrithm
-menu: Other
+name: Alogrithm(算法)
+menu: AutoML
 ---
 
 import { Playground, PropsTable } from 'docz';
 import { State, Toggle } from 'react-powerplug';
 import { } from 'antd';
-import { } from '../../index.tsx';
+import { AutoML } from '../../index.tsx';
+import dataItem from './_mock/dataItem.js';
 
 # Alogrithm
 
 ## 使用
-Alogrithm ...
+Alogrithm
 
+
+## 参数模板
+
+### 组件输出接口数据
+```
+[
+  {
+    "id": "99bbf190-a77d-65f7-2c3c-2d4372730695",
+    "name": "随机森林",
+    "params": {
+        "max_features": "Null",
+        "max_depth": [
+            10
+        ],
+        "n_jobs": 1,
+        "n_estimators": [
+            10
+        ],
+        "min_samples_leaf": [
+            1
+        ]
+    }
+}
+]
+```
 
 ## 案例介绍
 <Playground>
+    {
+      () => {
+        return <AutoML.Algorithm.Item data={dataItem} />
+      }
+    }
+
 </Playground>
 
 
