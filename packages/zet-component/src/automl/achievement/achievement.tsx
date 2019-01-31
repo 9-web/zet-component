@@ -38,6 +38,10 @@ interface AchievementState {
 
 class Achievement extends React.Component<AchievementProps, AchievementState> {
   static Panel: typeof Panel;
+  static defaultProps = {
+    extra:true,
+    extraKeys:'all'
+  }
   // 声明Context对象属性
   static childContextTypes = {
     unfoldState: PropTypes.string,
@@ -81,15 +85,6 @@ class Achievement extends React.Component<AchievementProps, AchievementState> {
       onChange('rotate',{...this.state})
     })
   };
-  getItemUnfoldCondition = (item) => {
-    let {extraKeys='all'} = this.props;
-    const {unfoldState} = this.state;
-    if(extraKeys === 'all' || extraKeys.indexOf(item.key)>-1){
-      return unfoldState==='open'
-    }else{
-      return true;
-    }
-  };
   render() {
     const {
       style, className, headStyle, title,
@@ -100,7 +95,7 @@ class Achievement extends React.Component<AchievementProps, AchievementState> {
     const cNames = classNames(styles.zetAchievement, className);
     return (
       <div className={`${cNames} ${styles[rotateState]}`} style={styleProps}>
-        <div onClick={this.unfoldPanel} className={styles['zet-achievement-title']} style={headStyle}>
+        <div  className={styles['zet-achievement-title']} style={headStyle}>
           <span className={styles['zet-achievement-title-name']} >{title}</span>
           <span className={styles['zet-achievement-title-option']} onClick={(e)=>{this.chartHandle(e,'')}} >
             <span className={`${styles['zet-achievement-title-chart']} ${type=='chart' && styles['zet-achievement-title-checked']}`}
@@ -110,7 +105,7 @@ class Achievement extends React.Component<AchievementProps, AchievementState> {
           </span>
 
           {
-            extra!==false &&  <span className={styles['zet-achievement-title-extra']}>
+            extra!==false &&  <span className={styles['zet-achievement-title-extra']} onClick={this.unfoldPanel}>
             <span >{unfoldState=='open'? '关闭':'展开'}</span>
           </span>
           }
