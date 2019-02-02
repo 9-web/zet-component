@@ -1,4 +1,5 @@
 export interface ParamsItemSchema {
+  /** 参数key */
   key: string,
   /** 名称 */
   name: string,
@@ -10,6 +11,10 @@ export interface ParamsItemSchema {
   default: any,
   /** 扩展描述 */
   extra: string,
+  /** item数据，例如：select 的 option || radio group */
+  data?: any,
+  /** 配置子父级依赖关系 */
+  condition?: string,
 }
 
 /** 当个数据项结构 */
@@ -19,7 +24,7 @@ export interface DataItemSchema {
   /** 名称 */
   name: string,
   /** 描述 */
-  desc: string,
+  desc?: string,
   /** 算法参数列表 */
   params: Array<ParamsItemSchema>,
 }

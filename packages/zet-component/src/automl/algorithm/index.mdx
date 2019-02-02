@@ -6,8 +6,9 @@ menu: AutoML
 import { Playground, PropsTable } from 'docz';
 import { State, Toggle } from 'react-powerplug';
 import { } from 'antd';
-import { AutoML } from '../../index.tsx';
-import dataItem from './_mock/dataItem.js';
+import { AutoML, LocaleProvider } from '../../index.tsx';
+import { item, value } from './_mock/dataItem.js';
+import list from './_mock/list.js';
 
 # Alogrithm
 
@@ -42,12 +43,19 @@ Alogrithm
 
 ## 案例介绍
 <Playground>
-    {
-      () => {
-        return <AutoML.Algorithm.Item data={dataItem} />
-      }
-    }
-
+  <State initial={{value: value}}>
+    {({ state, setState }) => (
+      <LocaleProvider locale={'zh_CN'}>
+        <React.Fragment>
+          <AutoML.Algorithm data={list} />
+          <AutoML.Algorithm.Item value={state.value} data={item} onChange={(value) => (setState({ value }))} />
+          <span>
+            change value: {JSON.stringify(state.value)}
+          </span>
+        </React.Fragment>
+      </LocaleProvider>
+    )}
+  </State>
 </Playground>
 
 

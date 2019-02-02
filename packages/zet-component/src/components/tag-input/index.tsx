@@ -36,7 +36,6 @@ class TagInput extends React.Component<TagInputProps, any> {
   }
 
   static defaultProps = {
-    value: new Set(),
     type: 'number',
     width: '100%',
   }

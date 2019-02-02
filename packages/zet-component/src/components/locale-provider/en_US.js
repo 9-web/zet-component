@@ -3,6 +3,10 @@ export default {
   global: {
     placeholder: 'Placeholder',
   },
+  AutoML: {
+    off: 'off',
+    on: 'on'
+  },
   Test: {
     okText: 'Ok',
   }
