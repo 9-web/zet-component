@@ -2,6 +2,7 @@ import * as React from 'react';
 import { FormComponentProps } from 'antd/lib/form';
 import { DataItemSchema, ParamsItemSchema, ValueItemSchema } from './interface';
 import { Form, Select, Input, InputNumber } from 'antd';
+import Ellipsis from '../../components/ellipsis';
 import TagInput from '../../components/tag-input';
 import styles from './index.less';
 
@@ -31,10 +32,24 @@ export interface ItemProps extends FormComponentProps {
   /** value 接口传过来的数据 */
   value: ValueItemSchema,
   /** onChange 变化 */
-  onChange: (DataItemSchema) => void,
+  onChange?: (DataItemSchema) => void,
+  /** 是否禁用 */
+  disabled: boolean,
 }
 
 class Item extends React.Component<ItemProps, any> {
+
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      collapse: true,
+    }
+  }
+
+  static defaultProps = {
+    disabled: false,
+  }
 
   componentDidMount() {
     const { data, value, onChange } = this.props;
@@ -56,8 +71,9 @@ class Item extends React.Component<ItemProps, any> {
   }
 
   renderSelect = (selectData: ParamsItemSchema) => {
+    const { disabled } = this.props;
     return (
-      <Select style={{width: '100%'}} key={selectData.key}>
+      <Select disabled={disabled} style={{width: '100%'}} key={selectData.key}>
         {
           selectData.data && selectData.data.map(d => {
             return <Option key={d.value} value={d.value}>{d.name}</Option>
@@ -67,15 +83,16 @@ class Item extends React.Component<ItemProps, any> {
   }
 
   renderItem = (item: ParamsItemSchema) => {
+    const { disabled } = this.props;
     switch (item.type) {
       case 'tag-input':
-        return <TagInput key={item.key} />
+        return <TagInput style={{width: '100%'}} disabled={disabled} key={item.key} />
       case 'select':
         return this.renderSelect(item)
       case 'input':
-        return <Input key={item.key} />
+        return <Input style={{width: '100%'}} disabled={disabled} key={item.key} />
       case 'inputnumber':
-        return <InputNumber key={item.key} />
+        return <InputNumber style={{width: '100%'}} min={item.min} max={item.max} disabled={disabled} key={item.key} />
       default:
         throw('auto ml algorithm params no matching ! ');
     }
@@ -121,30 +138,48 @@ class Item extends React.Component<ItemProps, any> {
     return filterValue;
   }
 
+  onChangeCollapse = () => {
+    this.setState(prevState => ({
+      collapse: !prevState.collapse,
+    }));
+  }
+
   public render() {
     const { data,
       form: { getFieldDecorator }
     } = this.props;
+    const {collapse} = this.state;
     // console.log('data', data)
     return (
-      <div className={styles.zetAmlAlgorithmParams}>
-        {
-          data.params && this.handleParams(data.params).map(item => {
-            return (
-              <FormItem
-                {...formItemLayout}
-                key={item.key}
-                label={item.name}
-                extra={item.extra ? item.extra : null}
-              >
-                { getFieldDecorator(item.key, {
-                  initialValue: item.default,
+      <React.Fragment>
+        <div className={styles.zetAmlAlgorithmParamsInfo}>
+          <div className={styles.zetAmlAlgorithmParamsInfoTitle} key='name'>{data.name}</div>
+          <div className={styles.zetAmlAlgorithmParamsInfoDesc} key='desc'>
+            <Ellipsis lines={collapse ? 1 : 100}>
+              {data.desc}
+            </Ellipsis>
+          </div>
+          <a style={{ float: 'right' }} onClick={() => this.onChangeCollapse()}>{collapse ? '展开' : '收起'}</a>
+        </div>
+        <Form layout='horizontal' className={styles.form}>
+          {
+            data.params && this.handleParams(data.params).map(item => {
+              return (
+                <FormItem
+                  {...formItemLayout}
+                  key={item.key}
+                  label={item.name}
+                  extra={item.extra ? item.extra : null}
+                >
+                  { getFieldDecorator(item.key, {
+                    initialValue: item.default,
 
-                })(this.renderItem(item)) }
-              </FormItem>)
-          })
-        }
-      </div>
+                  })(this.renderItem(item)) }
+                </FormItem>)
+            })
+          }
+        </Form>
+      </React.Fragment>
     );
   }
 }

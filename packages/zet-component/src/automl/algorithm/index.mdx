@@ -5,7 +5,7 @@ menu: AutoML
 
 import { Playground, PropsTable } from 'docz';
 import { State, Toggle } from 'react-powerplug';
-import { } from 'antd';
+import { Button } from 'antd';
 import { AutoML, LocaleProvider } from '../../index.tsx';
 import { item, value } from './_mock/dataItem.js';
 import list from './_mock/list.js';
@@ -43,20 +43,25 @@ Alogrithm
 
 ## 案例介绍
 <Playground>
-  <State initial={{value: value}}>
+  <State initial={{disabled: false, value: [{"id":"d7660525-e5a3-44fd-af23-8376f945bfb5","name":"LeNet","params":{"norm_size":4833}},{"id":"39f0901a-1807-40bf-848a-304d19d4ace4","name":"VGG19","params":{"norm_size":48}},{"id":"d1010bce-2050-4beb-855b-d9ebcae81598","name":"VGG19","params":{"norm_size":4333}}]}}>
     {({ state, setState }) => (
-      <LocaleProvider locale={'zh_CN'}>
-        <React.Fragment>
-          <AutoML.Algorithm data={list} />
-          <AutoML.Algorithm.Item value={state.value} data={item} onChange={(value) => (setState({ value }))} />
-          <span>
-            change value: {JSON.stringify(state.value)}
-          </span>
-        </React.Fragment>
-      </LocaleProvider>
+      <React.Fragment>
+        <Button style={{marginBottom: '10px'}} type='primay' onClick={() => { setState({ disabled: !state.disabled}) }}>{state.disabled ? '启用' : '禁用'}</Button>
+        <LocaleProvider locale={'zh_CN'}>
+          <React.Fragment>
+            <AutoML.Algorithm disabled={state.disabled} value={state.value} data={list} onChange={(value) => (setState({ value }))} />
+            {/* <AutoML.Algorithm.Item value={state.value} data={item} onChange={(value) => (setState({ value }))} /> */}
+            <span>
+              change value: {JSON.stringify(state.value)}
+            </span>
+          </React.Fragment>
+        </LocaleProvider>
+      </React.Fragment>
     )}
   </State>
 </Playground>
 
 
 ## API
+
+<PropsTable of={AutoML.Algorithm} />

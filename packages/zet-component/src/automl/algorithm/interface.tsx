@@ -9,6 +9,10 @@ export interface ParamsItemSchema {
   multiple?: boolean,
   /** 默认值 */
   default: any,
+  /** 最大值 */
+  max: number,
+  /** 最小值 */
+  min: number,
   /** 扩展描述 */
   extra: string,
   /** item数据，例如：select 的 option || radio group */
@@ -25,6 +29,8 @@ export interface DataItemSchema {
   name: string,
   /** 描述 */
   desc?: string,
+  /** 是否可用 */
+  checked?: boolean,
   /** 算法参数列表 */
   params: Array<ParamsItemSchema>,
 }
