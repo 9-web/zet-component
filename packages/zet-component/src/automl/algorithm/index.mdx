@@ -1,0 +1,67 @@
+---
+name: Alogrithm(算法)
+menu: AutoML
+---
+
+import { Playground, PropsTable } from 'docz';
+import { State, Toggle } from 'react-powerplug';
+import { Button } from 'antd';
+import { AutoML, LocaleProvider } from '../../index.tsx';
+import { item, value } from './_mock/dataItem.js';
+import list from './_mock/list.js';
+
+# Alogrithm
+
+## 使用
+Alogrithm
+
+
+## 参数模板
+
+### 组件输出接口数据
+```
+[
+  {
+    "id": "99bbf190-a77d-65f7-2c3c-2d4372730695",
+    "name": "随机森林",
+    "params": {
+        "max_features": "Null",
+        "max_depth": [
+            10
+        ],
+        "n_jobs": 1,
+        "n_estimators": [
+            10
+        ],
+        "min_samples_leaf": [
+            1
+        ]
+    }
+}
+]
+```
+
+## 案例介绍
+<Playground>
+  <State initial={{disabled: false, value: [{"id":"d7660525-e5a3-44fd-af23-8376f945bfb5","name":"LeNet","params":{"norm_size":4833}},{"id":"39f0901a-1807-40bf-848a-304d19d4ace4","name":"VGG19","params":{"norm_size":48}},{"id":"d1010bce-2050-4beb-855b-d9ebcae81598","name":"VGG19","params":{"norm_size":4333}}]}}>
+    {({ state, setState }) => (
+      <React.Fragment>
+        <Button style={{marginBottom: '10px'}} type='primay' onClick={() => { setState({ disabled: !state.disabled}) }}>{state.disabled ? '启用' : '禁用'}</Button>
+        <LocaleProvider locale={'zh_CN'}>
+          <React.Fragment>
+            <AutoML.Algorithm disabled={state.disabled} value={state.value} data={list} onChange={(value) => (setState({ value }))} />
+            {/* <AutoML.Algorithm.Item value={state.value} data={item} onChange={(value) => (setState({ value }))} /> */}
+            <span>
+              change value: {JSON.stringify(state.value)}
+            </span>
+          </React.Fragment>
+        </LocaleProvider>
+      </React.Fragment>
+    )}
+  </State>
+</Playground>
+
+
+## API
+
+<PropsTable of={AutoML.Algorithm} />

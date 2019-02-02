@@ -1,0 +1,61 @@
+@import '../../style/minxins/index.less';
+@import '../../style/index.less';
+
+@resource-prefix-cls: ~'@{zet-prefix}-tag-input';
+
+.@{resource-prefix-cls} {
+  border: 1px solid #d5dbe8;
+  color: #777777;
+  min-height: 30px;
+  overflow: hidden;
+  padding:0 4px;
+  border-radius: 4px;
+  position: relative;
+
+  &-focus{
+
+  }
+
+  &-disabled{
+    background: #eee;
+  }
+
+  &-tag{
+    color: rgba(16, 38, 58, 0.65);
+    i {
+      color: rgba(16, 38, 58, 0.65) !important;
+    }
+    height: 24px;
+  }
+
+  input {
+    border: none;
+    font-size: 100%;
+    max-width: 100%;
+    min-width: 0.75em;
+    background: transparent;
+    outline: 0;
+    border-radius: 4px;
+    line-height: 1;
+    padding-left: 0;
+  }
+  ul {
+    overflow: hidden;
+    margin: 0;
+    padding-left: 0;
+    li {
+      height: 24px;
+      line-height: 22px;
+      float: left;
+      margin-right: 4px;
+      max-width: 99%;
+      position: relative;
+      overflow: hidden;
+      margin-top: 1px;
+      .ant-tag{
+          margin-top: 2px;
+          margin-right: 4px;
+      }
+    }
+  }
+}

@@ -1,0 +1,76 @@
+@import '../../style/minxins/index.less';
+@import '../../style/index.less';
+
+@algorithm-prefix-cls: ~'@{zet-prefix}-aml-algorithm';
+
+// 算法参数前缀
+@algorithm-params-prefix-cls: ~'@{zet-prefix}-aml-algorithm-params';
+
+.@{algorithm-prefix-cls} {
+  &-layout{
+    height: 100%;
+    background-color: #fff;
+
+    &-list{
+      width: 100%;
+      box-sizing: border-box;
+      height: 100%;
+
+      &-item{
+        font-size: 14px!important;
+        // border-bottom: 1px solid #ebeef9;
+        height: 54px!important;
+        margin: 0!important;
+        line-height: 54px!important;
+        padding: 0 24px !important;
+        color: #777!important;
+        &.active{
+            background: #ebecf1;
+            color: #444;
+        }
+        &:hover{
+            background: #ebecf1;
+            color: #444;
+        }
+        &-right{
+          float: right;
+          margin-top: 17px;
+      }
+      }
+    }
+
+    &-content{
+      position: relative;
+      height: 100%;
+      font-size: 14px;
+      padding: 24px;
+      background-color: #fff;
+      overflow-y: auto;
+    }
+  }
+}
+
+
+.@{algorithm-params-prefix-cls} {
+  &-info{
+    background: #fafafa;
+    border-radius: 2px;
+    padding: 24px 40px;
+    margin-bottom: 24px;
+
+    &-title{
+      font-size: 18px;
+      line-height: 24px;
+      color: rgba(16, 38, 58, 0.85);
+      margin-bottom: 16px;
+    }
+
+    &-desc{
+      color: rgba(16, 38, 58, 0.65);
+      font-size: 14px;
+      line-height: 22px;
+      margin-bottom: 10px;
+    }
+  }
+
+}

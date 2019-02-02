@@ -4,6 +4,8 @@ TODO.md
 /packages/*/node_modules
 /packages/*/LICENSE
 lerna-debug.log
+.rtp2_cache
 .idea/*
 *.tsx/*.js
 *.tsx/*.js.map
+
