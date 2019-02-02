@@ -1,10 +1,12 @@
 
 import Design from './design';
 import Algorithm from './algorithm';
+import Achievement from './achievement';
 
-export const AutoML = {
+const AutoML = {
   Design,
   Algorithm,
+  Achievement
 }
 
 export default AutoML;
