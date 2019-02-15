@@ -20,8 +20,6 @@ export interface TreeProps {
   treeDefaultExpandAll?: boolean;
   /** 指定搜索属性 */
   treeNodeFilterProp?: string;
-  /** 是否展开树 */
-  treeSelectProps?: any;
 }
 
 class TreeSelect  extends React.Component<TreeProps, any> {
@@ -45,7 +43,7 @@ class TreeSelect  extends React.Component<TreeProps, any> {
   }
 
   render() {
-    const { style, className, treeData, showSearch, allowClear, treeDefaultExpandAll, treeNodeFilterProp, treeSelectProps } = this.props;
+    const { style, className, treeData, showSearch, allowClear, treeDefaultExpandAll, treeNodeFilterProp, ...rest} = this.props;
     const classNames = classnames(styles.zetSelect, className);
     const defuleStyle = {
       width: 300,
@@ -63,7 +61,7 @@ class TreeSelect  extends React.Component<TreeProps, any> {
         allowClear={allowClear}
         treeNodeFilterProp={treeNodeFilterProp}
         treeDefaultExpandAll={treeDefaultExpandAll}
-        {...treeSelectProps}
+        {...rest}
       />
     );
   }

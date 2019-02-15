@@ -104,7 +104,6 @@ class Achievement extends React.Component<AchievementProps, AchievementState> {
           </div>
         </div>
       </AchieveContext.Provider>
-
     )
   }
 }

@@ -68,3 +68,22 @@ export default props => (
     }}
   </AchieveContext.Consumer>
 )
+  render() {
+    const { style, width, height ,children} = this.props;
+    const styleProps = {width, height, ...style};
+    if(this.props.flex){
+      styleProps.flex = 1;
+    }
+    if(!this.getPanelUnfoldCondition()){
+      styleProps.height = 0;
+      delete styleProps.flex;
+    }
+    return (
+      <div className={styles['zet-panel']} style={styleProps}>
+        {children}
+     </div>
+    )
+  }
+}
+
+export default Panel

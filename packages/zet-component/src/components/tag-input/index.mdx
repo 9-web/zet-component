@@ -1,0 +1,51 @@
+---
+name: TagInput
+menu: Components
+---
+
+import { Playground, PropsTable } from 'docz';
+import { State, Toggle } from 'react-powerplug';
+import { } from 'antd';
+import { TagInput } from '../../index.tsx';
+
+# TagInput
+
+## 使用
+`TagInput`用来在文本框输入标签用，现在自助建模算法在使用
+
+
+## 基本使用
+<Playground>
+    <TagInput value={[1,2,3,4]} />
+</Playground>
+
+## 禁用
+<Playground>
+    <TagInput value={[1,2,3,4]} disabled />
+</Playground>
+
+
+## 输入类型
+`type` 属性用来区分输入类型，可选值为`number`或`string`
+<Playground>
+    <TagInput type='string' value={[1,2,3,4]} />
+</Playground>
+
+## onChage
+<Playground>
+  <State initial={{value: []}}>
+    {({ state, setState }) => (
+      <React.Fragment>
+        <TagInput type='string' value={state.value} onChange={(value) => (setState({ value }))} />
+        <span>
+          change value: {Array.isArray(state.value) && JSON.stringify(state.value)}
+        </span>
+      </React.Fragment>
+    )}
+  </State>
+</Playground>
+
+## API
+
+### TagInput
+<PropsTable of={TagInput}/>
