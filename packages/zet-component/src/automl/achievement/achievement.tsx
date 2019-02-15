@@ -1,7 +1,6 @@
 import * as React from 'react';
 import classNames from 'classnames';
 import {Icon} from 'antd';
-import PropTypes from 'prop-types'
 import Panel from './panel'
 import { AchieveContext } from './context'
 import styles from './index.less';
