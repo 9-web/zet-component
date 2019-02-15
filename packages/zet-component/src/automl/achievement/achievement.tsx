@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import {Icon} from 'antd';
 import PropTypes from 'prop-types'
 import Panel from './panel'
-
+import { AchieveContext } from './context'
 import styles from './index.less';
 
 interface AchievementProps {
@@ -42,20 +42,6 @@ class Achievement extends React.Component<AchievementProps, AchievementState> {
     extra:true,
     extraKeys:'all'
   }
-  // 声明Context对象属性
-  static childContextTypes = {
-    unfoldState: PropTypes.string,
-    extraKeys: PropTypes.any
-  }
-
-  // 返回Context对象，方法名是约定好的
-  getChildContext () {
-    return {
-      unfoldState: this.state.unfoldState,
-      extraKeys:this.props.extraKeys
-    }
-  }
-
   constructor(props: AchievementProps) {
     super(props);
     this.state = {
@@ -94,28 +80,30 @@ class Achievement extends React.Component<AchievementProps, AchievementState> {
     const { unfoldState, rotateState, type } = this.state;
     const cNames = classNames(styles.zetAchievement, className);
     return (
-      <div className={`${cNames} ${styles[rotateState]}`} style={styleProps}>
-        <div  className={styles['zet-achievement-title']} style={headStyle}>
-          <span className={styles['zet-achievement-title-name']} >{title}</span>
-          <span className={styles['zet-achievement-title-option']} onClick={(e)=>{this.chartHandle(e,'')}} >
-            <span className={`${styles['zet-achievement-title-chart']} ${type=='chart' && styles['zet-achievement-title-checked']}`}
-                  onClick={(e)=>{this.chartHandle(e,'chart')}}><Icon type="line-chart" /></span>
-            <span className={`${styles['zet-achievement-title-table']} ${type=='table' && styles['zet-achievement-title-checked']}`}
-                  onClick={(e)=>{this.chartHandle(e,'table')}}><Icon type="table" /></span>
-          </span>
+      <AchieveContext.Provider value={{unfoldState: this.state.unfoldState, extraKeys:this.props.extraKeys}}>
+        <div className={`${cNames} ${styles[rotateState]}`} style={styleProps}>
+          <div  className={styles['zet-achievement-title']} style={headStyle}>
+            <span className={styles['zet-achievement-title-name']} >{title}</span>
+            <span className={styles['zet-achievement-title-option']} onClick={(e)=>{this.chartHandle(e,'')}} >
+              <span className={`${styles['zet-achievement-title-chart']} ${type=='chart' && styles['zet-achievement-title-checked']}`}
+                    onClick={(e)=>{this.chartHandle(e,'chart')}}><Icon type="line-chart" /></span>
+              <span className={`${styles['zet-achievement-title-table']} ${type=='table' && styles['zet-achievement-title-checked']}`}
+                    onClick={(e)=>{this.chartHandle(e,'table')}}><Icon type="table" /></span>
+            </span>
 
-          {
-            extra!==false &&  <span className={styles['zet-achievement-title-extra']} onClick={this.unfoldPanel}>
-            <span >{unfoldState=='open'? '关闭':'展开'}</span>
-          </span>
-          }
+            {
+              extra!==false &&  <span className={styles['zet-achievement-title-extra']} onClick={this.unfoldPanel}>
+                <span >{unfoldState=='open'? '关闭':'展开'}</span>
+              </span>
+            }
+          </div>
+          <div className={styles['zet-achievement-content']}>
+            {React.Children.map(children,(item)=>{
+              return item;
+            })}
+          </div>
         </div>
-        <div className={styles['zet-achievement-content']}>
-          {React.Children.map(children,(item)=>{
-            return item;
-          })}
-        </div>
-      </div>
+      </AchieveContext.Provider>
     )
   }
 }

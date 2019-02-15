@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types'
+import { AchieveContext } from './context'
 
 import styles from './index.less';
 
@@ -14,6 +15,8 @@ export interface PanelProps {
   flex?:boolean,
   /** 高度 */
   height?: string | number,
+  unfoldState:string,
+  extraKeys:any,
 }
 
 export interface PanelState {
@@ -33,8 +36,7 @@ class Panel extends React.Component<PanelProps, PanelState> {
     super(props);
     this.state = {}
   }
-  getPanelUnfoldCondition = () => {
-    const {unfoldState,extraKeys} = this.context;
+  getPanelUnfoldCondition = (unfoldState,extraKeys) => {
     const {option} = this.props;
     if(extraKeys === 'all' || extraKeys.indexOf(option)>-1){
       return unfoldState==='open'
@@ -42,6 +44,30 @@ class Panel extends React.Component<PanelProps, PanelState> {
       return true;
     }
   };
+
+  render() {
+    let { style, width, height,children,unfoldState,extraKeys} = this.props;
+    let styleProps = {width,height, ...style};
+    if(this.props.flex){
+      styleProps.flex = 1;
+    }
+    if(!this.getPanelUnfoldCondition(unfoldState,extraKeys)){
+      styleProps.height = 0;
+      delete styleProps.flex;
+    }
+    return (<div className={styles['zet-panel']} style={styleProps}>
+      {children}
+    </div>)
+  }
+}
+
+export default props => (
+  <AchieveContext.Consumer>
+    {({unfoldState, extraKeys}) => {
+      return <Panel {...{...props,unfoldState,extraKeys}}></Panel>
+    }}
+  </AchieveContext.Consumer>
+)
   render() {
     const { style, width, height ,children} = this.props;
     const styleProps = {width, height, ...style};
