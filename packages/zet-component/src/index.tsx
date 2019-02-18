@@ -7,5 +7,9 @@ export { default as LocaleProvider} from './components/locale-provider';
 /** AutoML */
 export { default as AutoML} from './automl';
 
+/** 标签输入 */
+export { default as TagInput } from './components/tag-input';
+
 /** 选择器 */
 export { default as Select } from './components/select';
+

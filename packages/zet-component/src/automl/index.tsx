@@ -1,10 +1,12 @@
 
 import Design from './design';
-import Achievement from './achievement';
 import Layout from './layout';
+import Algorithm from './algorithm';
+import Achievement from './achievement';
 
 const AutoML = {
   Design,
+  Algorithm,
   Achievement,
   Layout
 }
