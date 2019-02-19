@@ -1,0 +1,52 @@
+---
+name: Layout (模型成果页布局)
+menu: AutoML
+order: 70
+---
+
+import { Playground, PropsTable } from 'docz';
+import { State, Toggle } from 'react-powerplug';
+import { AutoML } from '../../index.tsx';
+
+# Layout (模型成果页布局)
+
+引入组件
+```
+import { AutoML } from 'zet-component';
+```
+
+
+## Basic usage
+
+<Playground style={{backgroundColor:'aliceblue',height:600}}>
+  <State initial={{ show:'chart' }}>
+    {({ state, setState }) => {
+      const { Layout, Achievement } = AutoML;
+      const { Sider, Content } = Layout;
+      const { Panel } = Achievement;
+      const changeHandle = (option, record)=>{
+         if(option=='rotate'){
+            setState({
+              show:record.type
+            })
+         }
+      }
+      const {show} = state;
+      return (
+          <Layout>
+             <Sider>
+                <div style={{backgroundColor:'aquamarine',height:30,marginBottom:20}}></div>
+                <div style={{backgroundColor:'aquamarine',height:210}}></div>
+             </Sider>
+             <Content>
+                <Achievement title='Test'  style={{height:500}} onChange={changeHandle}>
+                    <Panel option='1' height={300}></Panel>
+                    <Panel option='2' flex ></Panel>
+                </Achievement>
+             </Content>
+          </Layout>
+      )
+    }}
+  </State>
+</Playground>
+
