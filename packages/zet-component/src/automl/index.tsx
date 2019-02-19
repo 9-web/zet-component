@@ -1,5 +1,6 @@
 
 import Design from './design';
+import Layout from './layout';
 import Algorithm from './algorithm';
 import Achievement from './achievement';
 import Task from './taskPanel'
@@ -9,7 +10,8 @@ const AutoML = {
   Algorithm,
   Achievement,
   Task,
-  Chart
+  Chart,
+  Layout,
 }
 
 export default AutoML;
