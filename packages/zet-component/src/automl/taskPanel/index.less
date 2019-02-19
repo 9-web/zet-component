@@ -1,0 +1,68 @@
+
+.zet-task-group{
+  .zet-task{
+    margin-bottom: 20px;
+  }
+}
+.card-title-options{
+  float:right;
+}
+.zet-task{
+  //padding: 16px 14px;
+  cursor: pointer;
+  :global{
+    .ant-card-body{
+      padding:10px;
+    }
+  }
+}
+.selected-title{
+  :global{
+    .ant-card-head{
+      background-color:rgba(174, 174, 174,0.8);
+    }
+  }
+}
+.taskAnchor{
+  margin-left: 0;
+  padding-left: 0;
+  :global{
+    .ant-anchor-ink{
+      display: none;
+    }
+    .ant-anchor{
+      padding-left: 0;
+    }
+    .ant-anchor-link{
+      padding: 0;
+    }
+  }
+}
+.linkWrap{
+  overflow: hidden;
+  line-height: 24px;
+  margin: 7px 0;
+  display: flex;
+}
+.mudoleListWrap{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.collapseWrap{
+  :global{
+    .ant-collapse-content{
+      overflow: initial;
+    }
+    .ant-collapse{
+      box-shadow: 0 2px 4px 0 rgba(120, 141, 180, 0.2);
+    }
+  }
+}
+.shortName{
+  // display: inline-block;
+  width: 100px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
