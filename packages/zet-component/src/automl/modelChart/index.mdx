@@ -1,0 +1,37 @@
+---
+name: Chart (自助建模chart图)
+menu: AutoML
+order: 70
+---
+
+import { Playground, PropsTable } from 'docz';
+import { State, Toggle } from 'react-powerplug'
+import { Row, Col } from 'antd';
+import autoChartData from './_mock/autoChart.js';
+import jobData from './_mock/jobData.js';
+
+import { AutoML } from '../../index.tsx'
+
+# Chart (自助建模chart图)
+
+## 基本
+<Playground>
+  <State>
+     {({ state, setState }) => {
+       const { Chart } = AutoML;
+       return (
+          <Chart
+          data={autoChartData}
+          gradeData={jobData}
+          legendScore={{"XGBoost":{"score":"0.9101"},"随机森林":{"score":"0.8962"},"梯度渐进树":{"score":"0.8850"}}}
+          ></Chart>
+       )
+     }}
+  </State>
+</Playground>
+
+
+## API
+
+### Chart
+<PropsTable of={AutoML.Chart}/>
