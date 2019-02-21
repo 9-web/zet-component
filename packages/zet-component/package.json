@@ -28,8 +28,11 @@
     "antd": "3.13.0"
   },
   "dependencies": {
+    "@antv/data-set": "^0.10.2",
     "antd": "3.13.0",
-    "classnames": "^2.2.6"
+    "bizcharts": "^3.4.3",
+    "classnames": "^2.2.6",
+    "moment": "^2.24.0"
   },
   "gitHead": "4fc6290749504292d4c362e914db1ce3ca9aff5a"
 }

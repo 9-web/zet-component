@@ -3,6 +3,7 @@ import classnames from 'classnames';
 
 import styles from './index.less';
 
+
 export interface taskGroupProps {
   /** 组件行行内样式 */
 
@@ -25,15 +26,19 @@ class taskGroup extends React.Component<taskGroupProps, taskGroupState> {
       selectedTaskId:record.jobId
     })
   }
+  instertSelectedRow = (child, extendProps) => {
+    if(typeof child === 'object'){
+      return React.cloneElement(child,extendProps)
+    }
+    return child
+  };
   render() {
     const { children,...otherProps } = this.props;
     const { selectedTaskId } = this.state;
     const extendProps = {...otherProps,selectedRow:this.selectedRow,selectedTaskId}
+
     const kids = React.Children.map(children, child =>{
-      if( typeof child !== 'string' && typeof child !== 'number'){
-        return React.cloneElement(child,extendProps)
-      }
-      return child
+      return this.instertSelectedRow(child as React.ReactChild,extendProps)
     })
     return (
       <div className={styles.zetTaskGroup}>
