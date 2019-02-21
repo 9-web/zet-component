@@ -13,7 +13,7 @@ const AutoML = {
   Task,
   Chart,
   Layout,
-  ModelList
+  ModelList,
 }
 
 export default AutoML;
