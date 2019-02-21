@@ -1,0 +1,41 @@
+---
+name: ModelList (模型成果列表)
+menu: AutoML
+order: 70
+---
+
+import { Playground, PropsTable } from 'docz';
+import { State, Toggle } from 'react-powerplug'
+import { AutoML } from '../../index.tsx';
+import modelList from './_mock/modelList.js';
+import jobData from './_mock/jobData.js';
+
+
+# ModelList (模型成果列表)
+
+
+
+引入组件
+
+```
+import { AutoML } from 'zet-component';
+```
+
+## Basic task
+<Playground>
+  <State initial={{ show:'chart' }}>
+    {
+      ({state,setState})=>{
+        const { ModelList } = AutoML;
+        return (
+          <ModelList
+          data={modelList}
+          contentType='detail'
+          jobData={jobData}
+          jobId={'6f30f8b4-90d7-49be-abb9-bd57abdbb5b6'}>
+          </ModelList>
+        )
+      }
+    }
+  </State>
+</Playground>
