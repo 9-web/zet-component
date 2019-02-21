@@ -9,17 +9,11 @@ class AutoChart extends Component {
   state = {
     data: [],
   }
-  componentDidMount() {
+  componentDidMount() {}
 
-  }
+  componentWillReceiveProps(nextProps) {}
 
-  componentWillReceiveProps(nextProps) {
-
-  }
-
-  componentWillUnmount() {
-
-  }
+  componentWillUnmount() {}
 
   compare = (property) => {
     return (a, b) => {

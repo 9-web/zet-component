@@ -1,0 +1,15 @@
+export default [
+  { value: 'explained_variance', name: 'EVS' },
+  { value: 'neg_mean_absolute_error', name: 'MAE' },
+  { value: 'neg_mean_squared_error', name: 'MSE' },
+  { value: 'neg_mean_squared_log_error', name: 'MSLE' },
+  { value: 'neg_median_absolute_error', name: 'MedianAE' },
+  { value: 'r2', name: 'R2' },
+  { value: 'accuracy', name: 'Accuracy' },
+  { value: 'f1', name: 'F1' },
+  { value: 'precision', name: 'Precision' },
+  { value: 'recall', name: 'Recall' },
+  { value: 'roc_auc', name: 'AUC' },
+  { value: 'fbeta', name: 'FBeta' },
+  { value: 'log_loss', name: 'Log Loss' },
+];

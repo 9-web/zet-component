@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@antv/data-set": "^0.10.2",
-    "bizcharts": "^3.4.3"
+    "bizcharts": "^3.4.3",
+    "moment": "^2.24.0"
   }
 }

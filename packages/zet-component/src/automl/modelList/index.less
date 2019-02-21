@@ -1,0 +1,114 @@
+.item{
+  display: flex;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(16, 38, 58, 0.15);
+}
+.itemInfo{
+  flex: 4
+}
+.itemTitle{
+  display: flex;
+  width: 90%;
+  height: 30px;
+  align-items: center;
+}
+.listWrap{
+  padding: 24px;
+}
+.chartItem{
+  flex: 1.5;
+  margin-right: 15px;
+}
+.shortName{
+  flex: 6;
+  display: inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-right: 10px;
+}
+.status{
+  flex: 4;
+}
+.timer{
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+}
+.userTimer{
+  font-size: 24px;
+  color: rgba(16, 38, 58, 0.45);
+}
+.timerTit{
+  font-size: 16px;
+  color: rgba(16, 38, 58, 0.85);
+}
+.mudoleList{
+  width: 100%;
+  flex: 1;
+  background: #fff;
+  box-shadow: 0 2px 4px 0 rgba(120, 141, 180, 0.2);
+  overflow-y: auto;
+}
+
+
+.mdlMain {
+  width: 100%;
+  flex: 1;
+  overflow: auto;
+}
+
+.mdlItem {
+  margin-bottom: 24px;
+  width: 100%;
+  box-shadow: 0 2px 4px 0 rgba(120, 141, 180, 0.2);
+}
+
+.mdlItemRow {
+  // margin: 16px;
+  height: 230px;
+  border: 1px solid rgba(16, 38, 58, 0.15);
+  border-radius: 4px;
+}
+
+.mdlItemStatusRow {
+  // margin: 16px;
+  height: 230px;
+  // border: 1px solid rgba(16, 38, 58, 0.15);
+  // border-radius: 4px;
+}
+
+.mdlItemCol {
+  border-right: 1px solid rgba(16, 38, 58, 0.15);
+  height: 100%;
+  :global {
+    .ant-list-item {
+      padding: 0 16px;
+      height: 38px;
+    }
+  }
+}
+
+.mdlItemColEnd {
+  height: 100%;
+  :global {
+    .ant-list-item {
+      padding: 0 16px;
+      height: 38px;
+    }
+  }
+}
+
+.mdlItemColName {
+  border-bottom: 1px solid rgba(16, 38, 58, 0.15);
+  height: 38px;
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+}
+
+.mdlItemColList {
+  height: 190px;
+  overflow-y: auto;
+}
+
