@@ -12,6 +12,8 @@ const { Link } = Anchor;
 interface JobInfo{
   jobStatus:string,
   jobId:string,
+  jobName:string,
+  modelList:ModelItem[]
 }
 interface ModelItem{
   modelName:string,
@@ -32,10 +34,10 @@ export interface TaskProps {
   /** title 样式扩展 */
   headStyle?: React.CSSProperties,
   /** 标题 */
-  title: string,
+  title?: string,
   /** 任务信息 */
   jobInfo: JobInfo,
-  modelList:ModelItem[],
+  modelList?:ModelItem[],
   selectedTaskId:string,
   /** 选中方法 */
   selectedRow?: (job: object) => void,
@@ -62,7 +64,9 @@ class Task extends React.Component<TaskProps, TaskState> {
   changeJobitem = (v)=>{}
   openModelDetail = (v1,v2,v3,v4)=>{}
   render() {
-    const {title,jobInfo,modelList,selectedTaskId} = this.props;
+    let {title,jobInfo,modelList,selectedTaskId} = this.props;
+    title = title || jobInfo.jobName || '';
+    modelList = modelList || jobInfo.modelList;
     const taskClass = classNames(styles.zetTask,{[styles.selectedTitle]:selectedTaskId===jobInfo.jobId});
     return (
       <Card

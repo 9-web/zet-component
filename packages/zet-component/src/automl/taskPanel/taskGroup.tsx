@@ -36,7 +36,7 @@ class taskGroup extends React.Component<taskGroupProps, taskGroupState> {
     const { children,...otherProps } = this.props;
     const { selectedTaskId } = this.state;
     const extendProps = {...otherProps,selectedRow:this.selectedRow,selectedTaskId}
-
+    alert(1)
     const kids = React.Children.map(children, child =>{
       return this.instertSelectedRow(child as React.ReactChild,extendProps)
     })
