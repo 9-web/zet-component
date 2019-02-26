@@ -41,8 +41,6 @@ class ModelDetail extends React.Component<ModelDetailProps, ModelDetailState> {
     /*const timer = moment.duration(moment(endTime) - moment(startTime));
     return timer.asSeconds();*/
   }
-
-
   getname=(val) => {
     const result = MetricsConfig.filter((i) => i.value === val);
     if (result.length > 0) {

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {Chart, Geom, Axis, Tooltip, Legend} from 'bizcharts';
 import { DataView } from '@antv/data-set';
 import trophy from '../../../assets/trophy.png';
-
 // import GlobalSocket from 'utils/socket';
 // import trophy from 'assets/trophy.png';
 import styles from '../index.less';
@@ -52,6 +51,7 @@ class AutoChart extends Component {
           result.push(point);
         }
       });
+      
     });
     return result;
   }

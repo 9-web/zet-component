@@ -22,5 +22,9 @@
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@antv/data-set": "^0.10.2",
+    "bizcharts": "^3.4.3",
+    "moment": "^2.24.0"
+  }
 }
