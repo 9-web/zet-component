@@ -23,7 +23,9 @@ export interface ModelDetailProps {
   /** 组件行行内样式 */
   item:any,
   jobId:string,
-  key?:string,
+  getView?:(blockId:string)=>void,
+  getForecast?:(moduleId:string)=>void,
+  openModelDetail?:(modelId:string,modelName:string,jobId:string)=>void
 }
 
 export interface ModelDetailState {
@@ -40,7 +42,6 @@ class ModelDetail extends React.Component<ModelDetailProps, ModelDetailState> {
     return timer.asSeconds();*/
   }
 
-  openModelDetail = () => {}
 
   getname=(val) => {
     const result = MetricsConfig.filter((i) => i.value === val);
@@ -51,11 +52,16 @@ class ModelDetail extends React.Component<ModelDetailProps, ModelDetailState> {
   }
 
   view = (blockId) => {
-
+    this.props.getView && this.props.getView(blockId);
   }
 
   forecast = (moduleId) => {
+    this.props.getForecast && this.props.getForecast(moduleId);
+  }
 
+  openModelDetail = () => {
+    const {item: {name, modelId}, jobId} = this.props;
+    this.props.openModelDetail && this.props.openModelDetail(modelId,name,jobId)
   }
 
   render() {
@@ -110,7 +116,6 @@ class ModelDetail extends React.Component<ModelDetailProps, ModelDetailState> {
               />
             )}
             bordered={false}
-            // style={{ width: 300 }}
           >
             <Row className={styles.mdlItemStatusRow} type='flex' align='middle' justify='center'>
               <div><Spin tip={'等待中'} /></div>

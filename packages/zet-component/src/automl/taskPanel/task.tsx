@@ -3,6 +3,7 @@ import { Card,Tooltip,Icon,Menu,Anchor,Button,Modal} from 'antd';
 import Group from './taskGroup';
 import classNames from 'classnames'
 import ContrastButton from './contrastButton'
+import ZetIcon from '../../components/ZetIcon'
 import styles from './index.less';
 
 const MenuItem = Menu.Item;
@@ -40,15 +41,21 @@ export interface TaskProps {
   contrastIds:string[],
   /** 任务内对比*/
   innerContras?:boolean,
+  /** 锚点内容展示的容器id */
   anchorContainerId?:string,
+  /** model数据*/
   modelList?: ModelItem[],
+  /** 默认 选中的任务id */
   selectedTaskId: string,
-  /** 选中方法 */
+  /** 选中方法回调 */
   selectedRow?: (job: object) => void,
   setSelectedModelKeys?:(modelKeys: string[]) => void,
   selectedModelKeys?: string[],
+  /** 删除任务回调 */
   delJob?: (id: string) => void,
+  /** 点击标题 展示详情回调*/
   clickTitle?:(jobId:string,workflowVersionId:string)=>void,
+
   openModelDetail?:(modelId:string,jobId:string,modelName:string)=>void,
   showContras?:(record:object,jobName:string)=>void,
 }
@@ -102,8 +109,10 @@ class Task extends React.Component<TaskProps, TaskState> {
     let {title,jobInfo,modelList,selectedTaskId,contrastIds,selectedModelKeys,anchorContainerId} = this.props;
     title = title || jobInfo.jobName || '';
     modelList = modelList || jobInfo.modelList;
+    contrastIds = contrastIds || [];
     const { contrastJobId } = this.state;
     const taskClass = classNames(styles.zetTask,{[styles.selectedTitle]:selectedTaskId===jobInfo.jobId});
+    const getContainer = anchorContainerId ? {getContainer:() => document.getElementById(anchorContainerId)} :{}
     return (
       <Card
         title={(
@@ -122,7 +131,7 @@ class Task extends React.Component<TaskProps, TaskState> {
             </span>
           </div>
         )}
-        style={{ width: 320 }}
+        style={{ width: 324 }}
         key={jobInfo.jobId}
         className={taskClass}
       >
@@ -130,9 +139,7 @@ class Task extends React.Component<TaskProps, TaskState> {
           affix={false}
           bounds={0}
           className={styles.taskAnchor}
-          getContainer={
-            () => document.getElementById(anchorContainerId)
-          }
+          {...getContainer}
         >
           <Menu
             style={{ border: 'none' }}
@@ -156,7 +163,7 @@ class Task extends React.Component<TaskProps, TaskState> {
                           <div style={{ width: '110px' }}>
                               <span style={{ display: 'inline-block', width: '25px' }}>
                                 { item.jobBlockStatus === 5 && <Icon type="loading" theme="outlined" /> }
-                                { i === 0 && item.score && <Icon type='zeticon-trophy' style={{ fontSize: 16, color: 'rgb(25, 118, 210)' }} />}
+                                { i === 0 && item.score && <ZetIcon type='zeticon-trophy' style={{ fontSize: 16, color: 'rgb(25, 118, 210)' }} />}
                               </span>
                             <span>{item.score ? item.score : '--'}</span>
                           </div>

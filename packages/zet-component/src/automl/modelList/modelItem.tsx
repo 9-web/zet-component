@@ -7,7 +7,7 @@ import  Timer  from '../../components/Timer';
 import styles from './index.less';
 
 export interface ModelItemProps {
-  /** 组件行行内样式 */
+  /** model 数据 */
   data:any,
   // onSeeLogClick:(dataId:string) => void,
 }

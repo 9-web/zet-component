@@ -21,7 +21,7 @@ import jobData from './_mock/jobData.js';
 import { AutoML } from 'zet-component';
 ```
 
-## Basic task
+## Basic Detail
 <Playground>
   <State initial={{ show:'chart' }}>
     {
@@ -31,6 +31,26 @@ import { AutoML } from 'zet-component';
           <ModelList
           data={modelList}
           contentType='detail'
+          jobData={jobData}
+          jobId={'6f30f8b4-90d7-49be-abb9-bd57abdbb5b6'}>
+          </ModelList>
+        )
+      }
+    }
+  </State>
+</Playground>
+
+
+## Basic List
+<Playground>
+  <State initial={{ show:'chart' }}>
+    {
+      ({state,setState})=>{
+        const { ModelList } = AutoML;
+        return (
+          <ModelList
+          data={modelList}
+          contentType='list'
           jobData={jobData}
           jobId={'6f30f8b4-90d7-49be-abb9-bd57abdbb5b6'}>
           </ModelList>

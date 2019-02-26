@@ -46,7 +46,7 @@ class Panel extends React.Component<PanelProps, PanelState> {
   };
 
   render() {
-    let { style, width, height,children,unfoldState,extraKeys} = this.props;
+    let { style, width, height,children,unfoldState,extraKeys,...otherProps} = this.props;
     let styleProps = {width,height, ...style};
     if(this.props.flex){
       styleProps.flex = 1;
@@ -55,7 +55,7 @@ class Panel extends React.Component<PanelProps, PanelState> {
       styleProps.height = 0;
       delete styleProps.flex;
     }
-    return (<div className={styles['zet-panel']} style={styleProps}>
+    return (<div className={styles['zet-panel']} style={styleProps} {...otherProps}>
       {children}
     </div>)
   }

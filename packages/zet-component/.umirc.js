@@ -5,7 +5,7 @@ export default {
   plugins: [
     [
       'umi-plugin-library', {
-        // umd:false,
+        umd:false,
         cssModules: {
           camelCase: true
         },

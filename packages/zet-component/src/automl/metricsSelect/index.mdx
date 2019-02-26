@@ -1,0 +1,37 @@
+---
+name: MetricsSelect (标准选择下拉列表)
+menu: AutoML
+order: 70
+---
+
+import { Playground, PropsTable } from 'docz';
+import { State, Toggle } from 'react-powerplug'
+import { AutoML } from '../../index.tsx';
+import metrics from './_mock/metrics'
+
+# AutoML.Design (建模设计)
+自动建模建模设计时候用此组件
+
+
+引入组件
+
+```
+import { AutoML } from 'zet-component';
+```
+
+## Basic task
+<Playground>
+  <State initial={{ metricsVal:'roc_auc' }}>
+    {
+      ({state,setState})=>{
+        const { MetricsSelect } = AutoML;
+        const changeMetrics = (val)=>{
+          setState({metricsVal:val})
+        }
+        return (
+          <MetricsSelect metrics={metrics} changeMetrics={changeMetrics} metricsVal={state.metricsVal}></MetricsSelect>
+        )
+      }
+    }
+  </State>
+</Playground>

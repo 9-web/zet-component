@@ -60,7 +60,6 @@ class ModelChart extends React.Component<ModelChartProps, ModelChartState> {
     const paramsOptionList = this.params().map((item) => {
       return (<RadioButton value={item.value} key={item.value}>{item.name}</RadioButton>);
     });
-    console.log('data-gradeData',data,gradeData)
     return (
       <div className={styles.autoParams}>
         <div className={styles.grading}>
