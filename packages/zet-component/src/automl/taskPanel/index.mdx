@@ -7,6 +7,7 @@ order: 70
 import { Playground, PropsTable } from 'docz';
 import { State, Toggle } from 'react-powerplug'
 import { AutoML } from '../../index.tsx';
+import jobList from './_mock/jobInfo.js';
 
 # AutoML.Design (建模设计)
 自动建模建模设计时候用此组件
@@ -52,71 +53,21 @@ import { AutoML } from 'zet-component';
 
 ## task group
 
-<Playground>
+<Playground style={{height:500}}>
   <State initial={{ show:'chart' }}>
     {
       ({state,setState})=>{
         const { Task } = AutoML;
         const { Group } = Task;
         return (
-          <Group>
-            <Task
-              title={'test01'}
-              jobInfo={{jobId:'1',jobStatus:'RUNNING'}}
-              modelList={[
-                {
-                  modelName:'test01',
-                  modelId:'1234',
-                  jobBlockStatus:5,
-                  score:0.8,
-                  modelTrainStatus:'success'
-                },{
-                  modelName:'test02',
-                  modelId:'12345',
-                  jobBlockStatus:5,
-                  score:0.8,
-                  modelTrainStatus:'success'
-                },
-              ]}
-            ></Task>
-            <Task
-              title={'test01'}
-              jobInfo={{jobId:'2',jobStatus:'RUNNING'}}
-              modelList={[
-                {
-                  modelName:'test01',
-                  modelId:'1234',
-                  jobBlockStatus:5,
-                  score:0.8,
-                  modelTrainStatus:'success'
-                },{
-                  modelName:'test02',
-                  modelId:'12345',
-                  jobBlockStatus:5,
-                  score:0.8,
-                  modelTrainStatus:'success'
-                },
-              ]}
-            ></Task>
-            <Task
-              title={'test01'}
-              jobInfo={{jobId:'3',jobStatus:'RUNNING'}}
-              modelList={[
-                {
-                  modelName:'test01',
-                  modelId:'1234',
-                  jobBlockStatus:5,
-                  score:0.8,
-                  modelTrainStatus:'success'
-                },{
-                  modelName:'test02',
-                  modelId:'12345',
-                  jobBlockStatus:5,
-                  score:0.8,
-                  modelTrainStatus:'success'
-                },
-              ]}
-            ></Task>
+          <Group selectedTaskId={'3ac15482-689f-4b0c-9212-0fd29086c46a'}>
+             { jobList && jobList.map(item=>{
+                return (
+                  <Task
+                    jobInfo={item}
+                  ></Task>
+                )
+             })}
           </Group>
         )
       }

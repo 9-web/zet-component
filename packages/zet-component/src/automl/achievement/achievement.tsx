@@ -24,6 +24,9 @@ interface AchievementProps {
   extraKeys?: string | Array<string>,
   /** 资源改变触发的回调 */
   onChange?: (option:string,state:object) => void,
+
+  chartIcon?:any,
+  tableIcon?:any
 }
 
 interface AchievementState {
@@ -73,11 +76,13 @@ class Achievement extends React.Component<AchievementProps, AchievementState> {
   render() {
     const {
       style, className, headStyle, title,
-      width, height, children, extra
+      width, height, children, extra,chartIcon,tableIcon
     } = this.props;
     const styleProps = {width, height, ...style};
     const { unfoldState, rotateState, type } = this.state;
     const cNames = classNames(styles.zetAchievement, className);
+    const ChartIcon = chartIcon || <Icon type="line-chart" />;
+    const TableIcon = tableIcon || <Icon type="table" />;
     return (
       <AchieveContext.Provider value={{unfoldState: this.state.unfoldState, extraKeys:this.props.extraKeys}}>
         <div className={`${cNames} ${styles[rotateState]}`} style={styleProps}>
@@ -85,14 +90,14 @@ class Achievement extends React.Component<AchievementProps, AchievementState> {
             <span className={styles['zet-achievement-title-name']} >{title}</span>
             <span className={styles['zet-achievement-title-option']} onClick={(e)=>{this.chartHandle(e,'')}} >
               <span className={`${styles['zet-achievement-title-chart']} ${type=='chart' && styles['zet-achievement-title-checked']}`}
-                    onClick={(e)=>{this.chartHandle(e,'chart')}}><Icon type="line-chart" /></span>
+                    onClick={(e)=>{this.chartHandle(e,'chart')}}>{ChartIcon}</span>
               <span className={`${styles['zet-achievement-title-table']} ${type=='table' && styles['zet-achievement-title-checked']}`}
-                    onClick={(e)=>{this.chartHandle(e,'table')}}><Icon type="table" /></span>
+                    onClick={(e)=>{this.chartHandle(e,'table')}}>{TableIcon}</span>
             </span>
 
             {
               extra!==false &&  <span className={styles['zet-achievement-title-extra']} onClick={this.unfoldPanel}>
-                <span >{unfoldState=='open'? '关闭':'展开'}</span>
+                <span >{unfoldState=='open'? '收缩':'展开'}</span>
               </span>
             }
           </div>

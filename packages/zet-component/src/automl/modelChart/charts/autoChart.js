@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Chart, Geom, Axis, Tooltip, Legend} from 'bizcharts';
-// import { DataView } from '@antv/data-set';
+import { DataView } from '@antv/data-set';
+import trophy from '../../../assets/trophy.png';
 // import GlobalSocket from 'utils/socket';
 // import trophy from 'assets/trophy.png';
 import styles from '../index.less';
@@ -24,8 +25,8 @@ class AutoChart extends Component {
   }
 
   fommatChart = (props) => {
-    const { jobChartData, legendscore } = props;
-    const res = [...jobChartData];
+    const { data, legendScore } = props;
+    const res = [...data];
     const arr = [];
     if (res.length > 0) {
       res.forEach((v) => {
@@ -44,18 +45,20 @@ class AutoChart extends Component {
       });
     }
     const result = [];
-    Object.keys(legendscore).forEach(type => {
+    Object.keys(legendScore).forEach(type => {
       arr.forEach(point => {
         if (point.type === type) {
           result.push(point);
         }
       });
+      
     });
     return result;
   }
 
   render() {
-    const { data,legendScore={} } = this.props;
+    const { legendScore={} } = this.props;
+    const dv = this.fommatChart(this.props);
     const scale = {
       x: {
         alias: 'Time (ms)',
@@ -67,7 +70,7 @@ class AutoChart extends Component {
     return (
       <Chart
         height={300}
-        data={data}
+        data={dv}
         forceFit
         scale={scale}
         padding={[40, 300, 60, 60]}
@@ -110,7 +113,7 @@ class AutoChart extends Component {
             } style="cursor: pointer;font-size: 14px;">`
                     + `<td width=200 style="border: none;padding:0;"><i class="g2-legend-marker" style="float:left;margin-top:6px;width:10px;height:10px;display:inline-block;margin-right:10px;background-color:${color};"></i>`
                     + `<span title= ${value} class="g2-legend-text ${styles.legendStyle}">${value}</span>`
-                    + `<span class=${styles.legendScore}>${(index === 0 && legendScore[value] && legendScore[value].score !== '--' ? `` : '')}<span title=${legendScore[value] && legendScore[value].score}>${legendScore[value] && legendScore[value].score}</span>`
+                    + `<span class=${styles.legendScore}>${(index === 0 && legendScore[value] && legendScore[value].score !== '--' ? `<img src=${trophy} style='vertical-align: initial' >` : '')}<span title=${legendScore[value] && legendScore[value].score}>${legendScore[value] && legendScore[value].score}</span>`
                     + '</span>'
                     + '</tr>';
           }}

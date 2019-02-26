@@ -6,11 +6,20 @@ import ModelDetail from './modelDetail'
 import styles from './index.less';
 
 export interface ModelListProps {
-  /** 组件行行内样式 */
+  /** model 数据 */
   data:any,
+  /** 展示类型 */
   contentType:string,
+  /** job数据 */
   jobData?:any,
-  jobId?:string
+  /** job id */
+  jobId?:string,
+  /** 查看日志回调  contentType 值为 detail*/
+  getView?:(blockId:string)=>void,
+  /** 预测按钮事件回调  contentType 值为 detail*/
+  getForecast?:(moduleId:string)=>void,
+  /** 查看详情回调  contentType 值为 detail*/
+  openModelDetail?:(modelId:string,modelName:string,jobId:string)=>void
 }
 
 export interface ModelListState {
@@ -25,7 +34,6 @@ class ModelList extends React.Component<ModelListProps, ModelListState> {
   sort=() => {
     const { data } = this.props;
     const arr = data.filter(v => [5, 7, 8].indexOf(v.status) !== -1);
-    console.log('arr',arr)
     return arr;
   }
   getContent = () => {
@@ -52,7 +60,14 @@ class ModelList extends React.Component<ModelListProps, ModelListState> {
         return (
           <div className={styles.mdlMain}>
             {jobData.map((item,index)=>{
-              return <ModelDetail item={item} jobId={jobId} key={index}></ModelDetail>
+              return <ModelDetail
+                item={item}
+                jobId={jobId}
+                key={index}
+                getView={this.props.getView}
+                getForecast={this.props.getForecast}
+                openModelDetail={this.props.openModelDetail}
+              ></ModelDetail>
             })}
           </div>
         )

@@ -7,13 +7,20 @@
 .@{panel-prefix-cls}{
   background-color: #fff;
   font-size:14px;
-  transition: all 0.45s;
+  transition: all 0.3s;
   overflow: auto;
 }
 .@{panel-prefix-clsg}{
   font-size:14px;
+  height:100%;
   .zet-panel{
     margin-bottom:20px;
+  }
+  .zet-panel:first-child{
+    overflow: hidden;
+  }
+  .zet-panel:last-child{
+    margin-bottom:0px !important;
   }
   &-title{
     background-color: #fff;
@@ -41,7 +48,7 @@
       cursor:pointer;
     }
     &-checked{
-      background-color: gray;
+      //background-color: gray;
     }
     &-extra{
       float:right;
@@ -74,16 +81,16 @@
   -webkit-transform:translate3d(0,0,0);
   -moz-transform:translate3d(0,0,0);
   transform:translate3d(0,0,0);
-  -webkit-animation:leftRight 0.5s linear;
-  -moz-animation:leftRight 0.5s linear;
-  animation:leftRight 0.5s linear;
+  -webkit-animation:leftRight 0.3s linear;
+  -moz-animation:leftRight 0.3s linear;
+  animation:leftRight 0.3s linear;
 }
 
 .rotateRightLeft{
   -webkit-transform:translate3d(0,0,0);
   -moz-transform:translate3d(0,0,0);
   transform:translate3d(0,0,0);
-  -webkit-animation:rightLeft 0.5s linear;
-  -moz-animation:rightLeft 0.5s linear;
-  animation:rightLeft 0.5s linear;
+  -webkit-animation:rightLeft 0.3s linear;
+  -moz-animation:rightLeft 0.3s linear;
+  animation:rightLeft 0.3s linear;
 }

@@ -69,7 +69,6 @@ export default class Design extends React.Component<DesignProps, DesignState> {
   getLeftContent = () => {
     const { leftData, leftRender, leftMenuProps} = this.props;
     const { selectedKeys } = this.state;
-    console.log('leftData', leftData);
     if (leftData) {
       return <Menu
         style={{ border: 'none' }}
