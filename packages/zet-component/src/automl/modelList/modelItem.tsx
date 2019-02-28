@@ -1,10 +1,11 @@
 import * as React from 'react';
-import classnames from 'classnames';
 import { Icon, Tooltip } from 'antd';
 import moment from 'moment';
-import { LineChart } from '../../components/Charts';
-import  Timer  from '../../components/Timer';
+import { Components } from '../../index';
+import  Timer  from '../../components/timer';
 import styles from './index.less';
+
+const { Chart:{LineChart} } = Components;
 
 export interface ModelItemProps {
   /** model 数据 */

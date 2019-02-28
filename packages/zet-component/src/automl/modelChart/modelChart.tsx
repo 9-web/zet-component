@@ -1,5 +1,4 @@
 import * as React from 'react';
-import classnames from 'classnames';
 import { Radio } from 'antd';
 import {AutoChart,RocChart,BarChart} from './charts'
 import MetricsConfig from '../config/metrics';

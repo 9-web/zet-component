@@ -3,7 +3,7 @@ import { Card,Tooltip,Icon,Menu,Anchor,Button,Modal} from 'antd';
 import Group from './taskGroup';
 import classNames from 'classnames'
 import ContrastButton from './contrastButton'
-import ZetIcon from '../../components/ZetIcon'
+import ZetIcon from '../../components/icon'
 import styles from './index.less';
 
 const MenuItem = Menu.Item;
