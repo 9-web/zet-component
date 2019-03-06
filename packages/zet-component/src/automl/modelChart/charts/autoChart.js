@@ -55,7 +55,6 @@ class AutoChart extends Component {
           result.push(point);
         }
       });
-
     });
     return result;
   }
