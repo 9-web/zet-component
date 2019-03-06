@@ -1,6 +1,6 @@
 import * as React from 'react';
 import classnames from 'classnames';
-import ZetInput from '../../components/ZetInput'
+import ZetInput from '../../components/input'
 import styles from './index.less';
 
 const {ZetSearch} = ZetInput;

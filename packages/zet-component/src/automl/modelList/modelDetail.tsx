@@ -1,9 +1,10 @@
 import React from 'react';
 import { Card, Row, Col, List, Icon, Spin } from 'antd';
-import { Rect4 } from '../../components/Charts';
-import moment from 'moment';
+import { Components } from '../../index';
 import MetricsConfig from '../config/metrics';
 import styles from './index.less';
+
+const {Chart:{Rect4}} = Components;
 
 function CardExtra(props) {
   return (

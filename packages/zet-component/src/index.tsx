@@ -1,3 +1,6 @@
+/** 基础组件 */
+export { default as Components } from './components';
+
 /** 资源 */
 export { default as Resource } from './components/resource';
 

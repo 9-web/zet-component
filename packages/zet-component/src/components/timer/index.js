@@ -60,7 +60,6 @@ class Timer extends Component {
     const hours = timer.get('hours');
     const mins = timer.get('minutes');
     const sec = timer.get('seconds');
-    console.log('timer',timer)
     return (
       <div className={styles.timer}>
         <div className={styles.timerTit}>耗时</div>
