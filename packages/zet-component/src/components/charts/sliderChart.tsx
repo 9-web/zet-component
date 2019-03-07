@@ -10,7 +10,7 @@ export interface SliderChartProps {
   data:any,
   height?: number | string,
   titles:Title[],
-  scales:Scale,
+  scales?:Scale,
 }
 
 export interface Title{
@@ -36,7 +36,7 @@ export interface SliderChartState {
 
 function getComponent(dataInfo,props) {
   const {data,begin,end} = dataInfo;
-  let {scales={},titles=[]} = props;
+  let {scales={},titles} = props;
   const ds = new DataSet({
     state: {
       start: begin ? new Date(begin).getTime() : new Date().getTime(),
@@ -44,7 +44,7 @@ function getComponent(dataInfo,props) {
     }
   });
   let axisX = scales.axisX || {key:'x',type:'time',tickCount:8,mask:'m/dd hh:MM'};
-  let axisY = scales.axisY || titles || [{key:'y',alias:''}];
+  let axisY = scales.axisY || titles || [{key:'y',alias:'y'}];
   let geoms=[],axis=[],axisYObj={},defaultYAxis='y';
   const dv = ds.createView("origin").source(data);
   dv.transform({
@@ -74,7 +74,7 @@ function getComponent(dataInfo,props) {
     },
     ...axisYObj
   };
-  titles = titles.length>0 ? titles : (axisY || []);
+  titles = Array.isArray(titles) && titles.length>0 ? titles : (axisY || []);
   const legendItems =  titles.map((item,index)=>{
       return {
         value: item.alias,
@@ -166,9 +166,7 @@ class SliderChart extends React.Component<SliderChartProps, SliderChartState> {
   render(){
     const {data,...otherProps} = this.props;
     const Chart = getComponent(data,otherProps);
-    return <div>
-      <Chart></Chart>
-    </div>
+    return <Chart></Chart>
   }
 }
 

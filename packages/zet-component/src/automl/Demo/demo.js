@@ -2,7 +2,7 @@ import React from 'react';
 import {AutoML} from '../../index.tsx'
 import autoChartData from '../modelChart/_mock/autoChart';
 import jobData from '../modelChart/_mock/jobData';
-import modelList from '../modelList/_mock/modellist'
+// import modelList from '../modelList/_mock/modellist'
 class Demo01 extends React.Component{
   constructor(props){
     super(props);

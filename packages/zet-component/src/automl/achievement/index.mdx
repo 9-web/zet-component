@@ -87,6 +87,28 @@ import { AutoML } from 'zet-component';
   </State>
 </Playground>
 
+## 单个
+
+<Playground style={{backgroundColor:'aliceblue'}}>
+  <State initial={{ show:'chart' }}>
+    {({ state, setState }) => {
+      const { Achievement } = AutoML;
+      const { Panel } = Achievement;
+      const changeHandle = (option, record)=>{
+         if(option=='rotate'){
+            setState({
+              show:record.type
+            })
+         }
+      }
+      const {show} = state;
+      return <Achievement title='Test' extraKeys={'all'} extra={false} style={{height:500}} onChange={changeHandle}>
+        <Panel option='1' flex >{show=='chart' ? <Example1 style={{height:600}}/> : <Example2 style={{height:600}}/>}</Panel>
+      </Achievement>
+    }}
+  </State>
+</Playground>
+
 
 ## API
 
