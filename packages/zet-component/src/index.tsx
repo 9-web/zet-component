@@ -1,3 +1,6 @@
+/** 基础组件 */
+export { default as Components } from './components';
+
 /** 资源 */
 export { default as Resource } from './components/resource';
 
@@ -15,4 +18,7 @@ export { default as Select } from './components/select';
 
 /** 筛选标签 */
 export { default as Tag } from './components/tag';
+
+/** 时间范围选择 */
+export { default as TimeSelect } from './components/time-select';
 

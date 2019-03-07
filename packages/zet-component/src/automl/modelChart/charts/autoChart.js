@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import {Chart, Geom, Axis, Tooltip, Legend} from 'bizcharts';
 import { DataView } from '@antv/data-set';
-import trophy from '../../../assets/trophy.png';
 // import GlobalSocket from 'utils/socket';
 // import trophy from 'assets/trophy.png';
+import Icon from '../../../components/icon'
 import styles from '../index.less';
 
 class AutoChart extends Component {
@@ -11,7 +12,10 @@ class AutoChart extends Component {
     data: [],
   }
   componentDidMount() {}
-
+  componentDidUpdate(){
+    const legendDom = document.getElementById('autoChartLegend')
+    legendDom && ReactDOM.render(<Icon type='zeticon-trophy' style={{ color: 'rgb(25, 118, 210)' }} />,legendDom)
+  }
   componentWillReceiveProps(nextProps) {}
 
   componentWillUnmount() {}
@@ -51,7 +55,7 @@ class AutoChart extends Component {
           result.push(point);
         }
       });
-      
+
     });
     return result;
   }
@@ -108,17 +112,19 @@ class AutoChart extends Component {
                 </div>`}
           itemTpl={(value, color, checked, index) => {
             checked = checked ? 'checked' : 'unChecked';
-            return `<tr class="g2-legend-list-item item-${index} ${checked
-            }" data-value="${value}" data-color=${color
-            } style="cursor: pointer;font-size: 14px;">`
-                    + `<td width=200 style="border: none;padding:0;"><i class="g2-legend-marker" style="float:left;margin-top:6px;width:10px;height:10px;display:inline-block;margin-right:10px;background-color:${color};"></i>`
-                    + `<span title= ${value} class="g2-legend-text ${styles.legendStyle}">${value}</span>`
-                    + `<span class=${styles.legendScore}>${(index === 0 && legendScore[value] && legendScore[value].score !== '--' ? `<img src=${trophy} style='vertical-align: initial' >` : '')}<span title=${legendScore[value] && legendScore[value].score}>${legendScore[value] && legendScore[value].score}</span>`
-                    + '</span>'
-                    + '</tr>';
+            return `<tr class="g2-legend-list-item item-${index} ${checked}" data-value="${value}" data-color=${color} style="cursor: pointer;font-size: 14px;">
+                      <td width=240 style="border: none;padding:0;">
+                        <i class="g2-legend-marker" style="float:left;margin-top:6px;width:10px;height:10px;display:inline-block;margin-right:10px;background-color:${color};"></i>
+                        <span title= ${value} class="g2-legend-text ${styles.legendStyle}">${value}</span>
+                        <span class=${styles.legendScore}>
+                          ${(index === 0 && legendScore[value] && legendScore[value].score !== '--' ? '<em id="autoChartLegend"></em>': '')}
+													<span title=${legendScore[value] && legendScore[value].score}>${legendScore[value] && legendScore[value].score}</span>
+                        </span>
+                      </td>
+                    </tr>`;
           }}
           g2-legend={{
-            maxWidth: '220px',
+            maxWidth: '240px',
           }}
           ref={this.legend}
         />
@@ -135,6 +141,7 @@ class AutoChart extends Component {
           }}
         />
       </Chart>
+
     );
   }
 }

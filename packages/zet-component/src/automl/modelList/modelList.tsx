@@ -1,11 +1,15 @@
 import React from 'react';
 import classnames from 'classnames';
 import ModuleListItem from './modelItem';
-import ModelDetail from './modelDetail'
+import ModelDetail from './modelDetail';
+import ModelChart from './modelChart'
 
 import styles from './index.less';
 
 export interface ModelListProps {
+  width?:string | number,
+  height?:string | number,
+  style?: React.CSSProperties,
   /** model 数据 */
   data:any,
   /** 展示类型 */
@@ -37,10 +41,14 @@ class ModelList extends React.Component<ModelListProps, ModelListState> {
     return arr;
   }
   getContent = () => {
-    const { contentType }= this.props;
-    if(contentType === 'list'){
-        return (
-          <div className={styles.mudoleList}>
+    const { contentType,width, height, style }= this.props;
+    let { jobData, jobId, data, ...otherProps } = this.props;
+    let result;
+    const styleProps = {width, height, ...style};
+    switch(contentType){
+      case 'list' :
+        result = (
+          <div className={styles.mudoleList} style={styleProps}>
             <div className={styles.listWrap}>
               {
                 this.sort().length > 0 && this.sort().map((v) => {
@@ -53,11 +61,10 @@ class ModelList extends React.Component<ModelListProps, ModelListState> {
                 })
               }
             </div>
-          </div>
-        )
-      }else{
-        const { jobData, jobId } = this.props;
-        return (
+          </div>)
+        break;
+      case 'detail':
+        result = (
           <div className={styles.mdlMain}>
             {jobData.map((item,index)=>{
               return <ModelDetail
@@ -69,15 +76,36 @@ class ModelList extends React.Component<ModelListProps, ModelListState> {
                 openModelDetail={this.props.openModelDetail}
               ></ModelDetail>
             })}
+        </div>
+        )
+        break;
+      case 'chart':
+        result = (
+          <div className={styles.mdlMain}>
+            {data.map((item,index)=>{
+              return <ModelChart
+                item={item}
+                jobId={jobData.jobId}
+                key={index}
+                {...otherProps}
+                {...item.scales}
+                getView={this.props.getView}
+                getForecast={this.props.getForecast}
+                openModelDetail={this.props.openModelDetail}
+              ></ModelChart>
+            })}
           </div>
         )
-      }
+        break;
+      default:null;
+    }
+    return result;
   };
   render() {
     return (
-      <div>
+      <React.Fragment>
         {this.getContent()}
-      </div>
+      </React.Fragment>
 
     );
   }

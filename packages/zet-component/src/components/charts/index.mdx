@@ -1,0 +1,61 @@
+---
+name: Chart (图表)
+menu: Components
+order: 70
+---
+
+import { Playground, PropsTable } from 'docz';
+import { State, Toggle } from 'react-powerplug'
+import { Components } from '../../index.tsx';
+import data from './_mock/sliderChartData.js';
+import data2 from './_mock/sliderChartData2.js';
+import data3 from './_mock/sliderChartData3.js';
+
+
+
+# Components.Chart (建模设计)
+自动建模建模设计时候用此组件
+
+
+## 基础展示
+
+引入组件
+```
+import { Components } from 'zet-component';
+```
+####基础
+
+<Playground style={{height:400}}>
+  <State initial={{ show:'chart' }}>
+    {({ state, setState }) => {
+      const {Chart:{SliderChart}} = Components;
+      return (
+        <SliderChart
+          data={data2}
+          height={300}
+          titles={[{alias:'CPU',key:'y'}]}
+        ></SliderChart>
+      )
+    }}
+  </State>
+</Playground>
+
+
+#### 自定义
+
+<Playground style={{height:400}}>
+  <State initial={{ show:'chart' }}>
+    {({ state, setState }) => {
+      const {Chart:{SliderChart}} = Components;
+      return (
+        <SliderChart
+          data={data}
+          height={300}
+          scales={{axisX:{key:'time'},axisY:[{key:'flow',alias:'流量'},{key:'rain',alias:'雨量'}]}}
+         ></SliderChart>
+      )
+  }}
+  </State>
+</Playground>
+
+

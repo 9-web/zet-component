@@ -1,9 +1,9 @@
 import * as React from 'react';
 import classnames from 'classnames';
-import ZetInput from '../../components/ZetInput'
+import Input from '../../components/input'
 import styles from './index.less';
 
-const {ZetSearch} = ZetInput;
+const {Search} = Input;
 
 export interface taskGroupProps {
   /** 组件行行内样式 */
@@ -79,7 +79,7 @@ class taskGroup extends React.Component<taskGroupProps, taskGroupState> {
     const styleProps = {width, ...style};
     return (
       <div className={cNames} style={styleProps}>
-        <ZetSearch
+        <Search
           style={{ width: 324,marginBottom:10 }}
           onChange={this.search}
           onSearch={this.search}
