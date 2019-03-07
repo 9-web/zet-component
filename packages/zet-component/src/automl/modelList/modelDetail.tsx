@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, Row, Col, List, Icon, Spin } from 'antd';
+import moment from 'moment';
 import { Components } from '../../index';
 import MetricsConfig from '../config/metrics';
 import styles from './index.less';
@@ -39,8 +40,7 @@ class ModelDetail extends React.Component<ModelDetailProps, ModelDetailState> {
     this.state = {}
   }
   durtion = (startTime, endTime) => {
-    /*const timer = moment.duration(moment(endTime) - moment(startTime));
-    return timer.asSeconds();*/
+    return moment(endTime).diff(moment(startTime),'seconds');
   }
   getname=(val) => {
     const result = MetricsConfig.filter((i) => i.value === val);
