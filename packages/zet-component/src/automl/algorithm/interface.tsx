@@ -3,7 +3,7 @@ export interface ParamsItemSchema {
   key: string,
   /** 名称 */
   name: string,
-  /** 组件渲染类型，支持tag-input, select, inputnumber, input, radio */
+  /** 组件渲染类型，支持tag-input, select, input-number, input, radio */
   type: string,
   /** 是否支持多选，只有type=select支持此参数 */
   multiple?: boolean,
