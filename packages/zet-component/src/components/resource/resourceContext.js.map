@@ -1,0 +1,1 @@
+{"version":3,"file":"resourceContext.js","sourceRoot":"","sources":["resourceContext.tsx"],"names":[],"mappings":"AAAA,OAAO,KAAK,MAAM,OAAO,CAAC;AAE1B,MAAM,YAAY,GAAG;IACnB,aAAa,EAAE;QACb,QAAQ,EAAE,KAAK;KAChB;CACF,CAAA;AAED,MAAM,CAAC,MAAM,eAAe,GAAG,KAAK,CAAC,aAAa,CAAC,YAAY,CAAC,CAAC"}
