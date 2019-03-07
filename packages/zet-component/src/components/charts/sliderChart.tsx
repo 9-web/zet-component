@@ -9,7 +9,7 @@ export interface SliderChartProps {
   /** 组件行行内样式 */
   data:any,
   height?: number | string,
-  titles:Title[],
+  titles?:Title[],
   scales?:Scale,
 }
 
