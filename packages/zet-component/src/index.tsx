@@ -16,3 +16,8 @@ export { default as TagInput } from './components/tag-input';
 /** 选择器 */
 export { default as Select } from './components/select';
 
+/** 时间范围选择 */
+export { default as TimeSelect } from './components/time-select';
+
+
+

@@ -1,0 +1,72 @@
+---
+name: TimeSelect(时间选择)
+menu: Components
+---
+
+import { Playground, PropsTable } from 'docz';
+import { State, Toggle } from 'react-powerplug';
+import { } from 'antd';
+import { TagInput, TimeSelect } from '../../index.tsx';
+import data from './_mock/data.js';
+
+# TimeSelect
+
+## 使用
+`TimeSelect`用来在选择时间范围，最终返回秒，可以结合Form表单使用, 现阶段支持秒，分钟，小时
+
+## data 配置
+```
+const data = {
+  seconds: {
+    key: 'seconds',
+    selectData: [1, 5, 10, 20, 30],
+    displayUnit: '秒',
+  },
+  minutes: {
+    key: 'minutes',
+    selectData: [1, 5, 10, 20, 30],
+    displayUnit: '分钟',
+  },
+  hours: {
+    key: 'hours',
+    selectData: [1, 2, 4, 8, 12, 18],
+    displayUnit: '小时',
+  },
+};
+
+```
+
+## 基本使用
+<Playground>
+    <TimeSelect width={200} />
+</Playground>
+
+## value值
+<Playground>
+    <TimeSelect width={200} value={1200} />
+</Playground>
+
+## 禁用
+<Playground>
+    <TimeSelect width={200} value={1200} disabled />
+</Playground>
+
+
+## onChage
+<Playground>
+  <State initial={{value: 120}}>
+    {({ state, setState }) => (
+      <React.Fragment>
+        <TimeSelect width={200} data={data} value={state.value} onChange={(value) => (setState({ value }))} />
+        <span>
+          change value: {state.value}
+        </span>
+      </React.Fragment>
+    )}
+  </State>
+</Playground>
+
+## API
+
+### TimeSelect
+<PropsTable of={TimeSelect}/>
