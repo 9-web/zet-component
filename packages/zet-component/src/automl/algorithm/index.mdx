@@ -43,7 +43,7 @@ Alogrithm
 
 ## 案例介绍
 <Playground>
-  <State initial={{disabled: false, value: [{"id":"d7660525-e5a3-44fd-af23-8376f945bfb5","name":"LeNet","params":{"norm_size":4833}},{"id":"39f0901a-1807-40bf-848a-304d19d4ace4","name":"VGG19","params":{"norm_size":48}},{"id":"d1010bce-2050-4beb-855b-d9ebcae81598","name":"VGG19","params":{"norm_size":4333}}]}}>
+  <State initial={{disabled: false, value: []}}>
     {({ state, setState }) => (
       <React.Fragment>
         <Button style={{marginBottom: '10px'}} type='primay' onClick={() => { setState({ disabled: !state.disabled}) }}>{state.disabled ? '启用' : '禁用'}</Button>

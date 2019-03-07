@@ -1,12 +1,14 @@
 import * as React from 'react';
 import { FormComponentProps } from 'antd/lib/form';
 import { DataItemSchema, ParamsItemSchema, ValueItemSchema } from './interface';
-import { Form, Select, Input, InputNumber } from 'antd';
+import { Form, Select, Input, InputNumber, Radio } from 'antd';
 import Ellipsis from '../../components/ellipsis';
 import TagInput from '../../components/tag-input';
+import TimeSelect from '../../components/time-select';
 import styles from './index.less';
 
 const FormItem = Form.Item;
+const RadioGroup = Radio.Group;
 const { Option } = Select;
 const formItemLayout = {
   labelCol: {
@@ -82,6 +84,24 @@ class Item extends React.Component<ItemProps, any> {
       </Select>)
   }
 
+  renderRadioGroup = (radioData: ParamsItemSchema) => {
+    const { disabled } = this.props;
+    return (
+      <RadioGroup disabled={disabled} key={radioData.key}>
+        {
+          Array.isArray(radioData.data) && radioData.data.map(d => {
+            return <Radio key={d.value} value={d.value}>{d.name}</Radio>
+          })
+        }
+      </RadioGroup>
+    )
+  }
+
+  renderTimeSelect = (timeSelectData: ParamsItemSchema) => {
+    const { disabled } = this.props;
+    return <TimeSelect key={timeSelectData.key} data={timeSelectData.data} disabled={disabled} />
+  }
+
   renderItem = (item: ParamsItemSchema) => {
     const { disabled } = this.props;
     switch (item.type) {
@@ -91,8 +111,12 @@ class Item extends React.Component<ItemProps, any> {
         return this.renderSelect(item)
       case 'input':
         return <Input style={{width: '100%'}} disabled={disabled} key={item.key} />
-      case 'inputnumber':
+      case 'input-number':
         return <InputNumber style={{width: '100%'}} min={item.min} max={item.max} disabled={disabled} key={item.key} />
+      case 'radio-group':
+        return this.renderRadioGroup(item);
+      case 'time-select':
+        return this.renderTimeSelect(item);
       default:
         throw('auto ml algorithm params no matching ! ');
     }
