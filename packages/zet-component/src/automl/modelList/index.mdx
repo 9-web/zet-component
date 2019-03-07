@@ -50,10 +50,29 @@ import { AutoML } from 'zet-component';
         const { ModelList } = AutoML;
         return (
           <ModelList
-          data={modelList}
-          contentType='list'
-          jobData={jobData}
-          jobId={'6f30f8b4-90d7-49be-abb9-bd57abdbb5b6'}>
+            data={modelList}
+            contentType='list'
+            jobData={jobData}
+            jobId={'6f30f8b4-90d7-49be-abb9-bd57abdbb5b6'}>
+          </ModelList>
+        )
+      }
+    }
+  </State>
+</Playground>
+
+## Basic chart
+<Playground>
+  <State initial={{ show:'chart' }}>
+    {
+      ({state,setState})=>{
+        const { ModelList } = AutoML;
+        return (
+          <ModelList
+            data={modelList}
+            contentType='chart'
+            jobData={jobData}
+            jobId={'6f30f8b4-90d7-49be-abb9-bd57abdbb5b6'}>
           </ModelList>
         )
       }

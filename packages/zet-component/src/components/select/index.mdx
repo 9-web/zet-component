@@ -43,11 +43,11 @@ import treeData from './_mock/treeData.js';
 
 ## 标签筛选
 <Playground>
-     <Dropdown
+    <Dropdown
        overlay={
           <Menu>
             <Menu.Item>
-              <Select.TreeSelect treeData={treeData} treeCheckable={true} />
+              <Select.TreeSelect treeData={treeData} treeCheckable={true} treeDefaultExpandAll={true}	/>
             </Menu.Item>
           </Menu>
        }
@@ -56,6 +56,13 @@ import treeData from './_mock/treeData.js';
      >
         <Button><Icon type='filter' /></Button>
      </Dropdown>
+</Playground>
+
+## 标签筛选
+<Playground>
+    <Select onChange={(value) => {
+                          console.log(`selected ${value}`);
+                        }}  data={['tag1', 'tag2']} />
 </Playground>
 
 ## 图标筛选
