@@ -2,8 +2,7 @@ import TreeSelect from './tree-select';
 import * as React from "react";
 export { TreeProps } from './tree-select';
 import { Dropdown, Button, Icon, Checkbox, Select as Select_ } from 'antd';
-import {TreeNodeNormal} from "antd/lib/tree-select/interface";
-import {TreeProps} from "@/components/select/tree-select";
+
 const Option = Select_.Option;
 
 export interface SelectProps {
