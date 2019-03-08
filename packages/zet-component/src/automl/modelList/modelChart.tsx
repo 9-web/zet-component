@@ -80,10 +80,12 @@ class ModelChart extends React.Component<ModelChartProps, ModelChartState> {
           // style={{ width: 300 }}
         >
          <div>
-           <SliderChart
-              data={repository}
-              {...otherProps}
-           />
+           {
+             repository && <SliderChart
+               data={repository}
+               {...otherProps}
+             />
+           }
          </div>
         </Card>
       </div>
