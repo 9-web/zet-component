@@ -43,7 +43,7 @@ function getComponent(dataInfo,props) {
       end: end ? new Date(end).getTime() : new Date().getTime()
     }
   });
-  let axisX = scales.axisX || {key:'x',type:'time',tickCount:8,mask:'m/dd hh:MM'};
+  let axisX = scales.axisX || {key:'x',type:'time',tickCount:8,mask:'MM/dd HH:mm'};
   let axisY = scales.axisY || titles || [{key:'y',alias:'y'}];
   let geoms=[],axis=[],axisYObj={},defaultYAxis='y';
   const dv = ds.createView("origin").source(data);
@@ -70,7 +70,7 @@ function getComponent(dataInfo,props) {
     [axisX.key]: {
       type: axisX.type || "time",
       tickCount: axisX.tickCount || 8,
-      mask: axisX.mask || "m/dd hh:MM",
+      mask: axisX.mask || "MM/DD HH:mm",
     },
     ...axisYObj
   };
