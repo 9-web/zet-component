@@ -119,7 +119,7 @@ class Task extends React.Component<TaskProps, TaskState> {
           <div className={styles.cardTitle} onClick={() => { this.changeJob(jobInfo); }}>
             <span className={styles.taskListTitle}>
               <span className={styles.taskListName} title={title}>
-                <a onClick={() => { this.title(jobInfo); }} >{title}</a>
+                <a onClick={() => { this.title(jobInfo); }} className={`${jobInfo.jobStatus === 'FAIL' ? styles.linkWraperr : ''}`} >{title}</a>
               </span>
               <span className={styles.cardTitleOptions}>
                 {jobInfo.jobStatus === 'RUNNING' && <Icon type="loading" theme="outlined" />}

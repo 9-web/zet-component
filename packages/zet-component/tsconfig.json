@@ -12,6 +12,7 @@
     "paths": {
       "@/*": ["src/*"]
     },
+    "include":["./src/**/*"],
     "allowSyntheticDefaultImports": true
   }
 }
