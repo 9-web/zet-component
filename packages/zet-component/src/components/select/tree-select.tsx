@@ -45,6 +45,7 @@ class TreeSelect  extends React.Component<TreeProps, any> {
   render() {
     const { style, className, treeData, showSearch, allowClear, treeDefaultExpandAll, treeNodeFilterProp, ...rest} = this.props;
     const classNames = classnames(styles.zetSelect, className);
+    console.log('styles.zetSelect', styles.zetSelect);
     const defuleStyle = {
       width: 300,
       ...style,
@@ -53,7 +54,7 @@ class TreeSelect  extends React.Component<TreeProps, any> {
     return (
       <TreeSelect_
         style={defuleStyle}
-        className={classNames}
+        dropdownClassName={classNames}
         value={this.state.value}
         onChange={this.onChange}
         treeData={treeData}
