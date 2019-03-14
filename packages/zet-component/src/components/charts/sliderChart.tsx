@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import {Chart, Geom, Axis, Tooltip, Legend} from "bizcharts";
 import DataSet from "@antv/data-set";
 
@@ -11,6 +11,7 @@ export interface SliderChartProps {
   height?: number | string,
   titles?:Title[],
   scales?:Scale,
+  defaultTimeRange?:any[]
 }
 
 export interface Title{
@@ -36,14 +37,14 @@ export interface SliderChartState {
 
 function getComponent(dataInfo,props) {
   const {data,begin,end} = dataInfo;
-  let {scales={},titles} = props;
+  let {scales={},titles, defaultTimeRange=[]} = props;
   const ds = new DataSet({
-    state: {
-      start: begin ? new Date(begin).getTime() : new Date().getTime(),
-      end: end ? new Date(end).getTime() : new Date().getTime()
-    }
-  });
-  let axisX = scales.axisX || {key:'x',type:'time',tickCount:8,mask:'MM/dd HH:mm'};
+      state: {
+        start: begin ? new Date(begin).getTime() : new Date().getTime(),
+        end: end ? new Date(end).getTime() : new Date().getTime()
+      }
+    });
+  let axisX = scales.axisX || {key:'x',type:'time',tickCount:8,mask:'MM/DD HH:mm'};
   let axisY = scales.axisY || titles || [{key:'y',alias:'y'}];
   let geoms=[],axis=[],axisYObj={},defaultYAxis='y';
   const dv = ds.createView("origin").source(data);
@@ -52,8 +53,13 @@ function getComponent(dataInfo,props) {
     callback(obj) {
       const time = new Date(obj[axisX.key]).getTime(); // !注意：时间格式，建议转换为时间戳进行比较
       return time >= ds.state.start && time <= ds.state.end;
+      //return time >= defaultTimeRange[0] && time<=defaultTimeRange[1]
     }
   });
+  if(defaultTimeRange.length===2){
+    ds.setState("start", defaultTimeRange[0]);
+    ds.setState("end", defaultTimeRange[1]);
+  }
   axisY.forEach((item,index)=>{
     const { key,...other} = item;
     if(index===0) defaultYAxis = key;
@@ -138,8 +144,8 @@ function getComponent(dataInfo,props) {
             <Slider
               width="auto"
               height={26}
-              start={ds.state.start}
-              end={ds.state.end}
+              start={defaultTimeRange[0] || ds.state.start}
+              end={defaultTimeRange[1] || ds.state.end}
               xAxis={axisX.key}
               yAxis={defaultYAxis}
               scales={scale}
@@ -162,6 +168,9 @@ class SliderChart extends React.Component<SliderChartProps, SliderChartState> {
   constructor(props: SliderChartProps) {
     super(props);
     this.state = {}
+  }
+  shouldComponentUpdate(){
+    return false;
   }
   render(){
     const {data,...otherProps} = this.props;
