@@ -16,6 +16,7 @@ export interface ModelListProps {
   contentType:string,
   /** job数据 */
   jobData?:any,
+  autoMLInfo?:any,
   /** job id */
   jobId?:string,
   /** 查看日志回调  contentType 值为 detail*/
@@ -41,7 +42,7 @@ class ModelList extends React.Component<ModelListProps, ModelListState> {
     return arr;
   }
   getContent = () => {
-    const { contentType,width, height, style }= this.props;
+    const { contentType,width, height, style,autoMLInfo }= this.props;
     let { jobData, jobId, data, ...otherProps } = this.props;
     let result;
     const styleProps = {width, height, ...style};
@@ -85,6 +86,7 @@ class ModelList extends React.Component<ModelListProps, ModelListState> {
             {data.map((item,index)=>{
               return <ModelChart
                 item={item}
+                autoMLInfo={autoMLInfo}
                 jobId={jobData.jobId}
                 key={index}
                 {...otherProps}

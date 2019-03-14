@@ -23,6 +23,7 @@ function CardExtra(props) {
 export interface ModelChartProps {
   /** 组件行行内样式 */
   data?:any,
+  autoMLInfo?:any,
   item?:any,
   jobId?:string,
   getView?:(blockId:string)=>void,
@@ -55,16 +56,16 @@ class ModelChart extends React.Component<ModelChartProps, ModelChartState> {
     this.props.openModelDetail && this.props.openModelDetail(modelId,name,jobId)
   }
   render() {
-    const { item: {blockId, modelId, repository,name,trainBeginTime,trainEndTime}, ...otherProps} = this.props;
+    const { item: {blockId, modelId, repository,name,trainBeginTime,trainEndTime}, autoMLInfo,...otherProps} = this.props;
 
     return (
       <div className={styles.mdlItem} id={modelId}>
         <Card
           title={
             <span>
-              <span style={{ marginRight: 8 }}>Metric名称</span>
+              <span style={{ marginRight: 8 }}>{autoMLInfo.metricName}</span>
               <span style={{ marginRight: 8, fontSize: 14, color: 'rgba(16, 38, 58, 0.45)' }}>{name}</span>
-              <span style={{ fontSize: 14, color: 'rgba(16, 38, 58, 0.45)' }}>{this.durtion(trainBeginTime, trainEndTime)}</span>
+              <span style={{ fontSize: 14, color: 'rgba(16, 38, 58, 0.45)' }}>运行时间 {this.durtion(trainBeginTime, trainEndTime)}s</span>
             </span>
           }
           extra={(
