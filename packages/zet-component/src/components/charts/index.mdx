@@ -49,9 +49,17 @@ import { Components } from 'zet-component';
       const {Chart:{SliderChart}} = Components;
       return (
         <SliderChart
+          logInfo
           data={data}
           height={300}
-          scales={{axisX:{key:'time'},axisY:[{key:'flow',alias:'流量'},{key:'rain',alias:'雨量'}]}}
+          scales={
+            {
+              axisX:{key:'time'},
+              axisY:[
+                {key:'flow',alias:'流量123',type:'line'},
+                {key:'rain',alias:'雨量',type:'point',shape:'circle'}
+              ]}
+          }
          ></SliderChart>
       )
   }}
