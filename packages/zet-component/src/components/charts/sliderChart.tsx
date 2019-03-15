@@ -38,7 +38,7 @@ export interface SliderChartState {
 
 function getComponent(dataInfo,props) {
   const {data,begin,end} = dataInfo;
-  let {scales={},titles, defaultTimeRange=[],logInfo} = props;
+  let {scales={},titles, logInfo, defaultTimeRange=[]} = props;
   const ds = new DataSet({
       state: {
         start: begin ? new Date(begin).getTime() : new Date().getTime(),
