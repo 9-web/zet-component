@@ -11,7 +11,8 @@ export interface SliderChartProps {
   height?: number | string,
   titles?:Title[],
   scales?:Scale,
-  defaultTimeRange?:any[]
+  defaultTimeRange?:any[],
+  logInfo?:any,
 }
 
 export interface Title{
@@ -37,7 +38,7 @@ export interface SliderChartState {
 
 function getComponent(dataInfo,props) {
   const {data,begin,end} = dataInfo;
-  let {scales={},titles, defaultTimeRange=[]} = props;
+  let {scales={},titles, defaultTimeRange=[],logInfo} = props;
   const ds = new DataSet({
       state: {
         start: begin ? new Date(begin).getTime() : new Date().getTime(),
@@ -46,29 +47,29 @@ function getComponent(dataInfo,props) {
     });
   let axisX = scales.axisX || {key:'x',type:'time',tickCount:8,mask:'MM/DD HH:mm'};
   let axisY = scales.axisY || titles || [{key:'y',alias:'y'}];
-  let geoms=[],axis=[],axisYObj={},defaultYAxis='y';
+  let geoms=[],axis=[],axisYObj={},axisYScale={},defaultYAxis='y';
   const dv = ds.createView("origin").source(data);
-  dv.transform({
-    type: "filter",
-    callback(obj) {
-      const time = new Date(obj[axisX.key]).getTime(); // !注意：时间格式，建议转换为时间戳进行比较
-      return time >= ds.state.start && time <= ds.state.end;
-      //return time >= defaultTimeRange[0] && time<=defaultTimeRange[1]
-    }
-  });
+
   if(defaultTimeRange.length===2){
     ds.setState("start", defaultTimeRange[0]);
     ds.setState("end", defaultTimeRange[1]);
   }
   axisY.forEach((item,index)=>{
-    const { key,...other} = item;
+    const { key, type, alias, notAllowZero, ...other } = item;
     if(index===0) defaultYAxis = key;
-    axisYObj[key] = other;
+    axisYScale[key] = {
+      alias:alias
+    };
+    axisYObj[key] = {
+      notAllowZero,
+      ...other
+    };
     geoms.push(<Geom
-      type={other.type || 'line'}
+      type={type || 'line'}
       position={`${axisX.key}*${key || 'y'}`}
       color={other.color || colors[index]}
       opacity={0.85}
+      {...other}
     />)
     axis.push(<Axis name={key} />)
   })
@@ -78,9 +79,10 @@ function getComponent(dataInfo,props) {
       tickCount: axisX.tickCount || 8,
       mask: axisX.mask || "MM/DD HH:mm",
     },
-    ...axisYObj
+    ...axisYScale
   };
   titles = Array.isArray(titles) && titles.length>0 ? titles : (axisY || []);
+
   const legendItems =  titles.map((item,index)=>{
       return {
         value: item.alias,
@@ -94,6 +96,31 @@ function getComponent(dataInfo,props) {
   }) || [];
   let chart;
   const {height} = props;
+  if(logInfo){
+    console.log('sliderChartLogInfo >> start')
+    console.log('data >',data);
+    console.log('scale > ',scale);
+    console.log('axis > ', axis);
+    console.log('axisYScale > ',axisYScale);
+    console.log('axisYObj > ',axisYObj);
+    console.log('legendItems > ', legendItems);
+    console.log('geoms > ', geoms)
+    console.log('sliderChartLogInfo >> end')
+  }
+  dv.transform({
+    type: "filter",
+    callback(obj) {
+      const time = new Date(obj[axisX.key]).getTime(); // !注意：时间格式，建议转换为时间戳进行比较
+      let flag = true;
+     /* Object.keys(axisYObj).forEach(item=>{
+        if(obj[item] === null || (axisYObj[item].notAllowZero && obj[item] === 0)){
+          flag = false;
+          return;
+        }
+      })*/
+      return flag && time >= ds.state.start && time <= ds.state.end ;
+    }
+  });
   class SliderChart extends React.Component {
     onChange(obj) {
       const { startValue, endValue } = obj;

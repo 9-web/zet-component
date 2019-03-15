@@ -124,8 +124,9 @@ class Task extends React.Component<TaskProps, TaskState> {
               <span className={styles.cardTitleOptions}>
                 {jobInfo.jobStatus === 'RUNNING' && <Icon type="loading" theme="outlined" />}
                 <Tooltip title={'删除'}>
-                  <Icon style={{ marginLeft: 35 }} type="delete" theme="outlined"
-                        onClick={(e) => { e.stopPropagation(); this.delJob(jobInfo.jobId); }} />
+                  {jobInfo.jobStatus !== 'RUNNING' && <Icon style={{ marginLeft: 35 }} type="delete" theme="outlined"
+                                                            onClick={(e) => { e.stopPropagation(); this.delJob(jobInfo.jobId); }} />}
+
                 </Tooltip>
               </span>
             </span>
