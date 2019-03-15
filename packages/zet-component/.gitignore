@@ -5,5 +5,6 @@
 /node_modules
 .rpt2_cache
 .idea/*
-/*.tsx/*.js
-/*.tsx/*.js.map
+*.tsx/*.js
+*.tsx/*.js.map
+
