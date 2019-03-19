@@ -47,7 +47,6 @@ class TreeSelect  extends React.Component<TreeProps, any> {
     const classNames = classnames(styles.zetSelect, className);
     console.log('styles.zetSelect', styles.zetSelect);
     const defuleStyle = {
-      width: 300,
       ...style,
     }
 
