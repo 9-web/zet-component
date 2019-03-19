@@ -54,6 +54,18 @@ class TagsInput extends React.Component {
     }
   }
 
+  onKeyDown = (e) => {
+    const { inputValue } = this.props;
+    const { valuelist } = this.state;
+    let keynum = window.event ? e.keyCode : e.which;
+    const size = valuelist.size;
+    if (keynum === 8 && !inputValue && size > 0) {
+      let lastValue = Array.from(valuelist).pop();
+      valuelist.delete(lastValue);
+      this.triggerChange(lastValue);
+    }
+  }
+
   removeTag = (v, e) => {
     e.preventDefault();
     const { disabled } = this.props;
@@ -84,7 +96,7 @@ class TagsInput extends React.Component {
 
   render() {
     const { valuelist, focus } = this.state;
-    const { disabled, addData, delData, inputValue, placeholder } = this.props;
+    const { disabled, addData, delData, inputValue, placeholder, maxLength } = this.props;
     addData.length > 0 && addData.forEach(v => {
       valuelist.add(v);
     });
@@ -117,12 +129,13 @@ class TagsInput extends React.Component {
               onChange={this.onInputChange}
               onBlur={this.onInputBlur}
               value={inputValue}
-              // maxLength='25'
+              maxLength={maxLength}
               // onPress={this.onPressEnter}
               ref={this.input}
               onFocus={this.onInputFocus}
               disabled={disabled}
               placeholder={valuelist.size === 0 ? placeholder : ''}
+              onKeyDown={this.onKeyDown}
             />
           </li>
         </ul>
