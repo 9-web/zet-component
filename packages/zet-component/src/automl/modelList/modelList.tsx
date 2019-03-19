@@ -24,7 +24,8 @@ export interface ModelListProps {
   /** 预测按钮事件回调  contentType 值为 detail*/
   getForecast?:(moduleId:string)=>void,
   /** 查看详情回调  contentType 值为 detail*/
-  openModelDetail?:(modelId:string,modelName:string,jobId:string)=>void
+  openModelDetail?:(modelId:string,modelName:string,jobId:string)=>void,
+  onSeeLogClick?:(dataId:string)=>void
 }
 
 export interface ModelListState {
@@ -55,7 +56,7 @@ class ModelList extends React.Component<ModelListProps, ModelListState> {
                 this.sort().length > 0 && this.sort().map((v) => {
                   if (v.mouduleName) {
                     return (
-                      <ModuleListItem data={v} />
+                      <ModuleListItem data={v} onSeeLogClick={this.props.onSeeLogClick}/>
                     );
                   }
                   return '';
