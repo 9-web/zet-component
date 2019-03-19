@@ -171,6 +171,7 @@ function getComponent(dataInfo,props) {
             <Slider
               width="auto"
               height={26}
+              padding={[0, 80]}
               start={defaultTimeRange[0] || ds.state.start}
               end={defaultTimeRange[1] || ds.state.end}
               xAxis={axisX.key}
