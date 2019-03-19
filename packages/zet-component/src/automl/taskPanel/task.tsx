@@ -93,9 +93,9 @@ class Task extends React.Component<TaskProps, TaskState> {
   changeJobItem = (item) => {
     this.props.setSelectedModelKeys([item.modelId])
   }
-  openModelDetail = (e,modelId,jobId,modelName)=>{
+  openModelDetail = (e,modelId,modelName,jobId)=>{
     e.stopPropagation();
-    this.props.openModelDetail(modelId,jobId,modelName);
+    this.props.openModelDetail(modelId,modelName,jobId);
   }
   showContras = (item,jobId,jobName) => {
     const {innerContras} = this.props
@@ -156,7 +156,7 @@ class Task extends React.Component<TaskProps, TaskState> {
                         <div className={`${styles.linkWrap} ${(jobInfo.jobStatus === 'FAIL' && (item.modelTrainStatus !== 'SUCCESS')) ? styles.linkWraperr : ''}`}>
                           <div
                             title={item.modelName}
-                            onClick={(e) => {this.openModelDetail(e, item.modelId, jobInfo.jobId, item.modelName);}}
+                            onClick={(e) => {this.openModelDetail(e, item.modelId, item.modelName, jobInfo.jobId);}}
                             className={styles.shortName}
                           >
                             {item.modelName}

@@ -119,8 +119,11 @@ class ModelItem extends React.Component<ModelItemProps, ModelItemState> {
                 </span>
               </Tooltip>
             </h3>
-            <div style={{ color: 'rgba(16, 38, 58, 0.45)', fontSize: 12 }}>
-              {data.mouduleDescription}
+
+            <div className={styles.moduleDescription} style={{ color: 'rgba(16, 38, 58, 0.45)', fontSize: 12 }}>
+              <Tooltip title={data.mouduleDescription}>
+                {data.mouduleDescription}
+              </Tooltip>
             </div>
           </div>
           <div className={styles.chartItem}>

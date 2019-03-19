@@ -41,7 +41,8 @@ class ModelChart extends React.Component<ModelChartProps, ModelChartState> {
     this.state = {}
   }
   durtion = (startTime, endTime) => {
-    return moment(endTime).diff(moment(startTime),'seconds');
+    let result = moment(endTime).diff(moment(startTime),'seconds')
+    return isNaN(result) ? 0 : result;
   }
   view = (blockId) => {
     this.props.getView && this.props.getView(blockId);
@@ -56,7 +57,7 @@ class ModelChart extends React.Component<ModelChartProps, ModelChartState> {
     this.props.openModelDetail && this.props.openModelDetail(modelId,name,jobId)
   }
   render() {
-    const { item: {blockId, modelId, repository,name,trainBeginTime,trainEndTime}, autoMLInfo,...otherProps} = this.props;
+    const { item: {blockId, modelId, repository,name,trainBeginTime,trainEndTime}, autoMLInfo = {},...otherProps} = this.props;
 
     return (
       <div className={styles.mdlItem} id={modelId}>
