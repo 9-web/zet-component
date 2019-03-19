@@ -3,6 +3,8 @@ import { Icon, Tooltip } from 'antd';
 import moment from 'moment';
 import { Components } from '../../index';
 import  Timer  from '../../components/timer';
+import ZetIcon from '../../components/icon'
+
 import styles from './index.less';
 
 const { Chart:{LineChart} } = Components;
@@ -10,7 +12,7 @@ const { Chart:{LineChart} } = Components;
 export interface ModelItemProps {
   /** model 数据 */
   data:any,
-  // onSeeLogClick:(dataId:string) => void,
+  onSeeLogClick?:(dataId:string) => void,
 }
 
 export interface ModelItemState {
@@ -68,7 +70,7 @@ class ModelItem extends React.Component<ModelItemProps, ModelItemState> {
     }
   }
   onSeeLogClick = (dataId) => {
-      // this.props.onSeeLogClick(dataId)
+      this.props.onSeeLogClick(dataId)
   };
   formatCpu = () => {
     const { data } = this.props;
@@ -115,7 +117,7 @@ class ModelItem extends React.Component<ModelItemProps, ModelItemState> {
               }
               <Tooltip title='查看日志'>
                 <span onClick={() => { this.onSeeLogClick(data.id); }}>
-                  {/*<ZetIcon type="zeticon-file-text1" style={{ cursor: 'pointer' }} />*/}
+                  <ZetIcon type="zeticon-file-text1" style={{ cursor: 'pointer' }} />
                 </span>
               </Tooltip>
             </h3>

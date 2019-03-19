@@ -55,7 +55,7 @@ function getComponent(dataInfo,props) {
     ds.setState("end", defaultTimeRange[1]);
   }
   axisY.forEach((item,index)=>{
-    const { key, type, alias, notAllowZero, ...other } = item;
+    const { key, type, alias, size, visible=true, notAllowZero, ...other } = item;
     if(index===0) defaultYAxis = key;
     axisYScale[key] = {
       alias:alias
@@ -69,9 +69,10 @@ function getComponent(dataInfo,props) {
       position={`${axisX.key}*${key || 'y'}`}
       color={other.color || colors[index]}
       opacity={0.85}
+      size={size}
       {...other}
     />)
-    axis.push(<Axis name={key} />)
+    axis.push(<Axis name={key} visible={visible}/>)
   })
   const scale = {
     [axisX.key]: {
@@ -111,14 +112,7 @@ function getComponent(dataInfo,props) {
     type: "filter",
     callback(obj) {
       const time = new Date(obj[axisX.key]).getTime(); // !注意：时间格式，建议转换为时间戳进行比较
-      let flag = true;
-     /* Object.keys(axisYObj).forEach(item=>{
-        if(obj[item] === null || (axisYObj[item].notAllowZero && obj[item] === 0)){
-          flag = false;
-          return;
-        }
-      })*/
-      return flag && time >= ds.state.start && time <= ds.state.end ;
+      return time >= ds.state.start && time <= ds.state.end ;
     }
   });
   class SliderChart extends React.Component {
