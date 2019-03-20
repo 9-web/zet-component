@@ -12,15 +12,6 @@
     "deploy": "npm run build && npm run publish"
   },
   "devDependencies": {
-    "@types/react": "^16.7.20",
-    "@types/react-dom": "^16.0.11",
-    "lerna": "^3.9.0",
-    "tslint": "^5.12.1",
-    "tslint-eslint-rules": "^5.4.0",
-    "tslint-react": "^3.6.0",
-    "umi-plugin-library": "^1.0.2",
-    "webpack": "^4.28.4",
-    "webpack-cli": "^3.2.1"
-  },
-  "dependencies": {}
+    "lerna": "^3.9.0"
+  }
 }

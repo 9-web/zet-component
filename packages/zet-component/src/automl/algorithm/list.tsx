@@ -36,13 +36,13 @@ class List extends React.Component<ListProps, any> {
       <Menu
         mode='inline'
         defaultSelectedKeys={[defaultSelectKey]}
-        className={styles.zetAmlAlgorithmLayoutList}
+        className={styles.list}
         // onClick={this.handleMenuClick}
       >
         {
           data.map(d => (
             <MenuItem
-              className={styles.zetAmlAlgorithmLayoutListItem}
+              className={styles.item}
               key={d.id}
               onClick={() => {this.handleMenuClick(d)}}
             >
@@ -51,7 +51,7 @@ class List extends React.Component<ListProps, any> {
                 {
                   (locale: any) => (
                     <Switch
-                    className={styles.zetAmlAlgorithmLayoutListItemRight}
+                    className={styles.right}
                       // size='small'
                       checkedChildren={locale.on}
                       unCheckedChildren={locale.off}

@@ -176,9 +176,9 @@ class Item extends React.Component<ItemProps, any> {
     // console.log('data', data)
     return (
       <React.Fragment>
-        <div className={styles.zetAmlAlgorithmParamsInfo}>
-          <div className={styles.zetAmlAlgorithmParamsInfoTitle} key='name'>{data.name}</div>
-          <div className={styles.zetAmlAlgorithmParamsInfoDesc} key='desc'>
+        <div className={styles.info}>
+          <div className={styles.title} key='name'>{data.name}</div>
+          <div className={styles.desc} key='desc'>
             <Ellipsis lines={collapse ? 1 : 100}>
               {data.desc}
             </Ellipsis>

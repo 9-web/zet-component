@@ -8,3 +8,4 @@ lerna-debug.log
 .idea/*
 *.tsx/*.js
 *.tsx/*.js.map
+ yarn-error.log

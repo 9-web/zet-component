@@ -4,6 +4,7 @@ import { Layout, Slider } from 'antd';
 import Item from './item';
 import List from './list';
 import styles from './index.less';
+console.log('styles', styles);
 
 const { Sider, Content } = Layout;
 
@@ -127,7 +128,7 @@ class Algorithm extends React.Component<AlgorithmProps, AlgorithmState> {
     const {disabled} = this.props;
     const {singleData, singleValue, isDisable, data, value} = this.state;
     return (
-      <Layout className={styles.zetAmlAlgorithmLayout}>
+      <Layout className={styles.layout}>
         <Sider theme='light' width={240}>
           <List
             disabled={disabled}
@@ -138,7 +139,7 @@ class Algorithm extends React.Component<AlgorithmProps, AlgorithmState> {
           />
         </Sider>
         <Content
-          className={styles.zetAmlAlgorithmLayoutContent}
+          className={styles.content}
         >
           {
             isDisable && singleData && <Item
