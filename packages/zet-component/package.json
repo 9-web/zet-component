@@ -14,24 +14,32 @@
     "build:doc": "umi-lib doc build",
     "deploy:doc": "npm run build:doc && umi-lib doc deploy",
     "build": "umi-lib build",
-    "build:watch": "umi-lib build --watch"
+    "build:watch": "umi-lib build --watch",
+    "tslint": "./node_modules/.bin/tslint -c tslint.json 'src/**/*.{ts,tsx}'"
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.7",
     "react-powerplug": "^1.0.0",
+    "tslint": "^5.14.0",
+    "tslint-react": "^3.6.0",
+    "typescript": "^3.3.4000",
     "umi": "^2.6.3",
-    "umi-library": "^1.2.2"
+    "umi-library": "^1.2.2",
+    "antd": "^3.13.0",
+    "prop-types": "^15.7.2",
+    "react": ">=16.0.0",
+    "react-dom": ">=16.0.0"
   },
   "typings": "dist/index.d.ts",
   "license": "MIT",
   "peerDependencies": {
-    "antd": "3.13.0",
+    "antd": "^3.13.0",
+    "prop-types": "^15.7.2",
     "react": ">=16.0.0",
-    "react-dom": ">=16.0.0",
-    "prop-types": "^15.7.2"
+    "react-dom": ">=16.0.0"
   },
   "dependencies": {
     "@antv/data-set": "^0.10.2",
-    "antd": "3.13.0",
     "bizcharts": "^3.4.3",
     "bizcharts-plugin-slider": "^2.1.1-beta.1",
     "classnames": "^2.2.6",

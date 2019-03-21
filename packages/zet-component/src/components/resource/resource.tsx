@@ -8,45 +8,45 @@ import styles from './index.less';
 
 export interface ResourceProps {
     /** 组件行行内样式 */
-    style?: React.CSSProperties,
+    style?: React.CSSProperties;
     /** 自定义类名 */
-    className?: string,
+    className?: string;
     /** 资源组件的宽度 */
-    width?: string | number,
+    width?: string | number;
     /** 是否禁用 */
-    disabled?: boolean,
+    disabled?: boolean;
     /** 资源项标题 */
-    title?: string,
+    title?: string;
     /** 初始化资源值 */
-    defaultValue?: number,
+    defaultValue?: number;
     /** 资源值 */
-    value?: number,
+    value?: number;
     /** 步长，取值必须大于 0，并且可被 (max - min) 整除 */
-    step?: number,
+    step?: number;
     /** 最大值 */
-    max?: number,
+    max?: number;
     /** 最小值 */
-    min?: number,
+    min?: number;
     /** 资源改变触发的回调 */
-    onChange?: (e: React.MouseEvent<any>) => void,
+    onChange?: (e: React.MouseEvent<any>) => void;
     /** 滑动输入条的属性 */
-    sliderProps?: any,
+    sliderProps?: any;
     /** 数字输入框的属性 */
-    inputNumberProps?: any,
+    inputNumberProps?: any;
 }
 
 class Resource extends React.Component<ResourceProps, any> {
   static ResourceGroup: typeof ResourceGroup;
   static defaultProps = {
     width: '255px',
-    onChange: () => {},
     step: 1,
     max: 100,
     min: 0,
     disabled: false,
     sliderProps: {},
     inputNumberProps: {},
-  }
+    onChange: () => {},
+  };
 
   constructor(props: ResourceProps) {
     super(props);
@@ -67,14 +67,13 @@ class Resource extends React.Component<ResourceProps, any> {
     });
   }
 
-
   render() {
     const { style, className, title, width, step, max, min, disabled, sliderProps, inputNumberProps  } = this.props;
     const { value } = this.state;
     const styleProps = {
       width,
       ...style,
-    }
+    };
     const classNames = classnames(styles.zetResource, className);
 
     return (
@@ -89,7 +88,8 @@ class Resource extends React.Component<ResourceProps, any> {
                 <React.Fragment>
                   <Row>
                     <Col span={12}>{title}</Col>
-                    <Col span={12}
+                    <Col
+                      span={12}
                       style={{
                         textAlign: 'right',
                         paddingRight: 3,
@@ -105,7 +105,7 @@ class Resource extends React.Component<ResourceProps, any> {
                         min={min}
                         disabled={disabled}
                         style={{
-                          width: 60
+                          width: 60,
                         }}
                         {...inputNumberProps}
                       />
@@ -123,12 +123,12 @@ class Resource extends React.Component<ResourceProps, any> {
                     {...sliderProps}
                   />
                 </React.Fragment>
-              )
+              );
             }
           }
         </ResourceContext.Consumer>
       </div>
-    )
+    );
   }
 }
 

@@ -9,3 +9,4 @@ lerna-debug.log
 *.tsx/*.js
 *.tsx/*.js.map
  yarn-error.log
+ yarn.lock
