@@ -2,10 +2,9 @@ export default {
   entry: 'src/index.tsx',
   esm: 'rollup',
   cjs: 'rollup',
-  cssModules: {
-    camelCase: true
-  },
+  cssModules: true,
   doc: {
+    base: '/zet-component',
     title: 'Zet Component',
     description: 'Zet Component UI library for React',
     wrapper: 'src/wrapper.js',
