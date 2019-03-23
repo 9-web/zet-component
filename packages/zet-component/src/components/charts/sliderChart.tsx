@@ -60,7 +60,6 @@ function getComponent(dataInfo,props) {
     axisYScale[key] = {
       alias:alias,
       min:0,
-      tickInterval:10
     };
     axisYObj[key] = {
       notAllowZero,
@@ -87,7 +86,7 @@ function getComponent(dataInfo,props) {
   titles = Array.isArray(titles) && titles.length>0 ? titles : (axisY || []);
 
   const legendItems =  titles.map((item,index)=>{
-    if(Array.isArray(item.color)) item.color == 'green'
+    if(Array.isArray(item.color)) item.color = 'green'
       return {
         value: item.alias,
         key:item.key,

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Dropdown, Button, Icon, Checkbox, Input, Badge, Empty } from 'antd';
+import { Dropdown, Button, Icon, Checkbox, Input, Badge, Empty, message } from 'antd';
 import classnames from 'classnames';
 import TagsInput from './tags-input.js'
 import styles from './index.less';
@@ -26,6 +26,8 @@ export interface TagProps {
   icon?: string,
   /** 占位符 */
   placeholder?: string,
+  /** 最大个数 */
+  maxLength: number,
 }
 
 class Tag extends React.Component<TagProps, any> {
@@ -52,7 +54,10 @@ class Tag extends React.Component<TagProps, any> {
   }
 
   selectNums = (keys) => {
-    const { data, onChange } = this.props;
+    const { data, onChange, maxLength } = this.props;
+    if (keys.length > maxLength) {
+      return message.warning(`最多可添加${maxLength}个标签`);
+    }
     this.setState({ selectNums: keys });
     const difference = Array.from(new Set([...this.state.selectNums].filter(x => !new Set(keys).has(x))));
     this.setState({ delData: difference });
@@ -82,7 +87,7 @@ class Tag extends React.Component<TagProps, any> {
 
 
   render() {
-    const { data, style, className, icon, placeholder } = this.props;
+    const { data, style, className, icon, placeholder, maxLength } = this.props;
     const { selectNums, delData, visible, inputValue } = this.state;
     const styleProps = {
       width: 39,
@@ -112,7 +117,7 @@ class Tag extends React.Component<TagProps, any> {
               onClick={() => { this.handleVisibleChange(true); }}
             >
               <div className={styles.zetTagInput}>
-                <TagsInput placeholder={placeholder} addData={selectNums} delData={delData} onChange={this.delTag} onInput={this.onInput} inputValue={inputValue} />
+                <TagsInput maxLength={maxLength} placeholder={placeholder} addData={selectNums} delData={delData} onChange={this.delTag} onInput={this.onInput} inputValue={inputValue} />
               </div>
               {options && options.length > 0 ? (
                 <Checkbox.Group
