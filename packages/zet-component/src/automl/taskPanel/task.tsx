@@ -39,6 +39,7 @@ export interface TaskProps {
   jobInfo: JobInfo,
   /** 模型对比id*/
   contrastIds:string[],
+  contrastJobId?:string,
   /** 任务内对比*/
   innerContras?:boolean,
   /** 锚点内容展示的容器id */
@@ -57,7 +58,7 @@ export interface TaskProps {
   clickTitle?:(jobId:string,workflowVersionId:string)=>void,
 
   openModelDetail?:(modelId:string,jobId:string,modelName:string)=>void,
-  showContras?:(record:object,jobName:string)=>void,
+  showContras?:(record:object,jobName:string, jobId:string)=>void,
 }
 
 
@@ -80,8 +81,8 @@ class Task extends React.Component<TaskProps, TaskState> {
     const propsDelJob = this.props.delJob;
     Modal.confirm({
       title: '确定要删除吗？',
-      okText: 'OK',
-      cancelText: 'Cancel',
+      okText: '确定',
+      cancelText: '取消',
       onOk: () => {
         propsDelJob(v)
       },
@@ -102,15 +103,14 @@ class Task extends React.Component<TaskProps, TaskState> {
     innerContras && this.setState({
       contrastJobId:jobId
     })
-    this.props.showContras(item,jobName)
+    this.props.showContras(item,jobName,jobId)
   };
 
   render() {
-    let {title,jobInfo,modelList,selectedTaskId,contrastIds,selectedModelKeys,anchorContainerId} = this.props;
+    let {title,jobInfo,modelList,selectedTaskId,contrastIds,contrastJobId,selectedModelKeys,anchorContainerId} = this.props;
     title = title || jobInfo.jobName || '';
     modelList = modelList || jobInfo.modelList;
     contrastIds = contrastIds || [];
-    const { contrastJobId } = this.state;
     const taskClass = classNames(styles.zetTask,{[styles.selectedTitle]:selectedTaskId===jobInfo.jobId});
     const getContainer = anchorContainerId ? {getContainer:() => document.getElementById(anchorContainerId)} :{}
     return (

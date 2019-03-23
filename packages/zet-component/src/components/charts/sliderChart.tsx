@@ -55,10 +55,12 @@ function getComponent(dataInfo,props) {
     ds.setState("end", defaultTimeRange[1]);
   }
   axisY.forEach((item,index)=>{
-    const { key, type, alias, size, visible=true, notAllowZero, ...other } = item;
+    const { key, type, min=0,max=20,alias, size, visible=true, notAllowZero, ...other } = item;
     if(index===0) defaultYAxis = key;
     axisYScale[key] = {
-      alias:alias
+      alias:alias,
+      min:0,
+      tickInterval:10
     };
     axisYObj[key] = {
       notAllowZero,
@@ -85,6 +87,7 @@ function getComponent(dataInfo,props) {
   titles = Array.isArray(titles) && titles.length>0 ? titles : (axisY || []);
 
   const legendItems =  titles.map((item,index)=>{
+    if(Array.isArray(item.color)) item.color == 'green'
       return {
         value: item.alias,
         key:item.key,
@@ -191,7 +194,10 @@ class SliderChart extends React.Component<SliderChartProps, SliderChartState> {
     super(props);
     this.state = {}
   }
-  shouldComponentUpdate(){
+  shouldComponentUpdate(nextProps){
+    if(JSON.stringify(nextProps.defaultTimeRange)!== JSON.stringify(this.props.defaultTimeRange)){
+      return true;
+    }
     return false;
   }
   render(){

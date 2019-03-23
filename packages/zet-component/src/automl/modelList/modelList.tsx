@@ -56,7 +56,7 @@ class ModelList extends React.Component<ModelListProps, ModelListState> {
                 this.sort().length > 0 && this.sort().map((v) => {
                   if (v.mouduleName) {
                     return (
-                      <ModuleListItem data={v} onSeeLogClick={this.props.onSeeLogClick}/>
+                      <ModuleListItem key={v.id} data={v} onSeeLogClick={this.props.onSeeLogClick}/>
                     );
                   }
                   return '';

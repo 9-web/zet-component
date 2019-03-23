@@ -9,8 +9,8 @@ class Timer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      start: moment(props.start || 0).millisecond(Number),
-      end: moment(props.end || props.start || 0).millisecond(Number),
+      start: moment(props.start || 0).valueOf(),
+      end: moment(props.end || props.start || 0).valueOf(),
     };
   }
 
@@ -30,13 +30,13 @@ class Timer extends Component {
     if (preTick !== nextTick && (nextTick === 'stop' || nextTick === '')) {
       this.stopTick();
       this.setState({
-        end: moment(nextProps.end).millisecond(Number),
+        end: moment(nextProps.end).valueOf(),
       });
     }
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval);
+    this.stopTick();
   }
 
   stopTick = () => {
