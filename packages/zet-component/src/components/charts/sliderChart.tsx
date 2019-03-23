@@ -11,6 +11,7 @@ export interface SliderChartProps {
   height?: number | string,
   titles?:Title[],
   scales?:Scale,
+  options?:object,
   defaultTimeRange?:any[],
   logInfo?:any,
 }
@@ -35,14 +36,17 @@ export interface Axis{
 export interface SliderChartState {
 
 }
+interface  ChartProps {
+  autoFormat?:any
+}
 
 function getComponent(dataInfo,props) {
   const {data,begin,end} = dataInfo;
-  let {scales={},titles, logInfo, defaultTimeRange=[]} = props;
+  let {scales={},titles, logInfo, defaultTimeRange=[],options} = props;
   const ds = new DataSet({
       state: {
         start: begin ? new Date(begin).getTime() : new Date().getTime(),
-        end: end ? new Date(end).getTime() : new Date().getTime()
+        end: end ? new Date(end).getTime() : new Date().getTime(),
       }
     });
   let axisX = scales.axisX || {key:'x',type:'time',tickCount:8,mask:'MM/DD HH:mm'};
@@ -50,16 +54,24 @@ function getComponent(dataInfo,props) {
   let geoms=[],axis=[],axisYObj={},axisYScale={},defaultYAxis='y';
   const dv = ds.createView("origin").source(data);
 
+  dv.transform({
+    type: "filter",
+    callback(obj) {
+      const time = new Date(obj[axisX.key]).getTime(); // !注意：时间格式，建议转换为时间戳进行比较
+      return time >= ds.state.start && time <= ds.state.end ;
+    }
+  });
   if(defaultTimeRange.length===2){
     ds.setState("start", defaultTimeRange[0]);
     ds.setState("end", defaultTimeRange[1]);
   }
   axisY.forEach((item,index)=>{
-    const { key, type, min=0,max=20,alias, size, visible=true, notAllowZero, ...other } = item;
+    const { key, type, min,max,alias, size,visible=true, notAllowZero, ...other } = item;
     if(index===0) defaultYAxis = key;
     axisYScale[key] = {
       alias:alias,
-      min:0,
+      min,
+      max,
     };
     axisYObj[key] = {
       notAllowZero,
@@ -110,18 +122,13 @@ function getComponent(dataInfo,props) {
     console.log('geoms > ', geoms)
     console.log('sliderChartLogInfo >> end')
   }
-  dv.transform({
-    type: "filter",
-    callback(obj) {
-      const time = new Date(obj[axisX.key]).getTime(); // !注意：时间格式，建议转换为时间戳进行比较
-      return time >= ds.state.start && time <= ds.state.end ;
-    }
-  });
-  class SliderChart extends React.Component {
+  options && options.autoFormat && options.autoFormat(dv.rows,scale)
+  class SliderChart extends React.Component<ChartProps> {
     onChange(obj) {
       const { startValue, endValue } = obj;
       ds.setState("start", startValue);
       ds.setState("end", endValue);
+      options && options.autoFormat && options.autoFormat(dv.rows,scale)
     }
     render() {
       return (

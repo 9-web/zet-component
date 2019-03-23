@@ -92,6 +92,7 @@ class ModelList extends React.Component<ModelListProps, ModelListState> {
                 key={index}
                 {...otherProps}
                 {...item.scales}
+                options={item.options}
                 getView={this.props.getView}
                 getForecast={this.props.getForecast}
                 openModelDetail={this.props.openModelDetail}
