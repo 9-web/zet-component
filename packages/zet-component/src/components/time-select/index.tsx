@@ -60,7 +60,7 @@ export interface TimeSelectProps {
    /** onChange 事件 */
    onChange?: (value: number) => void,
   /** test function */
-   test: (value: number) => void,
+   test?: (value: number) => void,
 }
 
 export interface TimeSelectState {
