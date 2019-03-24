@@ -89,7 +89,8 @@ class Resource extends React.Component<ResourceProps, any> {
                 <React.Fragment>
                   <Row>
                     <Col span={12}>{title}</Col>
-                    <Col span={12}
+                    <Col
+                      span={12}
                       style={{
                         textAlign: 'right',
                         paddingRight: 3,
