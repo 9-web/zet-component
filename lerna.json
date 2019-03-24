@@ -5,7 +5,7 @@
   "command": {
     "publish": {
       "ignoreChanges": [
-        "packages/zet-component/resource"
+        // "packages/zet-component/resource"
       ]
     },
     "bootstrap": {
