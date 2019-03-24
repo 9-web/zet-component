@@ -7,7 +7,7 @@ export interface ContrastButtonProps {
   /** 组件行行内样式 */
   contrastIds?:string[],
   /** 对比模型id */
-  contrastJobId:string,
+  contrastJobId?:string,
   item:any,
   jobName:string,
   jobId:string,
@@ -31,7 +31,7 @@ class ContrastButton extends React.Component<ContrastButtonProps, ContrastButton
 
   isDisabled = () => {
     const { item, contrastIds,contrastJobId,jobId } = this.props;
-    if(contrastJobId && contrastJobId === jobId){
+    if(contrastJobId && contrastJobId !== jobId){
       return true;
     }
     if (item.modelTrainStatus) {

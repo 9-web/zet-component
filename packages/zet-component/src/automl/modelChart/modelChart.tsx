@@ -69,7 +69,6 @@ class ModelChart extends React.Component<ModelChartProps, ModelChartState> {
             <RadioGroup defaultValue="auto" onChange={this.changeChart}>
               <RadioButton value="auto">自动调参</RadioButton>
               {paramsOptionList}
-              <RadioButton value="roc">ROC</RadioButton>
             </RadioGroup>
           </div>
         </div>

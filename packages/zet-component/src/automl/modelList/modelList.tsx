@@ -56,7 +56,7 @@ class ModelList extends React.Component<ModelListProps, ModelListState> {
                 this.sort().length > 0 && this.sort().map((v) => {
                   if (v.mouduleName) {
                     return (
-                      <ModuleListItem data={v} onSeeLogClick={this.props.onSeeLogClick}/>
+                      <ModuleListItem key={v.id} data={v} onSeeLogClick={this.props.onSeeLogClick}/>
                     );
                   }
                   return '';
@@ -92,6 +92,7 @@ class ModelList extends React.Component<ModelListProps, ModelListState> {
                 key={index}
                 {...otherProps}
                 {...item.scales}
+                options={item.options}
                 getView={this.props.getView}
                 getForecast={this.props.getForecast}
                 openModelDetail={this.props.openModelDetail}
