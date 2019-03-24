@@ -46,7 +46,7 @@ class Resource extends React.Component<ResourceProps, any> {
     disabled: false,
     sliderProps: {},
     inputNumberProps: {},
-  }
+  };
 
   constructor(props: ResourceProps) {
     super(props);
