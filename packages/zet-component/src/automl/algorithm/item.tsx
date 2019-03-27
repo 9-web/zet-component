@@ -28,6 +28,11 @@ const conditionKey = {
   float: 'float',
 }
 
+function isNumber(value) {
+  // return /^[0-9]*(.)[0-9]*$/.test(value);
+  return true;
+}
+
 export interface ItemProps extends FormComponentProps {
   /** item 展示需要的数据 */
   data: DataItemSchema,
@@ -132,10 +137,15 @@ class Item extends React.Component<ItemProps, any> {
         const parentKey = spt[0];
         const cdK = spt[1];
         const v = value.params[parentKey];
+        // console.log('cdk', cdK, v, typeof v);
         // 处理类型条件
         if (Array.isArray(v) && cdK === 'array') {
           return true;
         }
+
+        // if (['array', 'boolean'].indexOf(typeof v) === -1 && cdK === 'number') {
+        //   return true;
+        // }
         if (typeof v === 'number' && cdK === 'number') {
           return true;
         }
@@ -210,8 +220,6 @@ class Item extends React.Component<ItemProps, any> {
 
 export default Form.create({
   mapPropsToFields(props: ItemProps) {
-
-    // console.log('mapPropsToFields', props)
     const {data, value } = props;
 
     // 需要处理的字段
@@ -226,12 +234,13 @@ export default Form.create({
         const res = value.params[key];
         // 需要处理可以该字段
         if(handleFiled[key]) {
+          // console.log('r-rr',value, key, res, handleFiled);
           // handleFiled[key]
           // debugger;
           const isHandle = propsToFilesIsHandle(key, res, handleFiled);
           // console.log('isHandle', isHandle, res)
           if (isHandle) {
-            const resKey = `${key}##${getKey(res)}`
+            const resKey = `${key}##${getKey(res)}`;
             params[key] = Form.createFormField({ value: resKey });
             params[resKey] = Form.createFormField({ value: res });
             continue;
@@ -250,7 +259,16 @@ export default Form.create({
     const handleFiled = getHandleParams(data.params);
 
     // 获取当前字段改变的key
-    const fieldsKey = Object.keys(fields).length > 0 && Object.keys(fields)[0];
+    const fieldsKey: any = Object.keys(fields).length > 0 && Object.keys(fields)[0];
+
+    // https://gitlab.datacanvas.com/APS/compass/issues/1037
+    if ( fields[fieldsKey].name.indexOf('##number') !== -1) {
+      let value = fields[fieldsKey].value;
+      if (isNaN(value) || value === '') {
+        return false;
+      }
+      fields[fieldsKey].value = parseFloat(value);
+    }
 
     // 处理子父级关系
     const $$Key = `${fieldsKey}$$${fields[fieldsKey].value}`;
@@ -276,7 +294,7 @@ export default Form.create({
       if (isHandle) {
         // 依赖子级key
         // const dpKey = `${fieldsKey}##${handleFiled[fieldsKey]}`;
-        console.log('log', data.params.find(f => f.key === fields[fieldsKey].value))
+        // console.log('log', data.params.find(f => f.key === fields[fieldsKey].value))
         value.params[fieldsKey] = data.params.find(f => f.key === fields[fieldsKey].value).default;
       } else {
         value.params[fieldsKey] = fields[fieldsKey].value;
@@ -310,10 +328,13 @@ function propsToFilesIsHandle(currKey, value, handleFiled) {
       return true;
   }
 
-  if (handleFiled[currKey].includes('number') && typeof value === 'number' ) {
+  // if (handleFiled[currKey].includes('number') && typeof value === 'number' ) {
+  //   return true;
+  // }
+
+  if (handleFiled[currKey].includes('number') && isNumber(value)) {
     return true;
   }
-
 
   if (handleFiled[currKey].includes('boolean') && typeof value === 'boolean' ) {
     return true;
@@ -329,7 +350,11 @@ function getKey(value) {
   if (Array.isArray(value)) {
     return 'array';
   }
-  if (typeof value === 'number' ) {
+  // if (typeof value === 'number' ) {
+  //   return 'number';
+  // }
+
+  if (isNumber(value)) {
     return 'number';
   }
 

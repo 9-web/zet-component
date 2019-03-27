@@ -7,6 +7,15 @@ import styles from './index.less';
 
 const { Sider, Content } = Layout;
 
+function handleData(props) {
+  const {data, value} = props;
+  data && data.forEach(fh => {
+    fh.checked = value.some(sm => sm.id === fh.id);
+  })
+  return data;
+}
+
+
 export interface AlgorithmProps {
   /** 算法配置列表 */
   data: Array<any>,
@@ -51,25 +60,31 @@ class Algorithm extends React.Component<AlgorithmProps, AlgorithmState> {
       singleData: defaultSingleData,  // 单个算法数据项
       singleValue: defaultSingleValue,
       value: props.value,
-      data: this.handleData(props),
+      data: handleData(props),
       isDisable: true,
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.data !== nextProps.data) {
+      // console.log('nextProps', nextProps)
       this.setState({
-        data: this.handleData(nextProps.data)
+        data: handleData(nextProps),
       });
     }
-  }
 
-  handleData = (props) => {
-    const {data, value} = props;
-    data && data.forEach(fh => {
-      fh.checked = value.some(sm => sm.id === fh.id);
-    })
-    return data;
+    if (JSON.stringify(this.props.value) !== JSON.stringify(nextProps.value)) {
+      this.setState({
+        isDisable: false,
+      }, () => {
+        this.setState({
+          data: handleData(nextProps),
+          value: nextProps.value,
+          singleValue: this.getSingleValue(this.state.singleData, nextProps.value),
+          isDisable: true,
+        })
+      })
+    }
   }
 
   getSingleValue = (data, value) => {
@@ -129,13 +144,15 @@ class Algorithm extends React.Component<AlgorithmProps, AlgorithmState> {
     return (
       <Layout className={styles.zetAmlAlgorithmLayout}>
         <Sider theme='light' width={240}>
-          <List
-            disabled={disabled}
-            data={data}
-            value={value}
-            onChange={this.onListChange}
-            onSwitchChange={this.onSwitchChange}
-          />
+          {
+            data && <List
+              disabled={disabled}
+              data={data}
+              value={value}
+              onChange={this.onListChange}
+              onSwitchChange={this.onSwitchChange}
+            />
+          }
         </Sider>
         <Content
           className={styles.zetAmlAlgorithmLayoutContent}

@@ -1,6 +1,6 @@
 {
   "name": "zet-component",
-  "version": "0.0.3-alpha.16",
+  "version": "0.1.6",
   "description": "zet-ui",
   "main": "dist/zet-ui.js",
   "module": "dist/zet-ui.esm.js",
@@ -35,5 +35,5 @@
     "classnames": "^2.2.6",
     "moment": "^2.24.0"
   },
-  "gitHead": "20b2af8cda621df0143a82a187e9bdc8a9faf7dd"
+  "gitHead": "930b80939af50246307f29ccb1b4b7a0c44348e1"
 }

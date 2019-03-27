@@ -3,13 +3,14 @@ export default [{
   name: '特征抽样策略',
   desc: '特征抽样策略特征抽样策略特征抽样策略f',
   params: [
+    // {
+    //   key: 'tree',
+    //   name: '树的个数',
+    //   type: 'tag-input',
+    //   default: [10],
+    //   extra: '树的数量'
+    // },
     {
-      key: 'tree',
-      name: '树的个数',
-      type: 'tag-input',
-      default: [10],
-      extra: '树的数量'
-    }, {
       key: 'max_features',
       name: '特征抽象策略',
       type: 'select',
@@ -40,12 +41,12 @@ export default [{
       key: 'max_features##array',
       name: 'three_detail',
       type: 'tag-input',
-      default: [23, 232, 23],
+      default: [12, 12, 12],
     }, {
       key: 'max_features##number',
       name: 'number_detail',
       type: 'input-number',
-      default: 0,
+      default: 1.,
     }, {
       key: 'diff',
       name: 'aaaaaaaa',

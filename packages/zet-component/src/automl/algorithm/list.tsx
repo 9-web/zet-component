@@ -30,7 +30,6 @@ class List extends React.Component<ListProps, any> {
 
   public render() {
     const { data, value, disabled } = this.props;
-    // console.log('data', data, value)
     const defaultSelectKey = data.length > 0 && data[0].id || '';
     return (
       <Menu

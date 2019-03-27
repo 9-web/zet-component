@@ -45,6 +45,7 @@ Alogrithm
     {({ state, setState }) => (
       <React.Fragment>
         <Button style={{marginBottom: '10px'}} type='primay' onClick={() => { setState({ disabled: !state.disabled}) }}>{state.disabled ? '启用' : '禁用'}</Button>
+        <Button style={{marginBottom: '10px', marginLeft: '20px'}} type='primay' onClick={() => { setState({ value: [{"id":"component-item","name":"component-item","params":{"radioGroup":1,"timeSelect":1600}}]}) }}>设置Value受控</Button>
         <LocaleProvider locale={'zh_CN'}>
           <React.Fragment>
             <AutoML.Algorithm disabled={state.disabled} value={state.value} data={list} onChange={(value) => (setState({ value }))} />
