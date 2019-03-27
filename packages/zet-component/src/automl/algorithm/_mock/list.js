@@ -6,6 +6,7 @@ export default [
     params: [{
       key: 'norm_size',
       name: 'norm_size4',
+      extra: 'norm_size4',
       min: 48,
       max: 224,
       type: 'input-number',
@@ -19,6 +20,7 @@ export default [
       key: 'radioGroup',
       name: 'radioGroup',
       type: 'radio-group',
+      extra: "radio-group",
       data: [{
         name: 'A',
         value: 1,
@@ -34,6 +36,7 @@ export default [
       key: 'timeSelect',
       name: 'timeSelect',
       type: 'time-select',
+      extra: "time-select",
       data: {
         seconds: {
           key: 'seconds',

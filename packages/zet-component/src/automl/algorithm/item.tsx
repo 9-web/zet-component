@@ -276,7 +276,8 @@ export default Form.create({
       if (isHandle) {
         // 依赖子级key
         // const dpKey = `${fieldsKey}##${handleFiled[fieldsKey]}`;
-        value.params[fieldsKey] = data.params.find(f => f.key === fields[fieldsKey].value).default || []
+        console.log('log', data.params.find(f => f.key === fields[fieldsKey].value))
+        value.params[fieldsKey] = data.params.find(f => f.key === fields[fieldsKey].value).default;
       } else {
         value.params[fieldsKey] = fields[fieldsKey].value;
       }

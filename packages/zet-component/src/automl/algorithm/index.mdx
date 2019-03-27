@@ -9,6 +9,7 @@ import { Button } from 'antd';
 import { AutoML, LocaleProvider } from '../../index.tsx';
 import { item, value } from './_mock/dataItem.js';
 import list from './_mock/list.js';
+import conditionList from './_mock/condition.js';
 
 # Alogrithm
 
@@ -22,22 +23,19 @@ Alogrithm
 ```
 [
   {
-    "id": "99bbf190-a77d-65f7-2c3c-2d4372730695",
-    "name": "随机森林",
-    "params": {
-        "max_features": "Null",
-        "max_depth": [
-            10
-        ],
-        "n_jobs": 1,
-        "n_estimators": [
-            10
-        ],
-        "min_samples_leaf": [
-            1
-        ]
-    }
-}
+    id: 'd1010bce-2050-4beb-855b-d9ebcae81598',
+    name: 'VGG19',
+    desc: 'VGG19',
+    params: [{
+      key: 'norm_size',
+      name: 'norm_size4',
+      extra: 'norm_size4',
+      min: 48,
+      max: 224,
+      type: 'input-number',
+      default: 48,
+    }]
+  }
 ]
 ```
 
@@ -50,6 +48,27 @@ Alogrithm
         <LocaleProvider locale={'zh_CN'}>
           <React.Fragment>
             <AutoML.Algorithm disabled={state.disabled} value={state.value} data={list} onChange={(value) => (setState({ value }))} />
+            {/* <AutoML.Algorithm.Item value={state.value} data={item} onChange={(value) => (setState({ value }))} /> */}
+            <span>
+              change value: {JSON.stringify(state.value)}
+            </span>
+          </React.Fragment>
+        </LocaleProvider>
+      </React.Fragment>
+    )}
+  </State>
+</Playground>
+
+
+### condition(条件配置)
+<Playground>
+  <State initial={{disabled: false, value: []}}>
+    {({ state, setState }) => (
+      <React.Fragment>
+        <Button style={{marginBottom: '10px'}} type='primay' onClick={() => { setState({ disabled: !state.disabled}) }}>{state.disabled ? '启用' : '禁用'}</Button>
+        <LocaleProvider locale={'zh_CN'}>
+          <React.Fragment>
+            <AutoML.Algorithm disabled={state.disabled} value={state.value} data={conditionList} onChange={(value) => (setState({ value }))} />
             {/* <AutoML.Algorithm.Item value={state.value} data={item} onChange={(value) => (setState({ value }))} /> */}
             <span>
               change value: {JSON.stringify(state.value)}
