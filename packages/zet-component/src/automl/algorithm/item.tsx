@@ -264,7 +264,7 @@ export default Form.create({
     // https://gitlab.datacanvas.com/APS/compass/issues/1037
     if ( fields[fieldsKey].name.indexOf('##number') !== -1) {
       let value = fields[fieldsKey].value;
-      if (isNaN(value)) {
+      if (isNaN(value) || value === '') {
         return false;
       }
       fields[fieldsKey].value = parseFloat(value);
