@@ -1,7 +1,7 @@
 import React from 'react';
 import {Chart, Geom, Axis, Tooltip, Legend} from "bizcharts";
 import DataSet from "@antv/data-set";
-
+import moment from 'moment';
 import Slider from "bizcharts-plugin-slider";
 
 const colors = ['#6EC379','#F57070','#72ADF3','#92C1F8','#D9DFE3']
@@ -42,7 +42,7 @@ interface  ChartProps {
 
 function getComponent(dataInfo,props) {
   const {data,begin,end} = dataInfo;
-  let {scales={},titles, logInfo, defaultTimeRange=[],options} = props;
+  let {scales={},titles ,logInfo, defaultTimeRange=[],options={}} = props;
   const ds = new DataSet({
       state: {
         start: begin ? new Date(begin).getTime() : new Date().getTime(),
@@ -87,7 +87,7 @@ function getComponent(dataInfo,props) {
     />)
     axis.push(<Axis name={key} visible={visible}/>)
   })
-  const scale = {
+  let scale = {
     [axisX.key]: {
       type: axisX.type || "time",
       tickCount: axisX.tickCount || 8,
@@ -96,18 +96,18 @@ function getComponent(dataInfo,props) {
     ...axisYScale
   };
   titles = Array.isArray(titles) && titles.length>0 ? titles : (axisY || []);
-
+  titles = (options.legendExtend && options.legendExtend(dv.rows,titles)) || titles;
   const legendItems =  titles.map((item,index)=>{
     if(Array.isArray(item.color)) item.color = 'green'
-      return {
-        value: item.alias,
-        key:item.key,
-        marker: {
-          symbol: "circle",
-          fill: item.color || colors[index],
-          radius: 5
-        }
+    return {
+      value: item.alias,
+      key:item.key || item.alias,
+      marker: {
+        symbol: "circle",
+        fill: item.color || colors[index],
+        radius: 5
       }
+    }
   }) || [];
   let chart;
   const {height} = props;
@@ -122,17 +122,20 @@ function getComponent(dataInfo,props) {
     console.log('geoms > ', geoms)
     console.log('sliderChartLogInfo >> end')
   }
-  options && options.autoFormat && options.autoFormat(dv.rows,scale)
+  scale = (options.autoFormat && options.autoFormat(dv.rows,scale)) || scale;
   class SliderChart extends React.Component<ChartProps> {
     onChange(obj) {
       const { startValue, endValue } = obj;
       ds.setState("start", startValue);
       ds.setState("end", endValue);
-      options && options.autoFormat && options.autoFormat(dv.rows,scale)
+      options.autoFormat && options.autoFormat(dv.rows,scale)
     }
     render() {
       return (
         <div>
+          {options.dataTime && <div>
+            {moment(new Date()).format('YYYY-MM-DD')}
+          </div>}
           <Chart
             height={height}
             data={dv}
