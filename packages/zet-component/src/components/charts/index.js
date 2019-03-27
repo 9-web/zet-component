@@ -9,3 +9,4 @@ const Chart = {
     Rect4,
 };
 export default Chart;
+//# sourceMappingURL=index.js.map

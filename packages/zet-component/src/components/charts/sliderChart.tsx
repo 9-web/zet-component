@@ -66,8 +66,8 @@ function getComponent(dataInfo,props) {
     ds.setState("end", defaultTimeRange[1]);
   }
   axisY.forEach((item,index)=>{
-    const { key, type, min,max,alias, size,visible=true, notAllowZero, ...other } = item;
-    if(index===0) defaultYAxis = key;
+    const { key, type, min,max,alias, size,visible=true, defaultSlider, notAllowZero, ...other } = item;
+    if(defaultSlider) defaultYAxis = key;
     axisYScale[key] = {
       alias:alias,
       min,
@@ -133,9 +133,7 @@ function getComponent(dataInfo,props) {
     render() {
       return (
         <div>
-          {options.dataTime && <div>
-            {moment(new Date()).format('YYYY-MM-DD')}
-          </div>}
+          {options.dataTime && options.dataTime()}
           <Chart
             height={height}
             data={dv}
@@ -162,7 +160,7 @@ function getComponent(dataInfo,props) {
                   const geom = geoms[i];
                   if (geom.getYScale().field === value) {
                     if (checked) {
-                      defaultYAxis = value;
+                      // defaultYAxis = value;
                       geom.show();
                     } else {
                       geom.hide();
