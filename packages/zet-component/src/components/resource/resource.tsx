@@ -33,6 +33,7 @@ export interface ResourceProps {
     sliderProps?: any,
     /** 数字输入框的属性 */
     inputNumberProps?: any,
+    test?: any,
 }
 
 class Resource extends React.Component<ResourceProps, any> {
