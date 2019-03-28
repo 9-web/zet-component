@@ -28,11 +28,6 @@ const conditionKey = {
   float: 'float',
 }
 
-function isNumber(value) {
-  // return /^[0-9]*(.)[0-9]*$/.test(value);
-  return true;
-}
-
 export interface ItemProps extends FormComponentProps {
   /** item 展示需要的数据 */
   data: DataItemSchema,
@@ -143,9 +138,6 @@ class Item extends React.Component<ItemProps, any> {
           return true;
         }
 
-        // if (['array', 'boolean'].indexOf(typeof v) === -1 && cdK === 'number') {
-        //   return true;
-        // }
         if (typeof v === 'number' && cdK === 'number') {
           return true;
         }
@@ -328,11 +320,7 @@ function propsToFilesIsHandle(currKey, value, handleFiled) {
       return true;
   }
 
-  // if (handleFiled[currKey].includes('number') && typeof value === 'number' ) {
-  //   return true;
-  // }
-
-  if (handleFiled[currKey].includes('number') && isNumber(value)) {
+  if (handleFiled[currKey].includes('number') && typeof value === 'number' ) {
     return true;
   }
 
@@ -350,11 +338,7 @@ function getKey(value) {
   if (Array.isArray(value)) {
     return 'array';
   }
-  // if (typeof value === 'number' ) {
-  //   return 'number';
-  // }
-
-  if (isNumber(value)) {
+  if (typeof value === 'number' ) {
     return 'number';
   }
 
