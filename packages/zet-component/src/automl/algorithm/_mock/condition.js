@@ -59,6 +59,24 @@ export default [{
       type: 'input-number',
       default: 0.1224,
       condition: 'max_features$$five'
-    }
+    },
+    {
+      key: 'randomState',
+      name: 'randomState',
+      type: 'select',
+      data: [
+        { name: '随机', value: 'none' },
+        { name: '自定义', value: 'randomState##number' },
+      ],
+      default: 'none',
+    },
+    {
+      key: 'randomState##number',
+      name: 'randomStateNumber',
+      min: 0,
+      // max: 1.0,
+      type: 'input-number',
+      default: 0.1,
+    },
   ]
 }]
