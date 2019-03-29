@@ -43,6 +43,10 @@ interface  ChartProps {
 function getComponent(dataInfo,props) {
   const {data,begin,end} = dataInfo;
   let {scales={},titles ,logInfo, defaultTimeRange=[],options={}} = props;
+  let defaultSuccessColor = 'green';
+  if(options.setDefaultColor){
+    defaultSuccessColor = options.setDefaultColor()
+  }
   const ds = new DataSet({
       state: {
         start: begin ? new Date(begin).getTime() : new Date().getTime(),
@@ -97,14 +101,13 @@ function getComponent(dataInfo,props) {
   };
   titles = Array.isArray(titles) && titles.length>0 ? titles : (axisY || []);
   const legendTitles = [...(options.legendExtend && options.legendExtend(dv.rows,titles))] || [...titles];
-  const legendItems =  legendTitles.map((item,index)=>{
-    if(Array.isArray(item.color)) item.color = 'green'
+  const legendItems =  legendTitles.map((item)=>{
     return {
       value: item.alias,
       key:item.key || item.alias,
       marker: {
         symbol: "circle",
-        fill: item.color || colors[index],
+        fill: Array.isArray(item.color) ? defaultSuccessColor:item.color,
         radius: 5
       }
     }
