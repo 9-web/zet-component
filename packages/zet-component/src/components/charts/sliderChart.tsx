@@ -100,7 +100,7 @@ function getComponent(dataInfo,props) {
     ...axisYScale
   };
   titles = Array.isArray(titles) && titles.length>0 ? titles : (axisY || []);
-  const legendTitles = [...(options.legendExtend && options.legendExtend(dv.rows,titles))] || [...titles];
+  const legendTitles = (options.legendExtend && options.legendExtend(dv.rows,titles)) || [...titles];
   const legendItems =  legendTitles.map((item)=>{
     return {
       value: item.alias,
