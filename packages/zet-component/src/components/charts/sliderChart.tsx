@@ -96,8 +96,8 @@ function getComponent(dataInfo,props) {
     ...axisYScale
   };
   titles = Array.isArray(titles) && titles.length>0 ? titles : (axisY || []);
-  titles = (options.legendExtend && options.legendExtend(dv.rows,titles)) || titles;
-  const legendItems =  titles.map((item,index)=>{
+  const legendTitles = [...(options.legendExtend && options.legendExtend(dv.rows,titles))] || [...titles];
+  const legendItems =  legendTitles.map((item,index)=>{
     if(Array.isArray(item.color)) item.color = 'green'
     return {
       value: item.alias,
