@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Dropdown, Button, Icon, Checkbox, Input, Badge, Empty, message } from 'antd';
 import classnames from 'classnames';
-import TagsInput from './tags-input.js'
+import TagInput from '../tag-input'
 import styles from './index.less';
 import { emptyPicture } from '../../utils/utils';
 
@@ -21,13 +21,13 @@ export interface TagProps {
   /** 输入框内容变化时的回调 */
   onChange?: (value) => {},
   /** 下拉框数据 */
-  data: Array<Tags>,
+  data?: Array<Tags>,
   /** 按钮图标 */
   icon?: string,
   /** 占位符 */
   placeholder?: string,
   /** 最大个数 */
-  maxLength: number,
+  maxLength?: number,
 }
 
 class Tag extends React.Component<TagProps, any> {
@@ -44,6 +44,7 @@ class Tag extends React.Component<TagProps, any> {
 
   state = {
     visible: false,
+    data: [],
     selectNums: [],
     delData: [],
     inputValue: undefined,
@@ -66,15 +67,13 @@ class Tag extends React.Component<TagProps, any> {
     this.onInput('');
   }
 
-  delTag =  (tag) => {
+  delTag =  (values) => {
     const { data, onChange } = this.props;
     this.setState(prevState => {
       let { selectNums, delData } = prevState;
-      const index = selectNums.indexOf(tag);
-      if (index != -1) {
-        const elem = selectNums.splice(index, 1);
-        delData = elem;
-      }
+      const difference = Array.from(new Set([...this.state.selectNums].filter(x => !new Set(values).has(x))));
+      difference.length > 0 && difference.forEach(v => selectNums.splice(selectNums.indexOf(v), 1));
+      this.setState({ delData: difference });
       const filterArr = Array.from(new Set(data.filter(x => new Set(selectNums).has(x.title))));
       onChange && onChange(filterArr);
       return { selectNums, delData };
@@ -117,7 +116,7 @@ class Tag extends React.Component<TagProps, any> {
               onClick={() => { this.handleVisibleChange(true); }}
             >
               <div className={styles.zetTagInput}>
-                <TagsInput maxLength={maxLength} placeholder={placeholder} addData={selectNums} delData={delData} onChange={this.delTag} onInput={this.onInput} inputValue={inputValue} />
+                <TagInput maxLength={maxLength} placeholder={placeholder} addData={selectNums} delData={delData} onChange={this.delTag} onInput={this.onInput} type='string' allowEnter={false}/>
               </div>
               {options && options.length > 0 ? (
                 <Checkbox.Group
