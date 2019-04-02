@@ -4,32 +4,39 @@ import { Layout, Slider } from 'antd';
 import Item from './item';
 import List from './list';
 import styles from './index.less';
-console.log('styles', styles);
 
 const { Sider, Content } = Layout;
 
+function handleData(props) {
+  const {data, value} = props;
+  data.forEach((fh) => {
+    fh.checked = value.some((sm) => sm.id === fh.id);
+  });
+  return data;
+}
+
 export interface AlgorithmProps {
   /** 算法配置列表 */
-  data: Array<any>,
+  data: any[];
   /** 算法组件value */
-  value?: Array<ValueItemSchema>,
+  value?: ValueItemSchema[];
   /** 当前内容是否禁用 */
-  disabled: boolean,
+  disabled: boolean;
   /** 数据内容发生变化回调 */
-  onChange?: (value: Array<ValueItemSchema>) => void;
+  onChange?: (value: ValueItemSchema[]) => void;
 }
 
 export interface AlgorithmState {
   /** 算法配置列表 */
-  singleData?: DataItemSchema,
+  singleData?: DataItemSchema;
   /** 算法组件value */
-  singleValue?: ValueItemSchema,
+  singleValue?: ValueItemSchema;
   /** 整个算法value 的值 */
-  value?: Array<ValueItemSchema>,
+  value?: ValueItemSchema[];
   /** data 值 */
-  data?: Array<any>,
+  data?: any[];
 
-  isDisable?: boolean,
+  isDisable?: boolean;
 }
 
 class Algorithm extends React.Component<AlgorithmProps, AlgorithmState> {
@@ -41,9 +48,9 @@ class Algorithm extends React.Component<AlgorithmProps, AlgorithmState> {
   static defaultProps = {
     value: [],
     disable: false,
-  }
+  };
 
-  constructor(props: AlgorithmProps ) {
+  constructor(props: AlgorithmProps) {
     super(props);
 
     const defaultSingleData = props.data.length > 0 && props.data[0];
@@ -52,29 +59,35 @@ class Algorithm extends React.Component<AlgorithmProps, AlgorithmState> {
       singleData: defaultSingleData,  // 单个算法数据项
       singleValue: defaultSingleValue,
       value: props.value,
-      data: this.handleData(props),
+      data: handleData(props),
       isDisable: true,
-    }
+    };
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.data !== nextProps.data) {
+      // console.log('nextProps', nextProps)
       this.setState({
-        data: this.handleData(nextProps.data)
+        data: handleData(nextProps),
+      });
+    }
+
+    if (JSON.stringify(this.props.value) !== JSON.stringify(nextProps.value)) {
+      this.setState({
+        isDisable: false,
+      }, () => {
+        this.setState({
+          data: handleData(nextProps),
+          value: nextProps.value,
+          singleValue: this.getSingleValue(this.state.singleData, nextProps.value),
+          isDisable: true,
+        });
       });
     }
   }
 
-  handleData = (props) => {
-    const {data, value} = props;
-    data && data.forEach(fh => {
-      fh.checked = value.some(sm => sm.id === fh.id);
-    })
-    return data;
-  }
-
   getSingleValue = (data, value) => {
-    const singleValue = (value && value.find(fd => fd.id === data.id)) || { id: data.id, name: data.name, params: {}};
+    const singleValue = (value && value.find((fd) => fd.id === data.id)) || { id: data.id, name: data.name, params: {}};
     return singleValue;
   }
 
@@ -84,8 +97,8 @@ class Algorithm extends React.Component<AlgorithmProps, AlgorithmState> {
     const singleValue = this.getSingleValue(data, value);
     this.setState({
       singleData: data,
-      singleValue: singleValue,
-    })
+      singleValue,
+    });
   }
 
   onSwitchChange = (checked, data) => {
@@ -97,7 +110,7 @@ class Algorithm extends React.Component<AlgorithmProps, AlgorithmState> {
     if (checked) {
       newValue.push({id: data.id, name: data.name, params: {}});
     } else {
-      newValue = newValue.filter(ft => ft.id !== data.id);
+      newValue = newValue.filter((ft) => ft.id !== data.id);
     }
     this.setState({
       isDisable: false,
@@ -108,20 +121,19 @@ class Algorithm extends React.Component<AlgorithmProps, AlgorithmState> {
         value: newValue,
         isDisable: true,
       });
-      onChange && onChange(newValue);
-    })
+      onChange(newValue);
+    });
   }
 
   onItemChange = (data) => {
-    // console.log('onItemChange', data)
     const {value} = this.state;
     const {onChange} = this.props;
-    value.forEach(fh => {
+    value.forEach((fh) => {
       if (data.id === fh.id) {
         fh.params = data.params;
       }
-    })
-    onChange && onChange([...value]);
+    });
+    onChange([...value]);
   }
 
   public render() {
@@ -130,13 +142,15 @@ class Algorithm extends React.Component<AlgorithmProps, AlgorithmState> {
     return (
       <Layout className={styles.layout}>
         <Sider theme='light' width={240}>
-          <List
-            disabled={disabled}
-            data={data}
-            value={value}
-            onChange={this.onListChange}
-            onSwitchChange={this.onSwitchChange}
-          />
+          {
+            data && <List
+              disabled={disabled}
+              data={data}
+              value={value}
+              onChange={this.onListChange}
+              onSwitchChange={this.onSwitchChange}
+            />
+          }
         </Sider>
         <Content
           className={styles.content}
@@ -147,7 +161,7 @@ class Algorithm extends React.Component<AlgorithmProps, AlgorithmState> {
               value={singleValue}
               data={singleData}
               onChange={this.onItemChange}
-              />
+            />
           }
         </Content>
       </Layout>

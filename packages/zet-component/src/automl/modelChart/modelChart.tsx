@@ -1,34 +1,32 @@
 import * as React from 'react';
 import { Radio } from 'antd';
-import {AutoChart,RocChart,BarChart} from './charts'
+import {AutoChart, RocChart, BarChart} from './charts';
 import MetricsConfig from '../config/metrics';
 
 import styles from './index.less';
-
 
 const RadioGroup = Radio.Group;
 const RadioButton = Radio.Button;
 export interface ModelChartProps {
   /** 图表数据 */
-  data:any,
+  data: any;
   /** 评分指标数据 */
-  gradeData:any,
+  gradeData: any;
   /** 算法得分 */
-  legendScore:any
+  legendScore: any;
 }
 
 export interface ModelChartState {
   /** 图表类型 */
-  chart:string
+  chart: string;
 }
-
 
 class ModelChart extends React.Component<ModelChartProps, ModelChartState> {
   constructor(props: ModelChartProps) {
     super(props);
-    this.state = { chart:'auto'}
+    this.state = { chart: 'auto'};
   }
-  params=() => {
+  params = () => {
     const { gradeData } = this.props;
     const set = new Set([]);
     for (const model of gradeData) {
@@ -39,8 +37,8 @@ class ModelChart extends React.Component<ModelChartProps, ModelChartState> {
       }
     }
     const arr = [];
-    MetricsConfig.forEach(v => {
-      set.forEach(a => {
+    MetricsConfig.forEach((v) => {
+      set.forEach((a) => {
         if (a === v.value) {
           arr.push(v);
         }
@@ -52,7 +50,7 @@ class ModelChart extends React.Component<ModelChartProps, ModelChartState> {
     this.setState({
       chart: e.target.value,
     });
-  };
+  }
   render() {
     const { chart } = this.state;
     const {gradeData, data, legendScore} = this.props;
@@ -69,7 +67,6 @@ class ModelChart extends React.Component<ModelChartProps, ModelChartState> {
             <RadioGroup defaultValue="auto" onChange={this.changeChart}>
               <RadioButton value="auto">自动调参</RadioButton>
               {paramsOptionList}
-              <RadioButton value="roc">ROC</RadioButton>
             </RadioGroup>
           </div>
         </div>
@@ -94,4 +91,4 @@ class ModelChart extends React.Component<ModelChartProps, ModelChartState> {
   }
 }
 
-export default ModelChart
+export default ModelChart;
