@@ -4,7 +4,6 @@ import { InputNumber, Slider, Row, Col} from 'antd';
 import classnames from 'classnames';
 import ResourceGroup from './resourceGroup';
 import { isNumber } from '../../utils/utils';
-import styles from './index.less';
 
 export interface ResourceProps {
     /** 组件行行内样式 */
@@ -74,7 +73,7 @@ class Resource extends React.Component<ResourceProps, any> {
       width,
       ...style,
     };
-    const classNames = classnames(styles.zetResource, className);
+    const classNames = classnames('zet-resource', className);
 
     return (
       <div style={styleProps} className={classNames}>
@@ -112,7 +111,7 @@ class Resource extends React.Component<ResourceProps, any> {
                     </Col>
                   </Row>
                   <Slider
-                    className={styles.zetResourceSlider}
+                    className='zet-resource-slider'
                     onChange={this.onChange}
                     value={value}
                     step={step}

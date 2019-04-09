@@ -1,8 +1,10 @@
+import fs from 'fs';
+
 export default {
   entry: 'src/index.tsx',
   esm: 'rollup',
   cjs: 'rollup',
-  cssModules: true,
+  cssModules: false,
   doc: {
     base: '/zet-component',
     title: 'Zet Component',
@@ -24,6 +26,13 @@ export default {
         src:
           'http://www.zetyun.com/img/icon/logo.svg',
         width: 200,
+      },
+      htmlContext: {
+        head: {
+          raw: `<style>${fs.readFileSync(
+            process.cwd() + "/foo.css"
+          )}</style>`
+        }
       },
     },
   }
