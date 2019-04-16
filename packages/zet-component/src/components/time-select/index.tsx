@@ -27,7 +27,7 @@ const calculateUnit = {
   seconds: 1,
   minutes: 60,
   hours: 3600,
-}
+};
 
 const unitKey = {
   seconds: 'seconds',
@@ -37,44 +37,44 @@ const unitKey = {
 
 export interface Item {
   /** key */
-  key: string,
+  key: string;
   /** 时间下拉框数据 */
-  selectData: Array<number>,
+  selectData: number[];
   /** 时间单位 */
-  displayUnit: string,
+  displayUnit: string;
 }
 
 export interface TimeSelectProps {
   /** 组件行行内样式 */
-  style?: React.CSSProperties,
+  style?: React.CSSProperties;
   /** 自定义类名 */
-  className?: string,
+  className?: string;
   /** 宽度 */
-  width?: string | number,
+  width?: string | number;
   /** 组件选择数据 */
-  data?: object,
+  data?: object;
   /** value 值为秒数 */
-  value?: number,
+  value?: number;
    /** 是否禁用 */
-   disabled?: boolean,
+  disabled?: boolean;
    /** onChange 事件 */
-   onChange?: (value: number) => void,
+  onChange?: (value: number) => void;
   /** test function */
-   test?: (value: number) => void,
+  test?: (value: number) => void;
 }
 
 export interface TimeSelectState {
-  timeSelectData: Array<number>,
-  unitSelectData: Array<Item>,
-  value: number,
-  unitValue: string,
-  timeValue: number,
+  timeSelectData: number[];
+  unitSelectData: Item[];
+  value: number;
+  unitValue: string;
+  timeValue: number;
 }
 
 class TimeSelect extends React.Component<TimeSelectProps, TimeSelectState> {
   static defaultProps = {
-    data: data,
-  }
+    data,
+  };
 
   static getUnitValue = (seconds: number) => {
     if (seconds < 60) {
@@ -105,15 +105,15 @@ class TimeSelect extends React.Component<TimeSelectProps, TimeSelectState> {
 
   constructor(props: TimeSelectProps) {
     super(props);
-    const unitSelectData = Object.values(props.data) as Array<Item>;
-    const firstData = unitSelectData.length > 0 ? unitSelectData[0]: null;
+    const unitSelectData = Object.values(props.data) as Item[];
+    const firstData = unitSelectData.length > 0 ? unitSelectData[0] : null;
     this.state = {
       unitSelectData,
       timeSelectData: firstData.selectData || [],
       value: props.value || 1,
       unitValue: TimeSelect.getUnitValue(props.value || 1),
       timeValue: TimeSelect.getTimeValue(props.value || 1),
-    }
+    };
   }
 
   setValue = (value: number) => {
@@ -125,9 +125,9 @@ class TimeSelect extends React.Component<TimeSelectProps, TimeSelectState> {
   }
 
   onUnitChange = (unit: string) => {
-    const {data} = this.props;
-    const currData = data[unit];
-    const timeValue =  (Array.isArray(currData.selectData) && currData.selectData.length > 0 && currData.selectData[0]) || 1;
+    const currData = this.props.data[unit];
+    const timeValue =  (Array.isArray(currData.selectData)
+    && currData.selectData.length > 0 && currData.selectData[0]) || 1;
     const value = timeValue * calculateUnit[unit];
     this.setState({
       unitValue: unit,
@@ -141,7 +141,7 @@ class TimeSelect extends React.Component<TimeSelectProps, TimeSelectState> {
     const value = timeValue * calculateUnit[this.state.unitValue];
     this.setState({
       timeValue,
-    })
+    });
     this.setValue(value);
   }
 
@@ -152,15 +152,15 @@ class TimeSelect extends React.Component<TimeSelectProps, TimeSelectState> {
     const styleProps = {
       width,
       ...style,
-    }
+    };
     return (
       <div style={styleProps} className={classNames}>
         <Row gutter={10}>
           <Col span={12}>
             <Select disabled={disabled} style={{ width: '100%'}} value={timeValue} onChange={this.onTimeChange}>
               {
-                timeSelectData.map(item => {
-                  return <Option value={item} key={`${item}`}>{item}</Option>
+                timeSelectData.map((item) => {
+                  return <Option value={item} key={`${item}`}>{item}</Option>;
                 })
               }
             </Select>
@@ -168,8 +168,8 @@ class TimeSelect extends React.Component<TimeSelectProps, TimeSelectState> {
           <Col span={12}>
             <Select disabled={disabled} style={{ width: '100%'}} value={unitValue} onChange={this.onUnitChange}>
               {
-                unitSelectData.map(item => {
-                  return <Option value={item.key} key={item.key}>{item.displayUnit}</Option>
+                unitSelectData.map((item) => {
+                  return <Option value={item.key} key={item.key}>{item.displayUnit}</Option>;
                 })
               }
             </Select>

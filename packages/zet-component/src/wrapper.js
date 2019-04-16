@@ -4,6 +4,7 @@
  */
 import * as React from 'react';
 import '!style-loader!css-loader!antd/dist/antd.css';
+import './wrapper.css';
 
 export default function({ children }) {
   return <div>{children}</div>;

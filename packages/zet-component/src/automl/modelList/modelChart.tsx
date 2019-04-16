@@ -1,12 +1,12 @@
 import React from 'react';
 import { Card, Row, Col, List, Icon, Spin } from 'antd';
 import moment from 'moment';
-import { Components } from '../../index';
+import Chart from '../../components/charts';
 import styles from './index.less';
 import sliderData from './_mock/chartData';
 import {start} from "repl";
 
-const {Chart:{ SliderChart }} = Components;
+const {SliderChart} = Chart;
 
 function CardExtra(props) {
   return (

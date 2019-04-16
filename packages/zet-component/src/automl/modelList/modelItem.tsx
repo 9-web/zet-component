@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { Icon, Tooltip } from 'antd';
 import moment from 'moment';
-import { Components } from '../../index';
+import Chart from '../../components/charts';
 import  Timer  from '../../components/timer';
 import ZetIcon from '../../components/icon'
 
 import styles from './index.less';
 
-const { Chart:{LineChart} } = Components;
+const { LineChart} = Chart;
 
 export interface ModelItemProps {
   /** model 数据 */

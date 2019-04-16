@@ -7,15 +7,14 @@ import styles from './index.less';
 const MenuItem = Menu.Item;
 
 export interface ListProps {
-  data: Array<DataItemSchema>,
-  value: Array<ValueItemSchema>,
-  onChange?: (data: any) => void,
-  disabled: boolean,
-  onSwitchChange?: (checked: boolean, data:DataItemSchema) => void,
+  data: DataItemSchema[];
+  value: ValueItemSchema[];
+  onChange?: (data: any) => void;
+  disabled: boolean;
+  onSwitchChange?: (checked: boolean, data: DataItemSchema) => void;
 }
 
 class List extends React.Component<ListProps, any> {
-
 
   handleMenuClick = (item) => {
     const { onChange } = this.props;
@@ -35,28 +34,28 @@ class List extends React.Component<ListProps, any> {
       <Menu
         mode='inline'
         defaultSelectedKeys={[defaultSelectKey]}
-        className={styles.zetAmlAlgorithmLayoutList}
+        className={styles.list}
         // onClick={this.handleMenuClick}
       >
         {
-          data.map(d => (
+          data.map((d) => (
             <MenuItem
-              className={styles.zetAmlAlgorithmLayoutListItem}
+              className={styles.item}
               key={d.id}
-              onClick={() => {this.handleMenuClick(d)}}
+              onClick={() => {this.handleMenuClick(d); }}
             >
               <span>{d.name}</span>
               <LocaleReceiver componentName="AutoML">
                 {
                   (locale: any) => (
                     <Switch
-                    className={styles.zetAmlAlgorithmLayoutListItemRight}
+                    className={styles.right}
                       // size='small'
                       checkedChildren={locale.on}
                       unCheckedChildren={locale.off}
                       checked={ d.checked }
                       disabled={disabled}
-                      onChange={checked => { this.onSwitchChange(checked, d) }}
+                      onChange={(checked) => { this.onSwitchChange(checked, d); }}
                       // onClick={checked => { this.onSwitchChange(checked) }}
                       // className={styles.amMenuListItemRight}
                     />

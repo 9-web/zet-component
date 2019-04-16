@@ -1,3 +1,4 @@
+import React from 'react';
 import { Spin, Icon } from 'antd';
 import styles from './index.less'
 export function Example1(props){

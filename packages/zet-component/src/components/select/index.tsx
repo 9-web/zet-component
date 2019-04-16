@@ -1,6 +1,6 @@
 import TreeSelect from './tree-select';
 import * as React from "react";
-export { TreeProps } from './tree-select';
+// export { TreeProps } from './tree-select';
 import { Dropdown, Button, Icon, Checkbox, Select as Select_ } from 'antd';
 
 const Option = Select_.Option;

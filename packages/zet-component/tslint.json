@@ -1,0 +1,21 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:latest",
+        "tslint-react"
+    ],
+    "jsRules": {},
+    "rules": {
+      "quotemark": false,
+      "ordered-imports": false,
+      "interface-name": false,
+      "member-access": false,
+      "object-literal-sort-keys": false,
+      "no-empty": false,
+      "jsx-no-multiline-js": false,
+      "jsx-curly-spacing": false,
+      "no-unused-expression": false,
+      "max-classes-per-file": false
+    },
+    "rulesDirectory": []
+}

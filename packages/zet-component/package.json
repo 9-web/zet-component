@@ -3,33 +3,41 @@
   "version": "0.1.10",
   "description": "zet-ui",
   "main": "dist/zet-ui.js",
-  "module": "dist/zet-ui.esm.js",
-  "unpkg": "dist/zet-ui.umd.js",
+  "module": "dist/index.esm.js",
   "authors": {
     "name": "wangqj",
     "email": "qiaojienet@163.com"
   },
   "repository": "https://github.com/9-web/zet-component",
   "scripts": {
-    "dev": "umi doc dev",
-    "build:doc": "umi doc build",
-    "deploy:doc": "npm run build:doc && umi doc deploy",
-    "build": "umi lib build",
-    "build:watch": "umi lib build --watch"
+    "dev": "umi-lib doc dev",
+    "build:doc": "umi-lib doc build",
+    "deploy:doc": "npm run build:doc && umi-lib doc deploy",
+    "build": "umi-lib build",
+    "build:watch": "umi-lib build --watch",
+    "tslint": "./node_modules/.bin/tslint -c tslint.json 'src/**/*.{ts,tsx}'"
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.7",
+    "antd": "^3.13.0",
+    "docz": "^0.13.7",
+    "prop-types": "^15.7.2",
     "react-powerplug": "^1.0.0",
-    "umi": "^2.0.0",
-    "umi-plugin-library": "^1.1.0"
+    "tslint": "^5.14.0",
+    "tslint-react": "^3.6.0",
+    "typescript": "^3.3.4000",
+    "umi-library": "^1.3.0"
   },
   "typings": "dist/index.d.ts",
   "license": "MIT",
   "peerDependencies": {
-    "antd": "3.13.0"
+    "antd": "^3.13.0",
+    "prop-types": "^15.7.2",
+    "react": ">=16.0.0",
+    "react-dom": ">=16.0.0"
   },
   "dependencies": {
     "@antv/data-set": "^0.10.2",
-    "antd": "3.13.0",
     "bizcharts": "^3.4.3",
     "bizcharts-plugin-slider": "^2.1.1-beta.1",
     "classnames": "^2.2.6",

@@ -5,33 +5,29 @@ import styles from './index.less';
 
 export interface ContrastButtonProps {
   /** 组件行行内样式 */
-  contrastIds?:string[],
+  contrastIds?: string[];
   /** 对比模型id */
-  contrastJobId?:string,
-  item:any,
-  jobName:string,
-  jobId:string,
-  style?:object,
-  showContras?:(item:object,jobId:string,jobName:string)=>void
+  contrastJobId?: string;
+  item: any;
+  jobName: string;
+  jobId: string;
+  style?: object;
+  showContras?: (item: object, jobId: string, jobName: string) => void;
 }
 
-export interface ContrastButtonState {
-
-}
-
-class ContrastButton extends React.Component<ContrastButtonProps, ContrastButtonState> {
+class ContrastButton extends React.Component<ContrastButtonProps, any> {
   constructor(props: ContrastButtonProps) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
-  showContras = (e, item, jobId ,jobName) => {
+  showContras = (e, item, jobId , jobName) => {
     e.stopPropagation();
-    this.props.showContras(item,jobId,jobName)
+    this.props.showContras(item, jobId, jobName);
   }
 
   isDisabled = () => {
-    const { item, contrastIds,contrastJobId,jobId } = this.props;
-    if(contrastJobId && contrastJobId !== jobId){
+    const { item, contrastIds, contrastJobId, jobId } = this.props;
+    if (contrastJobId && contrastJobId !== jobId) {
       return true;
     }
     if (item.modelTrainStatus) {
@@ -43,7 +39,7 @@ class ContrastButton extends React.Component<ContrastButtonProps, ContrastButton
     return contrastIds.indexOf(item.modelId) !== -1;
   }
   render() {
-    const { contrastIds, item, jobName, style,jobId } = this.props;
+    const { contrastIds, item, jobName, style, jobId } = this.props;
     return (
       <Button
         size='small'
@@ -60,4 +56,4 @@ class ContrastButton extends React.Component<ContrastButtonProps, ContrastButton
   }
 }
 
-export default ContrastButton
+export default ContrastButton;
