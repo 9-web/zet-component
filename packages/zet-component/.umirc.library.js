@@ -4,7 +4,7 @@ export default {
   entry: 'src/index.tsx',
   esm: 'rollup',
   cjs: 'rollup',
-  cssModules: false,
+  cssModules: true,
   doc: {
     base: '/zet-component',
     title: 'Zet Component',
@@ -26,13 +26,6 @@ export default {
         src:
           'http://www.zetyun.com/img/icon/logo.svg',
         width: 200,
-      },
-      htmlContext: {
-        head: {
-          raw: `<style>${fs.readFileSync(
-            process.cwd() + "/foo.css"
-          )}</style>`
-        }
       },
     },
   }
