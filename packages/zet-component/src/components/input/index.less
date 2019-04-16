@@ -1,20 +1,25 @@
+@import '../../style/minxins/index.less';
+@import '../../style/index.less';
 
-.zetInputWrapper{
-    // .ant-input-affix-wrapper{
-    //   width: 280px;
-    // }
-    .zetInput{
-      width: 280px;
-      height: 32px;
-      // &:hover .clearIcon{
-      //   display: block;
-      // }
-    }
-    .zetInputWrapperNum{
-      margin-left: 10px;
-      color: #ccc;
-    }
+@input-prefix-cls: ~'@{zet-prefix}-input';
+.zet-input {
+  width: 100px;
 }
+
+.@{input-prefix-cls} {
+  height: 32px;
+  flex: 1;
+  &-wrapper {
+    display: flex;
+    width: 100%;
+    &-num {
+      margin-left: @margin-sm;
+      color: #ccc;
+      width: 40px;
+    }
+  }
+}
+
 .zetTextareaWrapper{
     .zetInputWrapperNum{
       margin-left: 10px;

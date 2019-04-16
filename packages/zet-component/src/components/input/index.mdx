@@ -1,0 +1,22 @@
+---
+name: Input (输入框)
+menu: Components
+order: 80
+---
+
+import { Playground, PropsTable } from 'docz';
+import { Input } from '../../index.tsx'
+
+# Input
+在antd基础上扩展了maxLength属性
+
+## 使用
+<Playground>
+  <Input allowClear />
+</Playground>
+
+
+## 限制可输入字符数(maxLength)
+<Playground>
+  <Input maxLength={20} />
+</Playground>
