@@ -4,7 +4,7 @@ export default {
   entry: 'src/index.tsx',
   esm: 'rollup',
   cjs: 'rollup',
-  cssModules: true,
+  cssModules: false,
   doc: {
     base: '/zet-component',
     title: 'Zet Component',
