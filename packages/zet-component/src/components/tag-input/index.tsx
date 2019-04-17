@@ -1,40 +1,46 @@
 import * as React from 'react';
 import {Input, message, Tag} from 'antd';
 import classnames from 'classnames';
-import styles from './index.less';
+import './index.less';
 
 export interface TagInputProps {
   /** 组件行行内样式 */
-  style?: React.CSSProperties,
+  style?: React.CSSProperties;
   /** 自定义类名 */
-  className?: string,
+  className?: string;
   /** 宽度 */
-  width?: string | number,
+  width?: string | number;
   /** 标签个数 */
-  maxLength?: number,
+  maxLength?: number;
   /** 占位符 */
-  placeholder?: string,
+  placeholder?: string;
   /** Tag Input value 值 */
-  value?: Set<number | string>,
+  value?: Set<number | string>;
   /** 支持输入的类型 */
-  type?: 'number' | 'string',
+  type?: 'number' | 'string';
   /** 是否禁用 */
-  disabled?: boolean,
+  disabled?: boolean;
   /** onChange 事件 */
-  onChange?: (values: Array<number | string>) => void,
+  onChange?: (values: Array<number | string>) => void;
   /** onBluer 事件 */
-  onBlur?: () => void,
+  onBlur?: () => void;
   /** 添加的元素数组 */
-  addData?: Array<number | string>,
+  addData?: Array<number | string>;
   /** 删除的元素数组 */
-  delData?: Array<number | string>,
+  delData?: Array<number | string>;
   /** 输入 nChange 事件 */
-  onInput?: (values: Array<number | string>) => void,
+  onInput?: (values: Array<number | string>) => void;
   /** 是否回车生成元素 */
-  allowEnter?: boolean,
+  allowEnter?: boolean;
 }
 
 class TagInput extends React.Component<TagInputProps, any> {
+
+  static defaultProps = {
+    type: 'number',
+    width: '100%',
+    allowEnter: true,
+  };
   public input: React.RefObject<any>;
 
   constructor(props: TagInputProps) {
@@ -45,12 +51,12 @@ class TagInput extends React.Component<TagInputProps, any> {
       inputValue: undefined,
       focus: false,
       allowEnter: true,
-    }
+    };
   }
 
-  static defaultProps = {
-    type: 'number',
-    width: '100%',
+  componentDidMount() {
+    const { allowEnter } = this.props;
+    this.setState({allowEnter});
   }
 
   componentWillReceiveProps(nextProps) {
@@ -83,19 +89,18 @@ class TagInput extends React.Component<TagInputProps, any> {
   }
 
   onPressEnter = (e) => {
-    const { type, maxLength, allowEnter } = this.props;
-    const { value } = this.state;
+    const { type, maxLength } = this.props;
+    const { value, allowEnter } = this.state;
     const { value: inputValue } = e.target;
     if (value.size >= maxLength) {
       return message.warning(`最多可添加${maxLength}个标签`);
     }
     if (allowEnter && inputValue.length !== 0) {
-      this.setState(prevState => {
-        const { value } = prevState;
+      this.setState((prevState) => {
         const currValue = type === 'number' ? parseFloat(inputValue) : inputValue;
-        value.add(currValue);
-        this.triggerChange([...value]);
-        return { value, inputValue: undefined };
+        prevState.value.add(currValue);
+        this.triggerChange([...prevState.value]);
+        return { value: prevState.value, inputValue: undefined };
       });
     }
   }
@@ -103,7 +108,10 @@ class TagInput extends React.Component<TagInputProps, any> {
   onInputBlur = (e) => {
     const { onBlur, maxLength } = this.props;
     const { value } = this.state;
-    if (e.target.value && value >= maxLength) {
+    if (value.size >= maxLength) {
+      return;
+    }
+    if (e.target.value) {
       this.onPressEnter(e);
     }
     if (onBlur) {
@@ -120,7 +128,7 @@ class TagInput extends React.Component<TagInputProps, any> {
     e.preventDefault();
     const { disabled } = this.props;
     if (!disabled) {
-      this.setState(prevState => {
+      this.setState((prevState) => {
         const { value } = prevState;
         value.delete(v);
         this.triggerChange([...value]);
@@ -129,7 +137,7 @@ class TagInput extends React.Component<TagInputProps, any> {
     }
   }
 
-  triggerChange = (values: Array<any>) => {
+  triggerChange = (values: any[]) => {
     const { onChange } = this.props;
     if (onChange) {
       onChange(values);
@@ -139,26 +147,26 @@ class TagInput extends React.Component<TagInputProps, any> {
   renderValue = () => {
     const { value } = this.state;
     const { addData, delData } = this.props;
-    addData && addData.length > 0 && addData.forEach(v => {
+    addData && addData.length > 0 && addData.forEach((v) => {
       value.add(v);
     });
-    delData && delData.length > 0 && delData.forEach(v => {
+    delData && delData.length > 0 && delData.forEach((v) => {
       value.delete(v);
     });
     const renderValue = [];
-    value.forEach(v => {
+    value.forEach((v) => {
       renderValue.push(
         <li key={v}>
           <Tag
-            closable
-            onClose={(e) => this.removeTag(v, e)}
+            closable={true}
+            onClose={(e) => { this.removeTag(v, e); }}
             key={v}
             color="#f5f5f5"
-            className={styles.zetTagInputTag}
+            className={'zet-tag-input-tags'}
           >
             {v}
           </Tag>
-        </li>
+        </li>,
       );
     });
     return renderValue;
@@ -166,14 +174,14 @@ class TagInput extends React.Component<TagInputProps, any> {
 
   onKeyDown = (e) => {
     const { inputValue } = this.state;
-    let keynum = window.event ? e.keyCode : e.which;
+    const keynum = window.event ? e.keyCode : e.which;
     if (keynum === 8 && !inputValue) {
-      this.setState(prevState => {
+      this.setState((prevState) => {
         const { value } = prevState;
-        let lastValue = Array.from(value).pop();
+        const lastValue = Array.from(value).pop();
         value.delete(lastValue);
         this.triggerChange([...value]);
-        return { value }
+        return { value };
       });
     }
   }
@@ -181,14 +189,14 @@ class TagInput extends React.Component<TagInputProps, any> {
   public render() {
     const { className, style, disabled, width, placeholder } = this.props;
     const { inputValue, value } = this.state;
-    const classNames = classnames(styles.zetTagInput, className, {
-      [styles.zetTagInputFocus]: focus,
-      [styles.zetTagInputDisabled]: disabled,
+    const classNames = classnames('zet-tag-input', className, {
+      ['zet-tag-input-focus']: focus,
+      ['zet-tag-input-disabled']: disabled,
     });
     const styleProps = {
       width,
       ...style,
-    }
+    };
     return (
       <div style={styleProps} className={classNames} onClick={this.onContainerClick}>
         <ul>
