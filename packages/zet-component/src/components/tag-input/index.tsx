@@ -30,7 +30,7 @@ export interface TagInputProps {
   delData?: Array<number | string>;
   /** 输入 nChange 事件 */
   onInput?: (values: Array<number | string>) => void;
-  /** 是否回车生成元素 */
+  /** 是否生成元素 */
   allowEnter?: boolean;
 }
 
