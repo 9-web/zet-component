@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Input } from 'antd';
 import classNames from 'classnames';
+import TextArea from './textarea';
 import './index.less';
 
 export interface ZetInputProps {
@@ -24,6 +25,7 @@ export interface ZetInputState {
 }
 
 class ZetInput extends React.Component<ZetInputProps, ZetInputState> {
+  static TextArea: typeof TextArea;
   constructor(props: ZetInputProps) {
     super(props);
     this.state = {
