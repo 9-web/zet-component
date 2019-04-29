@@ -13,7 +13,7 @@ import treeData from './_mock/treeData.js';
 # Tag (选择器)
 
 ## 基础展示
-我们需要定义`treeData`属性，数据格式如下：
+我们需要定义`data`属性，数据格式如下：
 ```
 [
   {
@@ -28,7 +28,7 @@ import treeData from './_mock/treeData.js';
 
 ## 基本
 <Playground>
-    <Tag maxLength={1} data={treeData} onChange={(values)=>{console.log(values);}}/>
+    <Tag maxLength={2} data={treeData} onChange={(values)=>{console.log(values);}}/>
 </Playground>
 
 ### API
