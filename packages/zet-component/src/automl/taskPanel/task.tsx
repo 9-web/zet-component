@@ -4,7 +4,7 @@ import Group from './taskGroup';
 import classNames from 'classnames';
 import ContrastButton from './contrastButton';
 import ZetIcon from '../../components/icon';
-import styles from './index.less';
+import './index.less';
 
 const MenuItem = Menu.Item;
 const { Link } = Anchor;
@@ -112,23 +112,23 @@ class Task extends React.Component<TaskProps, TaskState> {
     title = title || jobInfo.jobName || '';
     modelList = modelList || jobInfo.modelList;
     contrastIds = contrastIds || [];
-    const taskClass = classNames(styles.zetTask, {[styles.selectedTitle]: selectedTaskId === jobInfo.jobId});
+    const taskClass = classNames('zet-task', {['selected-title']: selectedTaskId === jobInfo.jobId});
     const getContainer = anchorContainerId ? {getContainer: () => document.getElementById(anchorContainerId)} : {};
     return (
       <Card
         title={(
-          <div className={styles.cardTitle} onClick={this.changeJob}>
-            <span className={styles.taskListTitle}>
-              <span className={styles.taskListName} title={title}>
+          <div className={'card-title'} onClick={this.changeJob}>
+            <span className={'task-list-title'}>
+              <span className={'task-list-name'} title={title}>
                 <a
                   // tslint:disable-next-line: jsx-no-lambda
                   onClick={() => { this.title(jobInfo); }}
-                  className={`${jobInfo.jobStatus === 'FAIL' ? styles.linkWraperr : ''}`}
+                  className={`${jobInfo.jobStatus === 'FAIL' ? 'link-wraperr' : ''}`}
                 >
                   {title}
                 </a>
               </span>
-              <span className={styles.cardTitleOptions}>
+              <span className={'card-title-options'}>
                 {jobInfo.jobStatus === 'RUNNING' && <Icon type="loading" theme="outlined" />}
                 <Tooltip title={'删除'}>
                   {jobInfo.jobStatus !== 'RUNNING' && <Icon
@@ -150,7 +150,7 @@ class Task extends React.Component<TaskProps, TaskState> {
         <Anchor
           affix={false}
           bounds={0}
-          className={styles.taskAnchor}
+          className={'task-anchor'}
           {...getContainer}
         >
           <Menu
@@ -170,12 +170,12 @@ class Task extends React.Component<TaskProps, TaskState> {
                       title={(
                         <div
                           // tslint:disable-next-line: max-line-length
-                          className={`${styles.linkWrap} ${(jobInfo.jobStatus === 'FAIL' && (item.modelTrainStatus !== 'SUCCESS')) ? styles.linkWraperr : ''}`}>
+                          className={`${'link-wrap'} ${(jobInfo.jobStatus === 'FAIL' && (item.modelTrainStatus !== 'SUCCESS')) ? 'link-wraperr' : ''}`}>
                           <div
                             title={item.modelName}
                             // tslint:disable-next-line: jsx-no-lambda
                             onClick={(e) => {this.openModelDetail(e, item.modelId, item.modelName, jobInfo.jobId); }}
-                            className={styles.shortName}
+                            className={'short-name'}
                           >
                             {item.modelName}
                           </div>

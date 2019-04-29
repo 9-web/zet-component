@@ -1,15 +1,15 @@
 import * as React from 'react';
 import classnames from 'classnames';
 
-import styles from './index.less';
+import './index.less';
 
 export interface SiderProps {
   /** 组件行行内样式 */
-  style?: React.CSSProperties,
+  style?: React.CSSProperties;
   /** 自定义类名 */
-  className?: string,
+  className?: string;
   /** 资源组件的宽度 */
-  width?: string | number,
+  width?: string | number;
 }
 
 export interface SiderState {
@@ -19,13 +19,13 @@ export interface SiderState {
 class Sider extends React.Component<SiderProps, SiderState> {
   constructor(props: SiderProps) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
 
   render() {
-    const { style, className,width,children } = this.props;
-    const classNames = classnames(styles.zetSider,className);
-    const styleProps = {...style, width}
+    const { style, className, width, children } = this.props;
+    const classNames = classnames('zetSider', className);
+    const styleProps = {...style, width};
     return (
       <div className={classNames} style={styleProps}>
         {children}
@@ -34,4 +34,4 @@ class Sider extends React.Component<SiderProps, SiderState> {
   }
 }
 
-export default Sider
+export default Sider;

@@ -3,7 +3,7 @@ import { Card, Row, Col, List, Icon, Spin } from 'antd';
 import moment from 'moment';
 import Chart from '../../components/charts';
 import MetricsConfig from '../config/metrics';
-import styles from './index.less';
+import './index.less';
 
 const {Rect4} = Chart;
 
@@ -74,7 +74,7 @@ class ModelDetail extends React.Component<ModelDetailProps, any> {
     } } = this.props;
     if ((jobStatus === 'FAIL' && trainStatus !== 'SUCCESS') || trainStatus === 'FAIL') {
       return (
-        <div className={styles.mdlItem} id={modelId}>
+        <div className={'mdlItem'} id={modelId}>
           <Card
             title={name}
             extra={(
@@ -89,7 +89,7 @@ class ModelDetail extends React.Component<ModelDetailProps, any> {
             bordered={false}
             // style={{ width: 300 }}
           >
-            <Row className={styles.mdlItemStatusRow} type='flex' align='middle' justify='center'>
+            <Row className={'mdlItemStatusRow'} type='flex' align='middle' justify='center'>
               <div><Icon type='close-circle' style={{ fontSize: 14, color: 'red' }} />trainfail</div>
             </Row>
           </Card>
@@ -98,7 +98,7 @@ class ModelDetail extends React.Component<ModelDetailProps, any> {
     }
     if (trainStatus === 'CREATE') {
       return (
-        <div className={styles.mdlItem} id={modelId}>
+        <div className={'mdlItem'} id={modelId}>
           <Card
             title={name}
             extra={(
@@ -112,7 +112,7 @@ class ModelDetail extends React.Component<ModelDetailProps, any> {
             )}
             bordered={false}
           >
-            <Row className={styles.mdlItemStatusRow} type='flex' align='middle' justify='center'>
+            <Row className={'mdlItemStatusRow'} type='flex' align='middle' justify='center'>
               <div><Spin tip={'等待中'} /></div>
             </Row>
           </Card>
@@ -121,7 +121,7 @@ class ModelDetail extends React.Component<ModelDetailProps, any> {
     }
     if (trainStatus === 'TRAINING' && !featureImportance && !params && !metricList) {
       return (
-        <div className={styles.mdlItem} id={modelId}>
+        <div className={'mdlItem'} id={modelId}>
           <Card
             title={name}
             extra={(
@@ -136,7 +136,7 @@ class ModelDetail extends React.Component<ModelDetailProps, any> {
             bordered={false}
             // style={{ width: 300 }}
           >
-            <Row className={styles.mdlItemStatusRow} type='flex' align='middle' justify='center'>
+            <Row className={'mdlItemStatusRow'} type='flex' align='middle' justify='center'>
               <div><Spin tip={'训练中'} /></div>
             </Row>
           </Card>
@@ -148,7 +148,7 @@ class ModelDetail extends React.Component<ModelDetailProps, any> {
       name: p, value: params[p],
     })) : [];
     return (
-      <div className={styles.mdlItem} id={modelId}>
+      <div className={'mdlItem'} id={modelId}>
         <Card
           title={
             trainStatus === 'SUCCESS' ? (
@@ -172,9 +172,9 @@ class ModelDetail extends React.Component<ModelDetailProps, any> {
           bordered={false}
           // style={{ width: 300 }}
         >
-          <Row className={styles.mdlItemRow}>
-            <Col span={8} className={styles.mdlItemCol}>
-              <div className={styles.mdlItemColName}>参数</div>
+          <Row className={'mdlItemRow'}>
+            <Col span={8} className={'mdlItemCol'}>
+              <div className={'mdlItemColName'}>参数</div>
               {paramsData && (
                 <List
                   dataSource={paramsData}
@@ -184,18 +184,18 @@ class ModelDetail extends React.Component<ModelDetailProps, any> {
                       {d.value}
                     </List.Item>
                   )}
-                  className={styles.mdlItemColList}
+                  className={'mdlItemColList'}
                 />
               )}
             </Col>
-            <Col span={8} className={styles.mdlItemCol}>
-              <div className={styles.mdlItemColName}>featurebl</div>
+            <Col span={8} className={'mdlItemCol'}>
+              <div className={'mdlItemColName'}>featurebl</div>
               <div>
                 {featureImportance && <Rect4 height={190} data={featureImportance} />}
               </div>
             </Col>
-            <Col span={8} className={styles.mdlItemColEnd}>
-              <div className={styles.mdlItemColName}>pfzb</div>
+            <Col span={8} className={'mdlItemColEnd'}>
+              <div className={'mdlItemColName'}>pfzb</div>
               {metricList && (
                 <List
                   dataSource={metricList}
@@ -205,7 +205,7 @@ class ModelDetail extends React.Component<ModelDetailProps, any> {
                       {d.score}
                     </List.Item>
                   )}
-                  className={styles.mdlItemColList}
+                  className={'mdlItemColList'}
                 />
               )}
             </Col>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Row, Col, List, Icon, Spin } from 'antd';
 import moment from 'moment';
 import Chart from '../../components/charts';
-import styles from './index.less';
+import './index.less';
 import sliderData from './_mock/chartData';
 import {start} from "repl";
 
@@ -22,13 +22,13 @@ function CardExtra(props) {
 
 export interface ModelChartProps {
   /** 组件行行内样式 */
-  data?:any,
-  autoMLInfo?:any,
-  item?:any,
-  jobId?:string,
-  getView?:(blockId:string)=>void,
-  getForecast?:(moduleId:string)=>void,
-  openModelDetail?:(modelId:string,modelName:string,jobId:string)=>void
+  data?: any;
+  autoMLInfo?: any;
+  item?: any;
+  jobId?: string;
+  getView?: (blockId: string) => void;
+  getForecast?: (moduleId: string) => void;
+  openModelDetail?: (modelId: string, modelName: string, jobId: string) => void;
 }
 
 export interface ModelChartState {
@@ -38,10 +38,10 @@ export interface ModelChartState {
 class ModelChart extends React.Component<ModelChartProps, ModelChartState> {
   constructor(props: ModelChartProps) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
   durtion = (startTime, endTime) => {
-    let result = moment(endTime).diff(moment(startTime),'seconds')
+    const result = moment(endTime).diff(moment(startTime), 'seconds');
     return isNaN(result) ? 0 : result;
   }
   view = (blockId) => {
@@ -54,13 +54,13 @@ class ModelChart extends React.Component<ModelChartProps, ModelChartState> {
 
   openModelDetail = () => {
     const {item: {name, modelId}, jobId} = this.props;
-    this.props.openModelDetail && this.props.openModelDetail(modelId,name,jobId)
+    this.props.openModelDetail && this.props.openModelDetail(modelId, name, jobId);
   }
   render() {
-    const { item: {blockId, modelId, repository,name,trainBeginTime,trainEndTime}, autoMLInfo = {},...otherProps} = this.props;
+    const { item: {blockId, modelId, repository, name, trainBeginTime, trainEndTime}, autoMLInfo = {}, ...otherProps} = this.props;
 
     return (
-      <div className={styles.mdlItem} id={modelId}>
+      <div className={'mdlItem'} id={modelId}>
         <Card
           title={
             <span>
@@ -95,4 +95,4 @@ class ModelChart extends React.Component<ModelChartProps, ModelChartState> {
   }
 }
 
-export default ModelChart
+export default ModelChart;

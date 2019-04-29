@@ -1,7 +1,7 @@
 import * as React from 'react';
 import classnames from 'classnames';
 import { Input } from 'antd';
-import styles from './index.less';
+import './index.less';
 
 const Search = Input.Search;
 
@@ -75,7 +75,7 @@ class TaskGroup extends React.Component<TaskGroupProps, TaskGroupState> {
     const kids = React.Children.map(children, (child) => {
       return this.instertSelectedRow(child as React.ReactChild, extendProps);
     });
-    const cNames = classnames(styles.zetTaskGroup, className);
+    const cNames = classnames('zet-task-group', className);
     const styleProps = {width, ...style};
     return (
       <div className={cNames} style={styleProps}>
@@ -84,7 +84,7 @@ class TaskGroup extends React.Component<TaskGroupProps, TaskGroupState> {
           onChange={this.search}
           onSearch={this.search}
         />
-        <div className={styles.zetTaskList}>
+        <div className={'zet-task-list'}>
           {kids}
         </div>
       </div>

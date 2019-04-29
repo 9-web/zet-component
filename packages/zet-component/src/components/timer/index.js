@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 // import intl from 'utils/intl';
 import { getServerCurrentTime } from '../../utils/utils';
-import styles from './index.less';
-
+import './index.less';
 
 class Timer extends Component {
   constructor(props) {
@@ -61,9 +60,9 @@ class Timer extends Component {
     const mins = timer.get('minutes');
     const sec = timer.get('seconds');
     return (
-      <div className={styles.timer}>
-        <div className={styles.timerTit}>耗时</div>
-        <div className={styles.userTimer}>
+      <div className={'timer'}>
+        <div className={'timerTit'}>耗时</div>
+        <div className={'userTimer'}>
           {this.addZero(hours)} : {this.addZero(mins)} : {this.addZero(sec)}
         </div>
       </div>

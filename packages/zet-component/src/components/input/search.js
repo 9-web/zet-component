@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon, Input } from 'antd';
 import classNames from 'classnames';
+import './index.less';
 
 class ZetSearch extends React.Component {
   static defaultProps = {

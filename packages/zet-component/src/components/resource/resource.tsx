@@ -4,6 +4,7 @@ import { InputNumber, Slider, Row, Col} from 'antd';
 import classnames from 'classnames';
 import ResourceGroup from './resourceGroup';
 import { isNumber } from '../../utils/utils';
+import './index.less';
 
 export interface ResourceProps {
     /** 组件行行内样式 */

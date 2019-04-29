@@ -1,16 +1,16 @@
 import * as React from 'react';
-import classnames from 'classnames'
-import styles from './index.less';
+import classnames from 'classnames';
+import './index.less';
 import Sider from './sider';
 import Content from './content';
 
 export interface LayoutComponentProps {
   /** 组件行行内样式 */
-  style?: React.CSSProperties,
+  style?: React.CSSProperties;
   /** 自定义类名 */
-  className?: string,
+  className?: string;
   /** 资源组件的宽度 */
-  width?: string | number,
+  width?: string | number;
 }
 
 export interface LayoutComponentState {
@@ -22,12 +22,12 @@ class LayoutComponent extends React.Component<LayoutComponentProps, LayoutCompon
   static Content: typeof Content;
   constructor(props: LayoutComponentProps) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
   render() {
-    const { style, className,width,children } = this.props;
-    const classNames = classnames(styles.zetLayout,className);
-    const styleProps = {...style, width}
+    const { style, className, width, children } = this.props;
+    const classNames = classnames('zetLayout', className);
+    const styleProps = {...style, width};
     return (
       <div className={classNames} style={styleProps}>
         {children}
@@ -36,4 +36,4 @@ class LayoutComponent extends React.Component<LayoutComponentProps, LayoutCompon
   }
 }
 
-export default LayoutComponent
+export default LayoutComponent;

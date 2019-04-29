@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Button } from 'antd';
 
-import styles from './index.less';
+import './index.less';
 
 export interface ContrastButtonProps {
   /** 组件行行内样式 */
@@ -44,7 +44,7 @@ class ContrastButton extends React.Component<ContrastButtonProps, any> {
       <Button
         size='small'
         style={style}
-        className={styles.ml15}
+        className={'ml15'}
         disabled={this.isDisabled()}
         onClick={(e) => {
           this.showContras(e, item, jobId, jobName);

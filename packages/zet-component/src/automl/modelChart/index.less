@@ -52,10 +52,8 @@
 .sider {
   background: #f0f6ff;
   margin-right: 24px;
-  :global {
-    .ant-list-item {
-      padding: 0 !important;
-    }
+  .ant-list-item {
+    padding: 0 !important;
   }
 }
 
@@ -80,16 +78,14 @@
   &:last-child{
     margin-bottom: 0 !important;
   }
-  :global{
-    .ant-card-body{
-      padding: 0;
-    }
-    .ant-card-head{
-      padding: 0;
-    }
-    .ant-card-head-title{
-      padding: 0;
-    }
+  .ant-card-body{
+    padding: 0;
+  }
+  .ant-card-head{
+    padding: 0;
+  }
+  .ant-card-head-title{
+    padding: 0;
   }
 }
 .cardTitle{
@@ -99,19 +95,17 @@
 .taskAnchor{
   margin-left: 0;
   padding-left: 0;
-  :global{
-    .ant-anchor-ink{
-      display: none;
-    }
-    .ant-anchor{
-      padding-left: 0;
-    }
-    // .ant-anchor-link{
-    //   padding-left: 0;
-    // }
-    .ant-anchor-link{
-      padding: 0;
-    }
+  .ant-anchor-ink{
+    display: none;
+  }
+  .ant-anchor{
+    padding-left: 0;
+  }
+  // .ant-anchor-link{
+  //   padding-left: 0;
+  // }
+  .ant-anchor-link{
+    padding: 0;
   }
 }
 .linkWrap{
@@ -126,13 +120,11 @@
   flex-direction: column;
 }
 .collapseWrap{
-  :global{
-    .ant-collapse-content{
-      overflow: initial;
-    }
-    .ant-collapse{
-      box-shadow: 0 2px 4px 0 rgba(120, 141, 180, 0.2);
-    }
+  .ant-collapse-content{
+    overflow: initial;
+  }
+  .ant-collapse{
+    box-shadow: 0 2px 4px 0 rgba(120, 141, 180, 0.2);
   }
 }
 .autoParams{
@@ -217,17 +209,15 @@
   padding: 0 32px;
 }
 .contrastLi{
-  :global{
-    .ant-list-item-content{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      span{
-        width: 170px;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-      }
+  .ant-list-item-content{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    span{
+      width: 170px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
     }
   }
 }
@@ -238,13 +228,11 @@
 .selContrastLi{
   z-index: 10;
   background: #fff;
-  :global{
-    .ant-list-bordered .ant-list-item{
-      border-bottom: none;
-    }
-    .ant-list-split .ant-list-item{
-      border-bottom: none;
-    }
+  .ant-list-bordered .ant-list-item{
+    border-bottom: none;
+  }
+  .ant-list-split .ant-list-item{
+    border-bottom: none;
   }
 }
 .selContrastLijobName{
@@ -256,19 +244,17 @@
 }
 .selectWrap{
   position: relative;
-  :global{
-    .ant-list-bordered .ant-list-item{
-      border: none;
+  .ant-list-bordered .ant-list-item{
+    border: none;
+  }
+  .ant-list-item{
+    &:hover{
+      background: rgba(28, 122, 238, 0.09);
     }
-    .ant-list-item{
-      &:hover{
-        background: rgba(28, 122, 238, 0.09);
-      }
-    }
-    .ant-spin-container{
-      overflow-y: scroll;
-      height: 400px;
-    }
+  }
+  .ant-spin-container{
+    overflow-y: scroll;
+    height: 400px;
   }
 }
 .shortName{
@@ -389,13 +375,11 @@
 }
 
 .compareParamsList{
-  :global{
-    .ant-list-item{
-      padding: 0;
-    }
-    .ant-list-item-content,.ant-list-item-content-single{
-      width: 100%;
-    }
+  .ant-list-item{
+    padding: 0;
+  }
+  .ant-list-item-content,.ant-list-item-content-single{
+    width: 100%;
   }
 }
 .listTit{

@@ -1,38 +1,38 @@
 import * as React from 'react';
 import classnames from 'classnames';
 import { Layout, Menu } from 'antd';
-import styles from './index.less';
+import './index.less';
 const { Header, Content, Sider } = Layout;
 
 const { ItemGroup: MenuItemGroup, Item: MenuItem  } = Menu;
 
 /** 左侧列表数据项接口 */
 export interface LeftDataItem {
-  key: string,
-  value: string,
-  children?: LeftDataItem,
+  key: string;
+  value: string;
+  children?: LeftDataItem;
 }
 
 export interface DesignProps {
   /** 组件行行内样式 */
-  style?: React.CSSProperties,
+  style?: React.CSSProperties;
   /** 自定义类名 */
-  className?: string,
+  className?: string;
   /** 左侧列表数据 */
-  leftData?: Array<LeftDataItem>,
+  leftData?: LeftDataItem[];
   /** 左侧面板内容自定义渲染 */
-  leftRender?: React.ReactNode,
+  leftRender?: React.ReactNode;
   /** 左侧antd layout.sider容器属性 */
-  leftSiderProps?: any,
+  leftSiderProps?: any;
   /** 左侧antd menu属性 */
-  leftMenuProps?: any,
+  leftMenuProps?: any;
   /** 左侧列表onSelect事件，参数为selectData */
-  onSelect: (selectData: LeftDataItem) => void,
+  onSelect: (selectData: LeftDataItem) => void;
 }
 
 export interface DesignState {
-  selectedKeys: Array<string>,
-  selectedData: LeftDataItem,
+  selectedKeys: string[];
+  selectedData: LeftDataItem;
 }
 
 export default class Design extends React.Component<DesignProps, DesignState> {
@@ -43,7 +43,7 @@ export default class Design extends React.Component<DesignProps, DesignState> {
     this.state = {
       selectedKeys: [initSelectData.key],
       selectedData: initSelectData,
-    }
+    };
   }
 
   getInitSelectData = (leftData) => {
@@ -51,7 +51,7 @@ export default class Design extends React.Component<DesignProps, DesignState> {
           && leftData.length > 0
           && leftData[0].children
           && leftData[0].children.length > 0
-          && leftData[0].children[0]) || {}
+          && leftData[0].children[0]) || {};
   }
 
   onMenuClick = (data) => {
@@ -76,17 +76,17 @@ export default class Design extends React.Component<DesignProps, DesignState> {
         {...leftMenuProps}
       >
         {
-          Array.isArray(leftData) && leftData.map(item => (
+          Array.isArray(leftData) && leftData.map((item) => (
             <MenuItemGroup key={item.key} title={item.value}>
               {
-                Array.isArray(item.children) && item.children.map(child => (
+                Array.isArray(item.children) && item.children.map((child) => (
                   <MenuItem  onClick={() => this.onMenuClick(child)} key={child.key}>{child.value}</MenuItem>
                 ))
               }
             </MenuItemGroup>
           ))
         }
-      </Menu>
+      </Menu>;
     }
     return leftRender;
   }
@@ -99,14 +99,14 @@ export default class Design extends React.Component<DesignProps, DesignState> {
       children,
     } = this.props;
     const { selectedData } = this.state;
-    const classNames = classnames(styles.zetAmlDesign, className);
+    const classNames = classnames('zet-aml-design', className);
     return (
       <Layout
         className={classNames}
         style={style}
       >
         <Sider
-          className={styles.zetAmlDesignSider}
+          className={'zet-aml-design-sider'}
           width={240}
           theme='light'
           {...leftSiderProps}
@@ -114,8 +114,8 @@ export default class Design extends React.Component<DesignProps, DesignState> {
           {this.getLeftContent()}
         </Sider>
         <Layout>
-          <Header className={styles.zetAmlDesignHeader}>{selectedData.value}</Header>
-          <Content className={styles.zetAmlDesignContent}>
+          <Header className={'zet-aml-design-header'}>{selectedData.value}</Header>
+          <Content className={'zet-aml-design-content'}>
             {children}
           </Content>
         </Layout>
