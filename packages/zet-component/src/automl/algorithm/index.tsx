@@ -41,9 +41,9 @@ export interface AlgorithmState {
 
 class Algorithm extends React.Component<AlgorithmProps, AlgorithmState> {
   /** 算法右侧内容 */
-  static Item = Item;
+  static Item: typeof Item;
   /** 算法左侧列表 */
-  static List = List;
+  static List: typeof List;
 
   static defaultProps = {
     value: [],
