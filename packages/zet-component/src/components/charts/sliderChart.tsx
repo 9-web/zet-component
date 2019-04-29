@@ -33,16 +33,14 @@ export interface Axis {
   mask?: string;
   color?: string;
 }
-export interface SliderChartState {
-
-}
 interface  ChartProps {
   autoFormat?: any;
 }
 
 function getComponent(dataInfo, props) {
   const {data, begin, end} = dataInfo;
-  let {scales= {}, titles , logInfo, defaultTimeRange= [], options= {}} = props;
+  const {scales= {}, logInfo, defaultTimeRange= [], options= {}} = props;
+  let { titles } = props;
   let defaultSuccessColor = 'green';
   if (options.setDefaultColor) {
     defaultSuccessColor = options.setDefaultColor();
@@ -55,7 +53,11 @@ function getComponent(dataInfo, props) {
     });
   const axisX = scales.axisX || {key: 'x', type: 'time', tickCount: 8, mask: 'MM/DD HH:mm'};
   const axisY = scales.axisY || titles || [{key: 'y', alias: 'y'}];
-  let geoms = [], axis = [], axisYObj = {}, axisYScale = {}, defaultYAxis = 'y';
+  const geoms = [];
+  const axis = [];
+  const axisYObj = {};
+  const axisYScale = {};
+  let defaultYAxis = 'y';
   const dv = ds.createView("origin").source(data);
 
   dv.transform({
@@ -81,7 +83,8 @@ function getComponent(dataInfo, props) {
       notAllowZero,
       ...other,
     };
-    geoms.push(<Geom
+    geoms.push(
+    <Geom
       type={type || 'line'}
       position={`${axisX.key}*${key || 'y'}`}
       color={other.color || colors[index]}
@@ -126,6 +129,7 @@ function getComponent(dataInfo, props) {
     // console.log('sliderChartLogInfo >> end');
   }
   scale = (options.autoFormat && options.autoFormat(dv.rows, scale)) || scale;
+  // tslint:disable-next-line: no-shadowed-variable
   class SliderChart extends React.Component<ChartProps> {
     onChange(obj) {
       const { startValue, endValue } = obj;
@@ -146,19 +150,21 @@ function getComponent(dataInfo, props) {
               g2Chart.animate(false);
               chart = g2Chart;
             }}
-            forceFit
+            forceFit={true}
           >
             {axis}
             <Tooltip />
             <Legend
-              custom
+              custom={true}
               position="top"
               items={legendItems}
-              onClick={(ev) => {
+              onClick={(ev: any) => {
                 const item = ev.item;
                 const value = item.key;
                 const checked = ev.checked;
+                // tslint:disable-next-line: no-shadowed-variable
                 const geoms = chart.getAllGeoms();
+                // tslint:disable-next-line: prefer-for-of
                 for (let i = 0; i < geoms.length; i++) {
                   const geom = geoms[i];
                   if (geom.getYScale().field === value) {
@@ -188,6 +194,7 @@ function getComponent(dataInfo, props) {
               backgroundChart={{
                 type: "line",
               }}
+              // tslint:disable-next-line: jsx-no-bind
               onChange={this.onChange.bind(this)}
             />
           </div>
@@ -213,8 +220,9 @@ class SliderChart extends React.Component<SliderChartProps, any> {
   }
   render() {
     const {data, ...otherProps} = this.props;
+    // tslint:disable-next-line: no-shadowed-variable
     const Chart = getComponent(data, otherProps);
-    return <Chart></Chart>;
+    return <Chart />;
   }
 }
 
