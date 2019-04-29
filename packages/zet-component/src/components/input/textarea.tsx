@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { Input } from 'antd';
 import classNames from 'classnames';
-import TextArea from './textarea';
 import './index.less';
 
-export interface ZetInputProps {
+const AntdTextArea = Input.TextArea;
+
+export interface TextAreaProps {
   /** 组件行行内样式 */
   style?: React.CSSProperties;
   /** 自定义类名 */
@@ -19,15 +20,13 @@ export interface ZetInputProps {
   onChange: (value: string) => void;
 }
 
-export interface ZetInputState {
+export interface TextAreaState {
   /** value 值 */
   value: string;
 }
 
-class ZetInput extends React.Component<ZetInputProps, ZetInputState> {
-  static TextArea: typeof TextArea;
-  static Search: any;
-  constructor(props: ZetInputProps) {
+class TextArea extends React.Component<TextAreaProps, TextAreaState> {
+  constructor(props: TextAreaProps) {
     super(props);
     this.state = {
       value: this.getValue(props.value) || this.getValue(props.defaultValue) || '',
@@ -76,7 +75,7 @@ class ZetInput extends React.Component<ZetInputProps, ZetInputState> {
     const rootClass = classNames('zet-input-wrapper', className);
     return (
       <span className={rootClass}>
-        <Input
+        <AntdTextArea
           {...otherProps}
           className='zet-input'
           onChange={this.onChange}
@@ -90,4 +89,4 @@ class ZetInput extends React.Component<ZetInputProps, ZetInputState> {
   }
 }
 
-export default ZetInput;
+export default TextArea;

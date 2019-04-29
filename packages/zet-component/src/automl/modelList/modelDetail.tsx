@@ -19,30 +19,26 @@ function CardExtra(props) {
   );
 }
 
-
-
 export interface ModelDetailProps {
   /** 组件行行内样式 */
-  item:any,
-  jobId:string,
-  getView?:(blockId:string)=>void,
-  getForecast?:(moduleId:string)=>void,
-  openModelDetail?:(modelId:string,modelName:string,jobId:string)=>void
+  item: any;
+  jobId: string;
+  getView?: (blockId: string) => void;
+  getForecast?: (moduleId: string) => void;
+  openModelDetail?: (modelId: string, modelName: string, jobId: string) => void;
 }
 
-export interface ModelDetailState {
-
-}
-
-class ModelDetail extends React.Component<ModelDetailProps, ModelDetailState> {
+class ModelDetail extends React.Component<ModelDetailProps, any> {
   constructor(props: ModelDetailProps) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
+
   durtion = (startTime, endTime) => {
-    return moment(endTime).diff(moment(startTime),'seconds');
+    return moment(endTime).diff(moment(startTime), 'seconds');
   }
-  getname=(val) => {
+
+  getname = (val) => {
     const result = MetricsConfig.filter((i) => i.value === val);
     if (result.length > 0) {
       return result[0].name;
@@ -60,7 +56,7 @@ class ModelDetail extends React.Component<ModelDetailProps, ModelDetailState> {
 
   openModelDetail = () => {
     const {item: {name, modelId}, jobId} = this.props;
-    this.props.openModelDetail && this.props.openModelDetail(modelId,name,jobId)
+    this.props.openModelDetail && this.props.openModelDetail(modelId, name, jobId);
   }
 
   render() {
@@ -148,7 +144,7 @@ class ModelDetail extends React.Component<ModelDetailProps, ModelDetailState> {
       );
     }
 
-    const paramsData = params ? Object.keys(params).map(p => ({
+    const paramsData = params ? Object.keys(params).map((p) => ({
       name: p, value: params[p],
     })) : [];
     return (
@@ -159,7 +155,9 @@ class ModelDetail extends React.Component<ModelDetailProps, ModelDetailState> {
               <span>
                 <span style={{ marginRight: 8 }}>{name}</span>
                 <span style={{ marginRight: 8, fontSize: 14, color: 'rgba(16, 38, 58, 0.45)' }}>训练时间</span>
-                <span style={{ fontSize: 14, color: 'rgba(16, 38, 58, 0.45)' }}>{this.durtion(trainBeginTime, trainEndTime)}s</span>
+                <span style={{ fontSize: 14, color: 'rgba(16, 38, 58, 0.45)' }}>
+                  {this.durtion(trainBeginTime, trainEndTime)}s
+                </span>
               </span>
             ) : name}
           extra={(
@@ -180,7 +178,7 @@ class ModelDetail extends React.Component<ModelDetailProps, ModelDetailState> {
               {paramsData && (
                 <List
                   dataSource={paramsData}
-                  renderItem={d => (
+                  renderItem={(d) => (
                     <List.Item>
                       <List.Item.Meta title={d.name} />
                       {d.value}
@@ -201,7 +199,7 @@ class ModelDetail extends React.Component<ModelDetailProps, ModelDetailState> {
               {metricList && (
                 <List
                   dataSource={metricList}
-                  renderItem={d => (
+                  renderItem={(d: any) => (
                     <List.Item>
                       <List.Item.Meta title={this.getname(d.name)} />
                       {d.score}
@@ -220,4 +218,4 @@ class ModelDetail extends React.Component<ModelDetailProps, ModelDetailState> {
 
 }
 
-export default ModelDetail
+export default ModelDetail;

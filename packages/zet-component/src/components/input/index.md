@@ -38,3 +38,9 @@ width | 设置Textarea的宽度 | string/number | 190
 maxLength | 支持最大输入的文字数， 0代表不启用此属性 | Number | 0 
 
 其余属性和 Textarea 一致。
+
+
+
+
+
+
