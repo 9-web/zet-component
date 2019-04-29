@@ -1,6 +1,6 @@
 {
   "name": "zet-component",
-  "version": "0.1.11-alpha.0",
+  "version": "0.1.11-alpha.1",
   "description": "zet-ui",
   "main": "dist/zet-ui.js",
   "module": "dist/index.esm.js",
