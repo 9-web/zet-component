@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { ResourceContext } from './resourceContext';
 import classnames from 'classnames';
-import styles from './index.less';
-
 
 export interface ResourceGroupProps{
   /** 组件行行内样式 */
@@ -28,7 +26,7 @@ class ResourceGroup extends React.Component<ResourceGroupProps, any> {
     const styleProps = {
 
     }
-    const classNames = classnames(styles.zetResourcePanel, className);
+    const classNames = classnames('zet-resource-panel', className);
     // context value
     const contextValue = {
       resourceGroup: {
@@ -37,10 +35,10 @@ class ResourceGroup extends React.Component<ResourceGroupProps, any> {
     }
     return (
       <div style={styleProps} className={classNames}>
-        <div className={styles.zetResourcePanelTitle}>
+        <div className='zet-resource-panel-title'>
           {title}
         </div>
-        <div className={styles.zetResourcePanelContent}>
+        <div className='zet-resource-panel-content'>
           <ResourceContext.Provider value={contextValue}>
             { children }
           </ResourceContext.Provider>
