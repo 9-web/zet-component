@@ -26,6 +26,7 @@ export interface ZetInputState {
 
 class ZetInput extends React.Component<ZetInputProps, ZetInputState> {
   static TextArea: typeof TextArea;
+  static Search: any;
   constructor(props: ZetInputProps) {
     super(props);
     this.state = {
