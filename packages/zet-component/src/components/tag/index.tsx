@@ -28,6 +28,8 @@ export interface TagProps {
   placeholder?: string;
   /** 最大个数 */
   maxLength?: number;
+  /** 指定当前选中的条目 */
+  value?: string[];
 }
 
 class Tag extends React.Component<TagProps, any> {
@@ -48,7 +50,66 @@ class Tag extends React.Component<TagProps, any> {
 
   constructor(props: TagProps) {
     super(props);
+    // const { value, data } = props;
+    // console.log(value, data);
+    // if (value.length > 0 && data.length > 0) {
+    //   const exitarr = Array.from(new Set([...data].filter((v) => new Set([...value]).has(v.key))));
+    //   const arr = [];
+    //   for (const i of exitarr) {
+    //     if (i.title) {
+    //       arr.push(i.title);
+    //     }
+    //   }
+    //   // console.log('arr', arr);
+    //   // this.setState((pre) => {
+    //   //   return { selectNums: [ ...pre.selectNums, ...arr ]};
+    //   // });
+    //   this.state = {
+    //     selectNums: arr,
+    //     visible: false,
+    //     data: [],
+    //     delData: [],
+    //     inputValue: undefined,
+    //   };
+      // console.log('value', value);
+    // }
   }
+
+  // componentWillReceiveProps(nextProps) {
+  //   console.log('value', nextProps);
+  //   if ('value' in nextProps) {
+  //     const {value, data} = this.props;
+  //     if (value.length > 0) {
+  //       const exitarr = Array.from(new Set([...data].filter((v) => new Set([...value]).has(v.key))));
+  //       const arr = [];
+  //       for (const i of exitarr) {
+  //         if (i.title) {
+  //           arr.push(i.title);
+  //         }
+  //       }
+  //       this.setState((pre) => {
+  //         return {selectNums: [...pre.selectNums, ...arr]};
+  //       });
+  //     }
+  //   }
+  // }
+  //
+  // componentDidMount() {
+  //   const { value, data } = this.props;
+  //   console.log('value', value);
+  //   if (value.length > 0) {
+  //     const exitarr = Array.from(new Set([...data].filter((v) => new Set([...value]).has(v.key))));
+  //     const arr = [];
+  //     for (const i of exitarr) {
+  //       if (i.title) {
+  //         arr.push(i.title);
+  //       }
+  //     }
+  //     this.setState((pre) => {
+  //       return { selectNums: [ ...pre.selectNums, ...arr ]};
+  //     });
+  //   }
+  // }
 
   handleVisibleChange = (flag) => {
     this.setState({ visible: flag });
@@ -85,7 +146,7 @@ class Tag extends React.Component<TagProps, any> {
   }
 
   render() {
-    const { data, style, className, icon, placeholder, maxLength } = this.props;
+    const { data, style, className, icon, placeholder, maxLength, value } = this.props;
     const { selectNums, delData, visible, inputValue } = this.state;
     const styleProps = {
       width: 39,
@@ -102,6 +163,15 @@ class Tag extends React.Component<TagProps, any> {
         value: v.title,
       };
     });
+    const values = [];
+    if (value && value.length > 0) {
+      const exitarr = Array.from(new Set([...data].filter((v) => new Set([...value]).has(v.key))));
+      for (const i of exitarr) {
+        if (i.title) {
+          values.push(i.title);
+        }
+      }
+    }
     return (
       <div style={{ display: 'inline-block' }}>
         <Dropdown
@@ -114,7 +184,7 @@ class Tag extends React.Component<TagProps, any> {
                 <TagInput
                   maxLength={maxLength}
                   placeholder={placeholder}
-                  addData={selectNums}
+                  addData={value ? values : selectNums}
                   delData={delData}
                   onChange={this.delTag}
                   onInput={this.onInput}
@@ -126,7 +196,7 @@ class Tag extends React.Component<TagProps, any> {
                 <Checkbox.Group
                   onChange={this.selectNums}
                   style={{ width: '100%', zIndex: 1000 }}
-                  value={selectNums}
+                  value={value ? values : selectNums}
                   options={options}
                   className={'zet-tag-settableChecklist'}
                 />) : (
@@ -144,7 +214,7 @@ class Tag extends React.Component<TagProps, any> {
           placement='bottomCenter'
           onVisibleChange={this.handleVisibleChange}
         >
-          <Badge dot={selectNums.length > 0} offset={[-12, 8]}>
+          <Badge dot={value ? values.length > 0 : selectNums.length > 0} offset={[-12, 8]}>
             <Button className={classNames} style={styleProps} icon={icon} />
           </Badge>
         </Dropdown>

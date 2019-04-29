@@ -1,86 +1,86 @@
 import * as React from 'react';
 import classnames from 'classnames';
-import Input from '../../components/input'
+import { Input } from 'antd';
 import styles from './index.less';
 
-const {Search} = Input;
+const Search = Input.Search;
 
-export interface taskGroupProps {
+export interface TaskGroupProps {
   /** 组件行行内样式 */
-  style?: React.CSSProperties,
+  style?: React.CSSProperties;
   /** 自定义类名 */
-  className?: string,
-  width?: string | number,
-  changeJob?:(record:object)=>void,
-  delJob?:(jobId:string)=>void,
-  onSearch?:(keywords:string)=>void,
-  selectedTaskId?:string
+  className?: string;
+  width?: string | number;
+  changeJob?: (record: object) => void;
+  delJob?: (jobId: string) => void;
+  onSearch?: (keywords: string) => void;
+  selectedTaskId?: string;
 }
 
-export interface taskGroupState {
-  selectedTaskId:string,
-  selectedModelKeys:string[],
+export interface TaskGroupState {
+  selectedTaskId: string;
+  selectedModelKeys: string[];
 }
 
-class taskGroup extends React.Component<taskGroupProps, taskGroupState> {
-  constructor(props: taskGroupProps) {
+class TaskGroup extends React.Component<TaskGroupProps, TaskGroupState> {
+  constructor(props: TaskGroupProps) {
     super(props);
     this.state = {
-      selectedTaskId:'',
-      selectedModelKeys:[]
-    }
+      selectedTaskId: '',
+      selectedModelKeys: [],
+    };
   }
-  componentDidMount(){
+  componentDidMount() {
     this.setState({
-      selectedTaskId:this.props.selectedTaskId
-    })
+      selectedTaskId: this.props.selectedTaskId,
+    });
   }
-  componentWillReceiveProps(nextProps){
-    if(this.props.selectedTaskId !== nextProps.selectedTaskId){
+  componentWillReceiveProps(nextProps) {
+    if (this.props.selectedTaskId !== nextProps.selectedTaskId) {
       this.setState({
-        selectedTaskId:nextProps.selectedTaskId
-      })
+        selectedTaskId: nextProps.selectedTaskId,
+      });
     }
   }
-  selectedRow = (record)=>{
+  selectedRow = (record) => {
     this.setState({
-      selectedTaskId:record.jobId
-    })
-    this.props.changeJob && this.props.changeJob(record)
+      selectedTaskId: record.jobId,
+    });
+    this.props.changeJob && this.props.changeJob(record);
   }
   setSelectedModelKeys = (selectedModelKeys) => {
     this.setState({
-      selectedModelKeys:selectedModelKeys
-    })
-  };
+      selectedModelKeys,
+    });
+  }
   instertSelectedRow = (child, extendProps) => {
-    if(typeof child === 'object'){
-      return React.cloneElement(child,extendProps)
+    if (typeof child === 'object') {
+      return React.cloneElement(child, extendProps);
     }
-    return child
-  };
+    return child;
+  }
   search = (keywords) => {
-    this.props.onSearch && this.props.onSearch(keywords)
-  };
+    this.props.onSearch && this.props.onSearch(keywords);
+  }
   render() {
-    const { children, className,style,width,...otherProps } = this.props;
-    const { selectedTaskId,selectedModelKeys } = this.state;
+    const { children, className, style, width, ...otherProps } = this.props;
+    const { selectedTaskId, selectedModelKeys } = this.state;
     const extendProps = {
       ...otherProps,
-      selectedRow:this.selectedRow,
+      selectedRow: this.selectedRow,
       selectedTaskId,
-      setSelectedModelKeys:this.setSelectedModelKeys,
-      selectedModelKeys:selectedModelKeys
-    }
-    const kids = React.Children.map(children, child =>{
-      return this.instertSelectedRow(child as React.ReactChild,extendProps)
-    })
+      setSelectedModelKeys: this.setSelectedModelKeys,
+      selectedModelKeys,
+    };
+    const kids = React.Children.map(children, (child) => {
+      return this.instertSelectedRow(child as React.ReactChild, extendProps);
+    });
     const cNames = classnames(styles.zetTaskGroup, className);
     const styleProps = {width, ...style};
     return (
       <div className={cNames} style={styleProps}>
         <Search
-          style={{ width: 324,marginBottom:10 }}
+          style={{ width: 324, marginBottom: 10 }}
           onChange={this.search}
           onSearch={this.search}
         />
@@ -92,4 +92,4 @@ class taskGroup extends React.Component<taskGroupProps, taskGroupState> {
   }
 }
 
-export default taskGroup
+export default TaskGroup;
