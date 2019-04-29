@@ -7,6 +7,7 @@ order: 2
 import { Playground, PropsTable } from 'docz';
 import { Icon, Menu, Dropdown, Button } from 'antd';
 import { Tag } from '../../index.tsx';
+import { State, Toggle } from 'react-powerplug'
 import { styles } from './index.less';
 import treeData from './_mock/treeData.js';
 
@@ -28,7 +29,13 @@ import treeData from './_mock/treeData.js';
 
 ## 基本
 <Playground>
-    <Tag maxLength={2} data={treeData} onChange={(values)=>{console.log(values);}}/>
+ <State>
+   {({ state = { value: ['0-0']}, setState }) => (
+    <React.Fragment>
+     <Tag maxLength={2} data={treeData} value={state.value} onChange={(values)=>{setState({ value: values.map(v => v.key)})}} />
+    </React.Fragment>
+  )}
+ </State>
 </Playground>
 
 ### API
