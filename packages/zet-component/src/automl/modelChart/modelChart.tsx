@@ -3,7 +3,7 @@ import { Radio } from 'antd';
 import {AutoChart, RocChart, BarChart} from './charts';
 import MetricsConfig from '../config/metrics';
 
-import styles from './index.less';
+import './index.less';
 
 const RadioGroup = Radio.Group;
 const RadioButton = Radio.Button;
@@ -58,12 +58,12 @@ class ModelChart extends React.Component<ModelChartProps, ModelChartState> {
       return (<RadioButton value={item.value} key={item.value}>{item.name}</RadioButton>);
     });
     return (
-      <div className={styles.autoParams}>
-        <div className={styles.grading}>
+      <div className={'autoParams'}>
+        <div className={'grading'}>
           <span>
             评分指标
           </span>
-          <div className={styles.ml15}>
+          <div className={'ml15'}>
             <RadioGroup defaultValue="auto" onChange={this.changeChart}>
               <RadioButton value="auto">自动调参</RadioButton>
               {paramsOptionList}

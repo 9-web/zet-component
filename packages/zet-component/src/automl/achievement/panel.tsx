@@ -1,22 +1,22 @@
 import * as React from 'react';
-import PropTypes from 'prop-types'
-import { AchieveContext } from './context'
+import PropTypes from 'prop-types';
+import { AchieveContext } from './context';
 
-import styles from './index.less';
+import './index.less';
 
 export interface PanelProps {
   /** 组件行行内样式 */
-  style?: React.CSSProperties,
+  style?: React.CSSProperties;
   /** panel 选项  panelGroup 操作子项是使用 */
-  option?: string,
+  option?: string;
   /** 宽度 */
-  width?: string | number,
+  width?: string | number;
   /** 是否在高度上自适应*/
-  flex?:boolean,
+  flex?: boolean;
   /** 高度 */
-  height?: string | number,
-  unfoldState:string,
-  extraKeys:any,
+  height?: string | number;
+  unfoldState: string;
+  extraKeys: any;
 }
 
 export interface PanelState {
@@ -27,45 +27,44 @@ class Panel extends React.Component<PanelProps, PanelState> {
   static defaultProps = {
     width: '100%',
     onChange: () => {},
-  }
+  };
   static contextTypes = {
     unfoldState: PropTypes.string,
-    extraKeys:PropTypes.any,
-  }
+    extraKeys: PropTypes.any,
+  };
   constructor(props: PanelProps) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
-  getPanelUnfoldCondition = (unfoldState,extraKeys) => {
+  getPanelUnfoldCondition = (unfoldState, extraKeys) => {
     const {option} = this.props;
-    if(extraKeys === 'all' || extraKeys.indexOf(option)>-1){
-      return unfoldState==='open'
-    }else{
+    if (extraKeys === 'all' || extraKeys.indexOf(option) > -1) {
+      return unfoldState === 'open';
+    } else {
       return true;
     }
-  };
+  }
 
   render() {
-    let { style, width, height,children,unfoldState,extraKeys,...otherProps} = this.props;
-    let styleProps = {width,height, ...style};
-    if(this.props.flex){
+    const { style, width, height, children, unfoldState, extraKeys, ...otherProps} = this.props;
+    const styleProps = {width, height, ...style};
+    if (this.props.flex) {
       styleProps.flex = 1;
     }
-    if(!this.getPanelUnfoldCondition(unfoldState,extraKeys)){
+    if (!this.getPanelUnfoldCondition(unfoldState, extraKeys)) {
       styleProps.height = 0;
       delete styleProps.flex;
     }
-    return (<div className={styles['zet-panel']} style={styleProps} {...otherProps}>
+    return (<div className={'zet-panel'} style={styleProps} {...otherProps}>
       {children}
-    </div>)
+    </div>);
   }
 }
 
-export default props => (
+export default (props) => (
   <AchieveContext.Consumer>
     {({unfoldState, extraKeys}) => {
-      return <Panel {...{...props,unfoldState,extraKeys}}></Panel>
+      return <Panel {...{...props, unfoldState, extraKeys}}></Panel>;
     }}
   </AchieveContext.Consumer>
-)
-
+);

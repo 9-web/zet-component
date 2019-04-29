@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Select } from 'antd';
 import CurveChartMore from './CurveChartMore'
-import styles from '../index.less';
+import '../index.less';
 
 const { Option } = Select;
 class RocChart extends Component {

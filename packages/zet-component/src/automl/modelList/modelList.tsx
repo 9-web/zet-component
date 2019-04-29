@@ -4,7 +4,7 @@ import ModuleListItem from './modelItem';
 import ModelDetail from './modelDetail';
 import ModelChart from './modelChart';
 
-import styles from './index.less';
+import './index.less';
 
 export interface ModelListProps {
   width?: string | number;
@@ -46,8 +46,8 @@ class ModelList extends React.Component<ModelListProps, any> {
     switch (contentType) {
       case 'list' :
         result = (
-          <div className={styles.mudoleList} style={styleProps}>
-            <div className={styles.listWrap}>
+          <div className={'mudoleList'} style={styleProps}>
+            <div className={'listWrap'}>
               {
                 this.sort().length > 0 && this.sort().map((v) => {
                   if (v.mouduleName) {
@@ -63,7 +63,7 @@ class ModelList extends React.Component<ModelListProps, any> {
         break;
       case 'detail':
         result = (
-          <div className={styles.mdlMain}>
+          <div className={'mdlMain'}>
             {jobData.map((item, index) => {
               return <ModelDetail
                 item={item}
@@ -79,7 +79,7 @@ class ModelList extends React.Component<ModelListProps, any> {
         break;
       case 'chart':
         result = (
-          <div className={styles.mdlMain}>
+          <div className={'mdlMain'}>
             {data.map((item, index) => {
               return <ModelChart
                 item={item}

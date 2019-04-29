@@ -3,15 +3,15 @@ import { TreeSelect as TreeSelect_ } from 'antd';
 import { TreeNodeNormal } from 'antd/lib/tree-select/interface';
 import classnames from 'classnames';
 
-import styles from './index.less';
+import './index.less';
 
 export interface TreeProps {
   /** 组件行行内样式 */
-  style?: React.CSSProperties,
+  style?: React.CSSProperties;
   /** 自定义类名 */
-  className?: string,
+  className?: string;
   /** 下拉框树形数组 */
-  treeData: Array<TreeNodeNormal>;
+  treeData: TreeNodeNormal[];
   /** 是否展示搜索匡 */
   showSearch?: boolean;
   /** 是否显示清除按钮 */
@@ -28,14 +28,14 @@ class TreeSelect  extends React.Component<TreeProps, any> {
     allowClear: true,
     treeDefaultExpandAll: true,
     treeNodeFilterProp: 'title',
-  }
-
-  constructor(props: TreeProps) {
-    super(props);
-  }
+  };
 
   state = {
     value: undefined,
+  };
+
+  constructor(props: TreeProps) {
+    super(props);
   }
 
   onChange = (value) => {
@@ -44,11 +44,10 @@ class TreeSelect  extends React.Component<TreeProps, any> {
 
   render() {
     const { style, className, treeData, showSearch, allowClear, treeDefaultExpandAll, treeNodeFilterProp, ...rest} = this.props;
-    const classNames = classnames(styles.zetSelect, className);
-    console.log('styles.zetSelect', styles.zetSelect);
+    const classNames = classnames('zetSelect', className);
     const defuleStyle = {
       ...style,
-    }
+    };
 
     return (
       <TreeSelect_

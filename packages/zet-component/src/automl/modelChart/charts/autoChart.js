@@ -5,7 +5,7 @@ import { DataView } from '@antv/data-set';
 // import GlobalSocket from 'utils/socket';
 // import trophy from 'assets/trophy.png';
 import Icon from '../../../components/icon'
-import styles from '../index.less';
+import '../index.less';
 
 class AutoChart extends Component {
   state = {
@@ -115,8 +115,8 @@ class AutoChart extends Component {
             return `<tr class="g2-legend-list-item item-${index} ${checked}" data-value="${value}" data-color=${color} style="cursor: pointer;font-size: 14px;">
                       <td width=240 style="border: none;padding:0;">
                         <i class="g2-legend-marker" style="float:left;margin-top:6px;width:10px;height:10px;display:inline-block;margin-right:10px;background-color:${color};"></i>
-                        <span title= ${value} class="g2-legend-text ${styles.legendStyle}">${value}</span>
-                        <span class=${styles.legendScore}>
+                        <span title= ${value} class="g2-legend-text ${'legendStyle'}">${value}</span>
+                        <span class=${'legendScore'}>
                           ${(index === 0 && legendScore[value] && legendScore[value].score !== '--' ? '<em id="autoChartLegend"></em>': '')}
 													<span title=${legendScore[value] && legendScore[value].score}>${legendScore[value] && legendScore[value].score}</span>
                         </span>

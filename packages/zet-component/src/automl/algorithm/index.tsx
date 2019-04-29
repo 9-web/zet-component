@@ -3,7 +3,7 @@ import { ValueItemSchema, DataItemSchema } from './interface';
 import { Layout, Slider } from 'antd';
 import Item from './item';
 import List from './list';
-import styles from './index.less';
+import './index.less';
 
 const { Sider, Content } = Layout;
 
@@ -140,7 +140,7 @@ class Algorithm extends React.Component<AlgorithmProps, AlgorithmState> {
     const {disabled} = this.props;
     const {singleData, singleValue, isDisable, data, value} = this.state;
     return (
-      <Layout className={styles.layout}>
+      <Layout className={'alg-layout'}>
         <Sider theme='light' width={240}>
           {
             data && <List
@@ -153,7 +153,7 @@ class Algorithm extends React.Component<AlgorithmProps, AlgorithmState> {
           }
         </Sider>
         <Content
-          className={styles.content}
+          className={'alg-content'}
         >
           {
             isDisable && singleData && <Item

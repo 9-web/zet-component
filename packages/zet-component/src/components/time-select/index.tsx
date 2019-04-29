@@ -1,7 +1,7 @@
 import * as React from 'react';
 import classnames from 'classnames';
 import { Row, Col, Select } from 'antd';
-import styles from './index.less';
+import './index.less';
 
 const Option = Select.Option;
 
@@ -148,7 +148,7 @@ class TimeSelect extends React.Component<TimeSelectProps, TimeSelectState> {
   public render() {
     const { width, style, className, disabled } = this.props;
     const { unitSelectData, timeSelectData, unitValue, timeValue } = this.state;
-    const classNames = classnames(styles.zetTimeSelect, className);
+    const classNames = classnames('zet-time-select', className);
     const styleProps = {
       width,
       ...style,

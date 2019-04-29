@@ -3,16 +3,16 @@ import { Icon, Tooltip } from 'antd';
 import moment from 'moment';
 import Chart from '../../components/charts';
 import  Timer  from '../../components/timer';
-import ZetIcon from '../../components/icon'
+import ZetIcon from '../../components/icon';
 
-import styles from './index.less';
+import './index.less';
 
 const { LineChart} = Chart;
 
 export interface ModelItemProps {
   /** model 数据 */
-  data:any,
-  onSeeLogClick?:(dataId:string) => void,
+  data: any;
+  onSeeLogClick?: (dataId: string) => void;
 }
 
 export interface ModelItemState {
@@ -22,9 +22,9 @@ export interface ModelItemState {
 class ModelItem extends React.Component<ModelItemProps, ModelItemState> {
   constructor(props: ModelItemProps) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
-  timeStatus=() => {
+  timeStatus = () => {
     const { data } = this.props;
     if (data.startTime && data.endTime) {
       return '';
@@ -42,20 +42,20 @@ class ModelItem extends React.Component<ModelItemProps, ModelItemState> {
       // case 3: return intl.get('project.job.block.ImgPulling');
       // case 4: return intl.get('project.job.block.ImgPulled');
       case 5:
-        return <span className={styles.status}><Icon type="loading" theme="outlined" style={{
+        return <span className={'status'}><Icon type="loading" theme="outlined" style={{
           color: '#dark-blue-grey-65',
-          marginRight: 5
+          marginRight: 5,
         }}/>运行中</span>;
       // case 6: return intl.get('project.job.block.Cancel');
       case 7:
-        return <span className={styles.status}><Icon type="close-circle-o" style={{
+        return <span className={'status'}><Icon type="close-circle-o" style={{
           color: 'rgba(245, 34, 45, 0.85)',
-          marginRight: 5
+          marginRight: 5,
         }}/>异常</span>;
       case 8:
-        return <span className={styles.status}><Icon type="check-circle-o" style={{
+        return <span className={'status'}><Icon type="check-circle-o" style={{
           color: '#13c2c2',
-          marginRight: 5
+          marginRight: 5,
         }}/>完成</span>;
       // case 9: return intl.get('project.job.block.Canceling');
       // case 10: return intl.get('project.job.block.Canceled');
@@ -70,8 +70,8 @@ class ModelItem extends React.Component<ModelItemProps, ModelItemState> {
     }
   }
   onSeeLogClick = (dataId) => {
-      this.props.onSeeLogClick(dataId)
-  };
+      this.props.onSeeLogClick(dataId);
+  }
   formatCpu = () => {
     const { data } = this.props;
     const cpus = data.metricData.cpu;
@@ -108,10 +108,10 @@ class ModelItem extends React.Component<ModelItemProps, ModelItemState> {
     const gpu = data.metricData.gpu;
     return (
       <div>
-        <div className={styles.item} id={data.moduleId}>
-          <div className={styles.itemInfo}>
-            <h3 className={styles.itemTitle}>
-              <span className={styles.shortName} style={{ fontSize: 16, color: 'rgba(16, 38, 58, 0.85)' }}>{data.alias}</span>
+        <div className={'item'} id={data.moduleId}>
+          <div className={'itemInfo'}>
+            <h3 className={'itemTitle'}>
+              <span className={'shortName'} style={{ fontSize: 16, color: 'rgba(16, 38, 58, 0.85)' }}>{data.alias}</span>
               {
                 this.iconStatus(data.status)
               }
@@ -122,13 +122,13 @@ class ModelItem extends React.Component<ModelItemProps, ModelItemState> {
               </Tooltip>
             </h3>
 
-            <div className={styles.moduleDescription} style={{ color: 'rgba(16, 38, 58, 0.45)', fontSize: 12 }}>
+            <div className={'moduleDescription'} style={{ color: 'rgba(16, 38, 58, 0.45)', fontSize: 12 }}>
               <Tooltip title={data.mouduleDescription}>
                 {data.mouduleDescription}
               </Tooltip>
             </div>
           </div>
-          <div className={styles.chartItem}>
+          <div className={'chartItem'}>
             <div>{this.formatCpu()} CPU(Cores)</div>
             {data.metricData && data.metricData.cpu.length > 0 && (
               <LineChart
@@ -155,7 +155,7 @@ class ModelItem extends React.Component<ModelItemProps, ModelItemState> {
               />
             )}
           </div>
-          <div className={styles.chartItem}>
+          <div className={'chartItem'}>
             <div>{this.formatMem()} MEM(GB)
             </div>
             {data.metricData && data.metricData.mem.length > 0 && (
@@ -186,7 +186,7 @@ class ModelItem extends React.Component<ModelItemProps, ModelItemState> {
               />
             )}
           </div>
-          <div className={styles.chartItem}>
+          <div className={'chartItem'}>
             <div>{this.formatMGpu()} GPU(S)</div>
             {data.metricData && data.metricData.gpu.length > 0 && (
               <LineChart
@@ -225,9 +225,9 @@ class ModelItem extends React.Component<ModelItemProps, ModelItemState> {
                 data={this.props.data}
               />
             ) : (
-              <div className={styles.timer}>
-                <div className={styles.timerTit}>耗时</div>
-                <div className={styles.userTimer}>
+              <div className={'timer'}>
+                <div className={'timerTit'}>耗时</div>
+                <div className={'userTimer'}>
                   - - : - - : - -
                 </div>
               </div>
@@ -239,4 +239,4 @@ class ModelItem extends React.Component<ModelItemProps, ModelItemState> {
   }
 }
 
-export default ModelItem
+export default ModelItem;

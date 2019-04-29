@@ -1,18 +1,16 @@
 import * as React from 'react';
 import { ResourceContext } from './resourceContext';
 import classnames from 'classnames';
-import styles from './index.less';
-
-
-export interface ResourceGroupProps{
+import './index.less';
+export interface ResourceGroupProps {
   /** 组件行行内样式 */
-  style: React.CSSProperties,
+  style: React.CSSProperties;
   /** 自定义类名 */
-  className: string,
+  className: string;
   /** 资源项标题 */
-  title: string,
+  title: string;
   /** 是否禁用 */
-  disabled: boolean,
+  disabled: boolean;
 }
 
 class ResourceGroup extends React.Component<ResourceGroupProps, any> {
@@ -21,34 +19,33 @@ class ResourceGroup extends React.Component<ResourceGroupProps, any> {
     className: '',
     style: {},
     disabled: false,
-  }
+  };
 
   render() {
     const { className, title, children, disabled } = this.props;
     const styleProps = {
 
-    }
-    const classNames = classnames(styles.zetResourcePanel, className);
+    };
+    const classNames = classnames('zet-resource-panel', className);
     // context value
     const contextValue = {
       resourceGroup: {
         disabled,
-      }
-    }
+      },
+    };
     return (
       <div style={styleProps} className={classNames}>
-        <div className={styles.zetResourcePanelTitle}>
+        <div className='zet-resource-panel-title'>
           {title}
         </div>
-        <div className={styles.zetResourcePanelContent}>
+        <div className='zet-resource-panel-content'>
           <ResourceContext.Provider value={contextValue}>
             { children }
           </ResourceContext.Provider>
         </div>
       </div>
-    )
+    );
   }
 }
-
 
 export default ResourceGroup;

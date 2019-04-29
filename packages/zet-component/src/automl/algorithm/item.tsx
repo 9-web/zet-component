@@ -6,7 +6,7 @@ import { Form, Select, Input, InputNumber, Radio } from 'antd';
 import Ellipsis from '../../components/ellipsis';
 import TagInput from '../../components/tag-input';
 import TimeSelect from '../../components/time-select';
-import styles from './index.less';
+import './index.less';
 
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
@@ -178,16 +178,16 @@ class Item extends React.Component<ItemProps, any> {
     // console.log('data', data)
     return (
       <React.Fragment>
-        <div className={styles.info}>
-          <div className={styles.title} key='name'>{data.name}</div>
-          <div className={styles.desc} key='desc'>
+        <div className={'alg-info'}>
+          <div className={'alg-title'} key='name'>{data.name}</div>
+          <div className={'alg-desc'} key='desc'>
             <Ellipsis lines={collapse ? 1 : 100}>
               {data.desc}
             </Ellipsis>
           </div>
           <a style={{ float: 'right' }} onClick={this.onChangeCollapse}>{collapse ? '展开' : '收起'}</a>
         </div>
-        <Form layout='horizontal' className={styles.form}>
+        <Form layout='horizontal' className={'alg-form'}>
           {
             data.params && this.handleParams(data.params).map((item) => {
               return (

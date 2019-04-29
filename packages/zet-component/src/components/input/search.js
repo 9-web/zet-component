@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon, Input } from 'antd';
 import classNames from 'classnames';
-import styles from './index.less';
+import './index.less';
 
 class ZetSearch extends React.Component {
   static defaultProps = {
@@ -61,14 +61,14 @@ class ZetSearch extends React.Component {
     const { style, allowClear, onSearch, onChange, className, ...restProps } = this.props;
     const clearIcon = allowClear && value.length > 0 ? (
       <span>
-        <Icon onClick={this.clearSelection} type="close" className={styles.clearIcon} />
-        <Icon className={styles.iconSearch} type="search" onClick={this.onIconClick} />
-      </span>) : <Icon className={styles.iconSearch} type="search" onClick={this.onIconClick} />;
-    const rootClass = classNames(styles.zetSearch, className);
+        <Icon onClick={this.clearSelection} type="close" className={'clearIcon'} />
+        <Icon className={'iconSearch'} type="search" onClick={this.onIconClick} />
+      </span>) : <Icon className={'iconSearch'} type="search" onClick={this.onIconClick} />;
+    const rootClass = classNames('zetSearch', className);
     return (
       <div className={rootClass} style={{ width: 320, ...style }}>
         <Input
-          className={styles.zetSearchInput}
+          className={'zetSearchInput'}
           style={style}
           onChange={this.onKeyChange}
           value={value}
