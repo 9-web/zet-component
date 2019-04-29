@@ -60,6 +60,3 @@ ReactDOM.render(<DatePicker>);
 * `yarn deploy:doc` 构建文档并发布到github pages
 * `yarn build` 构建组件产物
 * `yarn build:watch` 文件改变自动构建组件产物
-
-
-* push test1111
