@@ -30,7 +30,7 @@ import treeData from './_mock/treeData.js';
 ## 基本
 <Playground>
  <State>
-   {({ state = { value: ['0-0']}, setState }) => (
+   {({ state, setState }) => (
     <React.Fragment>
      <Tag maxLength={2} data={treeData} value={state.value} onChange={(values)=>{setState({ value: values.map(v => v.key)})}} />
     </React.Fragment>
