@@ -1,13 +1,12 @@
 import TreeSelect from './tree-select';
 import * as React from "react";
-// export { TreeProps } from './tree-select';
 import { Dropdown, Button, Icon, Checkbox, Select as Select_ } from 'antd';
 
 const Option = Select_.Option;
 
 export interface SelectProps {
-  data: Array<string>;
-  onChange?: (e: React.MouseEvent<any>) => void,
+  data: string[];
+  onChange?: (e: React.MouseEvent<any>) => void;
 }
 
 class Select extends React.Component<SelectProps, any> {
@@ -15,18 +14,18 @@ class Select extends React.Component<SelectProps, any> {
 
   static defaultProps = {
     data: [],
-  }
+  };
+
+  state = {
+    visible: false,
+  };
 
   constructor(props: SelectProps) {
     super(props);
   }
 
-  state = {
-    visible: false,
-  }
-
   handleVisibleChange = (flag) => {
-    this.setState({ visible: flag })
+    this.setState({ visible: flag });
   }
 
   handleChange = (value) => {
@@ -34,11 +33,11 @@ class Select extends React.Component<SelectProps, any> {
     onChange && onChange(value);
   }
 
-  render(){
+  render() {
     const { visible } = this.state;
     const { data } = this.props;
     const children = [];
-    for (let i of data) {
+    for (const i of data) {
       children.push(<Option key={i}>{i}</Option>);
     }
     return (
@@ -49,7 +48,7 @@ class Select extends React.Component<SelectProps, any> {
               mode="tags"
               style={{width: '100%'}}
               onChange={this.handleChange}
-              defaultOpen
+              defaultOpen={true}
               open={visible}
             >
               {children}
@@ -63,7 +62,7 @@ class Select extends React.Component<SelectProps, any> {
       >
         <Button><Icon type='filter'/></Button>
       </Dropdown>
-    )
+    );
   }
 }
 
