@@ -14,7 +14,7 @@ class LocaleProvider extends React.Component<LocaleProviderProps, any> {
   static LocaleReceiver: typeof LocaleReceiver;
   static defaultProps = {
     locale: 'zh_CN'
-  }
+  };
 
   render() {
     const {children, locale} = this.props;
