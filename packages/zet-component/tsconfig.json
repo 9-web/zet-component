@@ -13,6 +13,9 @@
       "@/*": ["src/*"]
     },
     // "include":["./src/**/*"],
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "plugins":[
+      {"name":"typescript-tslint-plugin"}
+    ]
   }
 }
