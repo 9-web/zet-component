@@ -5,7 +5,9 @@ export default {
   },
   AutoML: {
     off: '关',
-    on: '开'
+    on: '开',
+    shrink:'收缩',
+    unfold:'展开'
   },
   Test: {
     okText: '确定',

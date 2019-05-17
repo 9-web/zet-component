@@ -3,6 +3,8 @@ import classNames from 'classnames';
 import {Icon} from 'antd';
 import Panel from './panel';
 import { AchieveContext } from './context';
+import LocaleReceiver from '../../components/locale-provider/localeReceiver';
+
 import './index.less';
 
 interface AchievementProps {
@@ -97,7 +99,13 @@ class Achievement extends React.Component<AchievementProps, AchievementState> {
 
             {
               extra !== false &&  <span className={'zet-achievement-title-extra'} onClick={this.unfoldPanel}>
-                <span >{unfoldState == 'open' ? '收缩' : '展开'}</span>
+              <LocaleReceiver componentName="AutoML">
+                {
+                  (locale: any) => (
+                    <span >{unfoldState == 'open' ? locale.shrink : locale.unfold}</span>
+                  )
+                }
+              </LocaleReceiver>
               </span>
             }
           </div>

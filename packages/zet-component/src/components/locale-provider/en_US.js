@@ -5,7 +5,9 @@ export default {
   },
   AutoML: {
     off: 'off',
-    on: 'on'
+    on: 'on',
+    shrink:'shrink',
+    unfold:'unfold'
   },
   Test: {
     okText: 'Ok',
