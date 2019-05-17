@@ -1,10 +1,10 @@
-import * as React from 'react';
-import classnames from 'classnames';
-import { Layout, Menu } from 'antd';
-import './index.less';
+import * as React from "react";
+import classnames from "classnames";
+import { Layout, Menu } from "antd";
+import "./index.less";
 const { Header, Content, Sider } = Layout;
 
-const { ItemGroup: MenuItemGroup, Item: MenuItem  } = Menu;
+const { ItemGroup: MenuItemGroup, Item: MenuItem } = Menu;
 
 /** 左侧列表数据项接口 */
 export interface LeftDataItem {
@@ -36,7 +36,6 @@ export interface DesignState {
 }
 
 export default class Design extends React.Component<DesignProps, DesignState> {
-
   constructor(props: DesignProps) {
     super(props);
     const initSelectData = this.getInitSelectData(props.leftData);
@@ -47,11 +46,14 @@ export default class Design extends React.Component<DesignProps, DesignState> {
   }
 
   getInitSelectData = (leftData) => {
-    return (Array.isArray(leftData)
-          && leftData.length > 0
-          && leftData[0].children
-          && leftData[0].children.length > 0
-          && leftData[0].children[0]) || {};
+    return (
+      (Array.isArray(leftData) &&
+        leftData.length > 0 &&
+        leftData[0].children &&
+        leftData[0].children.length > 0 &&
+        leftData[0].children[0]) ||
+      {}
+    );
   }
 
   onMenuClick = (data) => {
@@ -67,57 +69,54 @@ export default class Design extends React.Component<DesignProps, DesignState> {
    * 左侧面板内容
    */
   getLeftContent = () => {
-    const { leftData, leftRender, leftMenuProps} = this.props;
+    const { leftData, leftRender, leftMenuProps } = this.props;
     const { selectedKeys } = this.state;
     if (leftData) {
-      return <Menu
-        style={{ border: 'none' }}
-        selectedKeys={selectedKeys}
-        {...leftMenuProps}
-      >
-        {
-          Array.isArray(leftData) && leftData.map((item) => (
-            <MenuItemGroup key={item.key} title={item.value}>
-              {
-                Array.isArray(item.children) && item.children.map((child) => (
-                  <MenuItem  onClick={() => this.onMenuClick(child)} key={child.key}>{child.value}</MenuItem>
-                ))
-              }
-            </MenuItemGroup>
-          ))
-        }
-      </Menu>;
+      return (
+        <Menu
+          style={{ border: "none" }}
+          selectedKeys={selectedKeys}
+          {...leftMenuProps}
+        >
+          {Array.isArray(leftData) &&
+            leftData.map((item) => (
+              <MenuItemGroup key={item.key} title={item.value}>
+                {Array.isArray(item.children) &&
+                  item.children.map((child) => (
+                    <MenuItem
+                      onClick={() => this.onMenuClick(child)}
+                      key={child.key}
+                    >
+                      {child.value}
+                    </MenuItem>
+                  ))}
+              </MenuItemGroup>
+            ))}
+        </Menu>
+      );
     }
     return leftRender;
   }
 
   public render() {
-    const {
-      style,
-      className,
-      leftSiderProps,
-      children,
-    } = this.props;
+    const { style, className, leftSiderProps, children } = this.props;
     const { selectedData } = this.state;
-    const classNames = classnames('zet-aml-design', className);
+    const classNames = classnames("zet-aml-design", className);
     return (
-      <Layout
-        className={classNames}
-        style={style}
-      >
+      <Layout className={classNames} style={style}>
         <Sider
-          className={'zet-aml-design-sider'}
+          className={"zet-aml-design-sider"}
           width={240}
-          theme='light'
+          theme="light"
           {...leftSiderProps}
         >
           {this.getLeftContent()}
         </Sider>
         <Layout>
-          <Header className={'zet-aml-design-header'}>{selectedData.value}</Header>
-          <Content className={'zet-aml-design-content'}>
-            {children}
-          </Content>
+          <Header className={"zet-aml-design-header"}>
+            {selectedData.value}
+          </Header>
+          <Content className={"zet-aml-design-content"}>{children}</Content>
         </Layout>
       </Layout>
     );

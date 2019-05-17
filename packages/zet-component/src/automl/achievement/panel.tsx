@@ -1,8 +1,8 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import { AchieveContext } from './context';
+import * as React from "react";
+import PropTypes from "prop-types";
+import { AchieveContext } from "./context";
 
-import './index.less';
+import "./index.less";
 
 export interface PanelProps {
   /** 组件行行内样式 */
@@ -18,14 +18,9 @@ export interface PanelProps {
   unfoldState: string;
   extraKeys: any;
 }
-
-export interface PanelState {
-
-}
-
-class Panel extends React.Component<PanelProps, PanelState> {
+class Panel extends React.Component<PanelProps> {
   static defaultProps = {
-    width: '100%',
+    width: "100%",
     onChange: () => {},
   };
   static contextTypes = {
@@ -37,17 +32,25 @@ class Panel extends React.Component<PanelProps, PanelState> {
     this.state = {};
   }
   getPanelUnfoldCondition = (unfoldState, extraKeys) => {
-    const {option} = this.props;
-    if (extraKeys === 'all' || extraKeys.indexOf(option) > -1) {
-      return unfoldState === 'open';
+    const { option } = this.props;
+    if (extraKeys === "all" || extraKeys.indexOf(option) > -1) {
+      return unfoldState === "open";
     } else {
       return true;
     }
   }
 
   render() {
-    const { style, width, height, children, unfoldState, extraKeys, ...otherProps} = this.props;
-    const styleProps = {width, height, ...style};
+    const {
+      style,
+      width,
+      height,
+      children,
+      unfoldState,
+      extraKeys,
+      ...otherProps
+    } = this.props;
+    const styleProps = { width, height, ...style };
     if (this.props.flex) {
       styleProps.flex = 1;
     }
@@ -55,16 +58,18 @@ class Panel extends React.Component<PanelProps, PanelState> {
       styleProps.height = 0;
       delete styleProps.flex;
     }
-    return (<div className={'zet-panel'} style={styleProps} {...otherProps}>
-      {children}
-    </div>);
+    return (
+      <div className={"zet-panel"} style={styleProps} {...otherProps}>
+        {children}
+      </div>
+    );
   }
 }
 
 export default (props) => (
   <AchieveContext.Consumer>
-    {({unfoldState, extraKeys}) => {
-      return <Panel {...{...props, unfoldState, extraKeys}}></Panel>;
+    {({ unfoldState, extraKeys }) => {
+      return <Panel {...{ ...props, unfoldState, extraKeys }} />;
     }}
   </AchieveContext.Consumer>
 );

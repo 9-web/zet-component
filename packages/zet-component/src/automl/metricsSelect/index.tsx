@@ -1,24 +1,22 @@
-import * as React from 'react';
-import { Select } from 'antd';
-import MetricsConfig from '../config/metrics';
+import * as React from "react";
+import { Select } from "antd";
+import MetricsConfig from "../config/metrics";
 
 const { Option } = Select;
 
 export interface MetricsSelectProps {
-  metrics:object[],
-  metricsVal:string,
+  metrics: object[];
+  metricsVal: string;
   /** 切换标准回调 */
-  changeMetrics?:(value:string)=>void,
+  changeMetrics?: (value: string) => void;
 }
 
-export interface MetricsSelectState {
-
-}
+export interface MetricsSelectState {}
 
 class Index extends React.Component<MetricsSelectProps, MetricsSelectState> {
   constructor(props: MetricsSelectProps) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
 
   changeMetrics = (val) => {
@@ -42,14 +40,23 @@ class Index extends React.Component<MetricsSelectProps, MetricsSelectState> {
 
   render() {
     const { metricsVal } = this.props;
-    const metricsList = this.format().length > 0 && this.format().map((v) => (
-      <Option value={v.value} key={v.value}>{v.name}</Option>));
+    const metricsList =
+      this.format().length > 0 &&
+      this.format().map((v) => (
+        <Option value={v.value} key={v.value}>
+          {v.name}
+        </Option>
+      ));
     return (
-      <Select style={{ width: 120 }} value={metricsVal} onSelect={this.changeMetrics}>
+      <Select
+        style={{ width: 120 }}
+        value={metricsVal}
+        onSelect={this.changeMetrics}
+      >
         {metricsList}
       </Select>
     );
   }
 }
 
-export default Index
+export default Index;
