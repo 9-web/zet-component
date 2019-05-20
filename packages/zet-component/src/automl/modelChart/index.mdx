@@ -10,7 +10,8 @@ import { Row, Col } from 'antd';
 import autoChartData from './_mock/autoChart.js';
 import jobData from './_mock/jobData.js';
 
-import { AutoML } from '../../index.tsx'
+import { AutoML, LocaleProvider } from '../../index.tsx';
+import { LocaleProviderHoc } from '../../utils/hoc.tsx';
 
 # Chart (自助建模chart图)
 
@@ -25,6 +26,24 @@ import { AutoML } from '../../index.tsx'
           gradeData={jobData}
           legendScore={{"XGBoost":{"score":"0.9101"},"随机森林":{"score":"0.8962"},"梯度渐进树":{"score":"0.8850"}}}
           ></Chart>
+       )
+     }}
+  </State>
+</Playground>
+
+## 基本 (中英文切换)
+<Playground>
+  <State>
+     {({ state={currLocale:'zh_CH'}, setState }) => {
+       const { Chart } = AutoML;
+       return (
+         LocaleProviderHoc(
+             <Chart
+                data={autoChartData}
+                gradeData={jobData}
+                legendScore={{"XGBoost":{"score":"0.9101"},"随机森林":{"score":"0.8962"},"梯度渐进树":{"score":"0.8850"}}}
+              ></Chart>
+           )
        )
      }}
   </State>

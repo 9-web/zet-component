@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Button } from 'antd';
+import { LocaleReceiverHoc } from "../../utils/hoc";
 
 import './index.less';
 
@@ -12,6 +13,7 @@ export interface ContrastButtonProps {
   jobName: string;
   jobId: string;
   style?: object;
+  intl?: any;
   showContras?: (item: object, jobId: string, jobName: string) => void;
 }
 
@@ -39,7 +41,7 @@ class ContrastButton extends React.Component<ContrastButtonProps, any> {
     return contrastIds.indexOf(item.modelId) !== -1;
   }
   render() {
-    const { contrastIds, item, jobName, style, jobId } = this.props;
+    const { contrastIds, item, jobName, style, jobId, intl= {} } = this.props;
     return (
       <Button
         size='small'
@@ -50,10 +52,10 @@ class ContrastButton extends React.Component<ContrastButtonProps, any> {
           this.showContras(e, item, jobId, jobName);
         }}
       >
-        {contrastIds.indexOf(item.modelId) !== -1 ? '已添加' : '对比'}
+        {contrastIds.indexOf(item.modelId) !== -1 ? (intl.added || '已添加') : (intl.contrast || '对比')}
       </Button>
     );
   }
 }
 
-export default ContrastButton;
+export default LocaleReceiverHoc('AutoML')(ContrastButton);

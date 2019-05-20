@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import moment from 'moment';
 // import intl from 'utils/intl';
 import { getServerCurrentTime } from '../../utils/utils';
+import { LocaleReceiverHoc } from "../../utils/hoc"
 import './index.less';
 
 class Timer extends Component {
@@ -55,13 +56,14 @@ class Timer extends Component {
   }
 
   render() {
+    const {intl={}} = this.props;
     const timer = moment.duration(this.state.end - this.state.start, 'ms');
     const hours = timer.get('hours');
     const mins = timer.get('minutes');
     const sec = timer.get('seconds');
     return (
       <div className={'timer'}>
-        <div className={'timerTit'}>耗时</div>
+        <div className={'timerTit'}>{intl.time || '耗时'}</div>
         <div className={'userTimer'}>
           {this.addZero(hours)} : {this.addZero(mins)} : {this.addZero(sec)}
         </div>
@@ -70,4 +72,4 @@ class Timer extends Component {
   }
 }
 
-export default Timer;
+export default LocaleReceiverHoc('Component')(Timer);

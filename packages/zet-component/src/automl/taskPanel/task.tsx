@@ -4,6 +4,7 @@ import Group from './taskGroup';
 import classNames from 'classnames';
 import ContrastButton from './contrastButton';
 import ZetIcon from '../../components/icon';
+import { LocaleReceiverHoc } from "../../utils/hoc";
 import './index.less';
 
 const MenuItem = Menu.Item;
@@ -48,6 +49,7 @@ export interface TaskProps {
   modelList?: ModelItem[];
   /** 默认 选中的任务id */
   selectedTaskId: string;
+  intl?: any;
   /** 选中方法回调 */
   selectedRow?: (job: object) => void;
   setSelectedModelKeys?: (modelKeys: string[]) => void;
@@ -78,13 +80,13 @@ class Task extends React.Component<TaskProps, TaskState> {
     this.props.selectedRow(jobInfo);
   }
   delJob = (v) => {
-    const propsDelJob = this.props.delJob;
+    const {delJob, intl= {}} = this.props;
     Modal.confirm({
-      title: '确定要删除吗？',
-      okText: '确定',
-      cancelText: '取消',
+      title: intl.deleteConfirm || '确定要删除吗？',
+      okText: intl.ok || '确定',
+      cancelText: intl.cancel || '取消',
       onOk: () => {
-        propsDelJob(v);
+        delJob(v);
       },
     });
   }
@@ -108,6 +110,7 @@ class Task extends React.Component<TaskProps, TaskState> {
 
   render() {
     let {title, modelList, contrastIds} = this.props;
+    const {intl= {}} = this.props;
     const {jobInfo, selectedTaskId, contrastJobId, selectedModelKeys, anchorContainerId} = this.props;
     title = title || jobInfo.jobName || '';
     modelList = modelList || jobInfo.modelList;
@@ -130,7 +133,7 @@ class Task extends React.Component<TaskProps, TaskState> {
               </span>
               <span className={'card-title-options'}>
                 {jobInfo.jobStatus === 'RUNNING' && <Icon type="loading" theme="outlined" />}
-                <Tooltip title={'删除'}>
+                <Tooltip title={ intl.delete || '删除'}>
                   {jobInfo.jobStatus !== 'RUNNING' && <Icon
                     style={{ marginLeft: 35 }}
                     type="delete"
@@ -215,4 +218,4 @@ class Task extends React.Component<TaskProps, TaskState> {
   }
 }
 
-export default Task;
+export default LocaleReceiverHoc('AutoML')(Task);

@@ -4,6 +4,7 @@ import moment from "moment";
 import Chart from "../../components/charts";
 import Timer from "../../components/timer";
 import ZetIcon from "../../components/icon";
+import { LocaleReceiverHoc } from "../../utils/hoc";
 
 import "./index.less";
 
@@ -12,6 +13,7 @@ const { LineChart } = Chart;
 export interface ModelItemProps {
   /** model 数据 */
   data: any;
+  intl?: any;
   onSeeLogClick?: (dataId: string) => void;
 }
 
@@ -32,7 +34,7 @@ class ModelItem extends React.Component<ModelItemProps, ModelItemState> {
     }
     return "stop";
   }
-  iconStatus = (status) => {
+  iconStatus = (status, intl) => {
     switch (status) {
       // case 0: return intl.get('project.job.block.Queued');
       // case 1: return intl.get('project.job.block.Sent');
@@ -50,7 +52,7 @@ class ModelItem extends React.Component<ModelItemProps, ModelItemState> {
                 marginRight: 5,
               }}
             />
-            运行中
+            { intl.running || '运行中'}
           </span>
         );
       // case 6: return intl.get('project.job.block.Cancel');
@@ -64,7 +66,7 @@ class ModelItem extends React.Component<ModelItemProps, ModelItemState> {
                 marginRight: 5,
               }}
             />
-            异常
+            { intl.exception || '异常'}
           </span>
         );
       case 8:
@@ -77,7 +79,7 @@ class ModelItem extends React.Component<ModelItemProps, ModelItemState> {
                 marginRight: 5,
               }}
             />
-            完成
+            { intl.done || '完成'}
           </span>
         );
       // case 9: return intl.get('project.job.block.Canceling');
@@ -131,7 +133,7 @@ class ModelItem extends React.Component<ModelItemProps, ModelItemState> {
     return data.resource.gpus;
   }
   render() {
-    const { data } = this.props;
+    const { data, intl= {} } = this.props;
     const cpu = data.metricData.cpu;
     const mem = data.metricData.mem;
     const gpu = data.metricData.gpu;
@@ -146,8 +148,8 @@ class ModelItem extends React.Component<ModelItemProps, ModelItemState> {
               >
                 {data.alias}
               </span>
-              {this.iconStatus(data.status)}
-              <Tooltip title="查看日志">
+              {this.iconStatus(data.status, intl)}
+              <Tooltip title={intl.viewLog || '查看日志'}>
                 <span
                   onClick={() => {
                     this.onSeeLogClick(data.id);
@@ -280,7 +282,7 @@ class ModelItem extends React.Component<ModelItemProps, ModelItemState> {
               />
             ) : (
               <div className={"timer"}>
-                <div className={"timerTit"}>耗时</div>
+                <div className={"timerTit"}>{ intl.time || '耗时'}</div>
                 <div className={"userTimer"}>- - : - - : - -</div>
               </div>
             )}
@@ -291,4 +293,4 @@ class ModelItem extends React.Component<ModelItemProps, ModelItemState> {
   }
 }
 
-export default ModelItem;
+export default LocaleReceiverHoc('AutoML')(ModelItem);

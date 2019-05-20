@@ -12,13 +12,12 @@ export interface LocaleProviderProps {
 class LocaleProvider extends React.Component<LocaleProviderProps, any> {
   static LocaleReceiver: typeof LocaleReceiver;
   static defaultProps = {
-    locale: "zh_CN"
+    locale: "zh_CN",
   };
 
   render() {
     const { children, locale } = this.props;
     const currLocal = ["en_US", "en-US"].includes(locale) ? enUS : zhCN;
-    console.log("currLocal", currLocal, locale);
     return (
       <LocaleContext.Provider value={currLocal}>
         {/* 子节点只有一项 */}

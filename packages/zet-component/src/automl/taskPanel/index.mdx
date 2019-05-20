@@ -8,6 +8,8 @@ import { Playground, PropsTable } from 'docz';
 import { State, Toggle } from 'react-powerplug'
 import { AutoML } from '../../index.tsx';
 import jobList from './_mock/jobInfo.js';
+import { LocaleProviderHoc } from "../../utils/hoc.tsx";
+
 
 # AutoML.Design (建模设计)
 自动建模建模设计时候用此组件
@@ -25,7 +27,7 @@ import { AutoML } from 'zet-component';
     {
       ({state,setState})=>{
         const { Task } = AutoML;
-        return (
+        return LocaleProviderHoc(
           <Task
             title={'test01'}
             jobInfo={{jobId:'123',jobStatus:'FAIL'}}
@@ -59,7 +61,7 @@ import { AutoML } from 'zet-component';
       ({state,setState})=>{
         const { Task } = AutoML;
         const { Group } = Task;
-        return (
+        return LocaleProviderHoc(
           <Group selectedTaskId={'3ac15482-689f-4b0c-9212-0fd29086c46a'}>
              { jobList && jobList.map(item=>{
                 return (

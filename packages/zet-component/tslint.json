@@ -17,7 +17,9 @@
     "jsdoc-format": false,
     "jsx-self-close": false,
     "no-empty-interface": false,
-    "jsx-alignment": false
+    "jsx-alignment": false,
+    "no-implicit-dependencies": false,
+    "arrow-parens" : false
   },
   "rulesDirectory": []
 }

@@ -2,47 +2,20 @@ import React from "react";
 import { Card, Row, Col, List, Icon, Spin } from "antd";
 import moment from "moment";
 import Chart from "../../components/charts";
+import { LocaleReceiverHoc } from "../../utils/hoc";
+import CardExtra from './CardExtra';
 import "./index.less";
 // import sliderData from './_mock/chartData';
 // import {start} from "repl";
 
 const { SliderChart } = Chart;
 
-function CardExtra(props) {
-  return (
-    <span>
-      <a
-        onClick={() => {
-          props.forecast(props.modelId);
-        }}
-      >
-        预测
-      </a>
-      <span> | </span>
-      <a
-        onClick={() => {
-          props.openModelDetail();
-        }}
-      >
-        查看
-      </a>
-      <span> | </span>
-      <a
-        onClick={() => {
-          props.view(props.id);
-        }}
-      >
-        日志
-      </a>
-    </span>
-  );
-}
-
 export interface ModelChartProps {
   /** 组件行行内样式 */
   data?: any;
   autoMLInfo?: any;
   item?: any;
+  intl?: any;
   jobId?: string;
   getView?: (blockId: string) => void;
   getForecast?: (moduleId: string) => void;
@@ -60,11 +33,11 @@ class ModelChart extends React.Component<ModelChartProps, ModelChartState> {
     const result = moment(endTime).diff(moment(startTime), "seconds");
     return isNaN(result) ? 0 : result;
   }
-  view = (blockId) => {
+  view = blockId => {
     this.props.getView && this.props.getView(blockId);
   }
 
-  forecast = (moduleId) => {
+  forecast = moduleId => {
     this.props.getForecast && this.props.getForecast(moduleId);
   }
 
@@ -87,6 +60,7 @@ class ModelChart extends React.Component<ModelChartProps, ModelChartState> {
         trainEndTime,
       },
       autoMLInfo = {},
+      intl = {},
       ...otherProps
     } = this.props;
 
@@ -106,7 +80,8 @@ class ModelChart extends React.Component<ModelChartProps, ModelChartState> {
                 {name}
               </span>
               <span style={{ fontSize: 14, color: "rgba(16, 38, 58, 0.45)" }}>
-                运行时间 {this.durtion(trainBeginTime, trainEndTime)}s
+                {intl.runTime || "运行时间"}{" "}
+                {this.durtion(trainBeginTime, trainEndTime)}s
               </span>
             </span>
           }
@@ -131,4 +106,4 @@ class ModelChart extends React.Component<ModelChartProps, ModelChartState> {
   }
 }
 
-export default ModelChart;
+export default LocaleReceiverHoc('AutoML')(ModelChart);

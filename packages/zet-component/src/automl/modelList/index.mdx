@@ -9,6 +9,8 @@ import { State, Toggle } from 'react-powerplug'
 import { AutoML } from '../../index.tsx';
 import modelList from './_mock/modelList.js';
 import jobData from './_mock/jobData.js';
+import { LocaleProviderHoc } from '../../utils/hoc.tsx';
+
 
 
 # ModelList (模型成果列表)
@@ -28,7 +30,7 @@ import { AutoML } from 'zet-component';
     {
       ({state,setState})=>{
         const { ModelList } = AutoML;
-        return (
+        return LocaleProviderHoc(
           <ModelList
           data={modelList}
           contentType='detail'
@@ -48,7 +50,7 @@ import { AutoML } from 'zet-component';
     {
       ({state,setState})=>{
         const { ModelList } = AutoML;
-        return (
+        return LocaleProviderHoc(
           <ModelList
             data={modelList}
             contentType='list'
@@ -67,7 +69,7 @@ import { AutoML } from 'zet-component';
     {
       ({state,setState})=>{
         const { ModelList } = AutoML;
-        return (
+        return LocaleProviderHoc(
           <ModelList
             data={[{}]}
             contentType='chart'
