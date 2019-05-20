@@ -5,12 +5,8 @@ import LocaleReceiver from "../components/locale-provider/localeReceiver";
 /**
    中英文 LocaleProvider hoc
 */
-interface LocaleProviderHocState {
-  /** 图表类型 */
-  currLocale: string;
-}
 export const LocaleProviderHoc = WrappedComponent => {
-  class HocComponent extends React.Component<any, LocaleProviderHocState> {
+  class HocComponent extends React.Component{
     constructor(props) {
       super(props);
       this.state = {
@@ -45,12 +41,9 @@ export const LocaleProviderHoc = WrappedComponent => {
 /**
    中英文 LocaleProvider hoc
 */
-interface LocaleReceiverHocState {
-  /** 图表类型 */
-  lcoale: any;
-}
+
 export const LocaleReceiverHoc = componentName => WrappedComponent => {
-  return class HocComponent extends React.Component<any, LocaleReceiverHocState> {
+  return class HocComponent extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -61,7 +54,7 @@ export const LocaleReceiverHoc = componentName => WrappedComponent => {
       const { lcoale } = this.state;
       return (
         <LocaleReceiver componentName={componentName}>
-          {(locale: any) => <WrappedComponent {...this.props} intl={locale} />}
+          {(locale) => <WrappedComponent {...this.props} intl={locale} />}
         </LocaleReceiver>
       );
     }
