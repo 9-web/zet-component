@@ -2,7 +2,7 @@ import * as React from 'react';
 // tslint:disable-next-line: no-submodule-imports
 import { FormComponentProps } from 'antd/lib/form';
 import { DataItemSchema, ParamsItemSchema, ValueItemSchema } from './interface';
-import { Form, Select, Input, InputNumber, Radio } from 'antd';
+import { Form, Select, Input, InputNumber, Radio, Checkbox } from 'antd';
 import Ellipsis from '../../components/ellipsis';
 import TagInput from '../../components/tag-input';
 import TimeSelect from '../../components/time-select';
@@ -10,6 +10,7 @@ import './index.less';
 
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
+const CheckboxGroup = Checkbox.Group;
 const { Option } = Select;
 const formItemLayout = {
   labelCol: {
@@ -97,6 +98,19 @@ class Item extends React.Component<ItemProps, any> {
     );
   }
 
+  renderCheckboxGroup = (checkboxData: ParamsItemSchema) => {
+    const { disabled } = this.props;
+    return (
+      <CheckboxGroup disabled={disabled} key={checkboxData.key}>
+        {
+          Array.isArray(checkboxData.data) && checkboxData.data.map((d) => {
+            return <Checkbox key={d.value} value={d.value}>{d.name}</Checkbox>;
+          })
+        }
+      </CheckboxGroup>
+    );
+  }
+
   renderTimeSelect = (timeSelectData: ParamsItemSchema) => {
     const { disabled } = this.props;
     return <TimeSelect key={timeSelectData.key} data={timeSelectData.data} disabled={disabled} />;
@@ -115,6 +129,8 @@ class Item extends React.Component<ItemProps, any> {
         return <InputNumber style={{width: '100%'}} min={item.min} max={item.max} disabled={disabled} key={item.key} />;
       case 'radio-group':
         return this.renderRadioGroup(item);
+      case 'checkbox-group':
+        return this.renderCheckboxGroup(item);
       case 'time-select':
         return this.renderTimeSelect(item);
       default:

@@ -32,7 +32,25 @@ export default [
         value: 3,
       }],
       default: 1,
-    }, {
+    }, 
+    {
+      key: 'checkboxGroup',
+      name: 'checkboxGroup',
+      type: 'checkbox-group',
+      extra: "checkbox-group",
+      data: [{
+        name: 'A',
+        value: 1,
+      }, {
+        name: 'B',
+        value: 2,
+      }, {
+        name: 'C',
+        value: 3,
+      }],
+      default: [1],
+    },
+    {
       key: 'timeSelect',
       name: 'timeSelect',
       type: 'time-select',
