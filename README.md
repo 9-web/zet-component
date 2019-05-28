@@ -86,3 +86,6 @@ $ yarn dev
 * `yarn deploy:doc` 把文档产物发布到github pages上
 * `yarn publish` 发布组件到npm仓库上
 * `yarn deploy` 构建组件并并把组件发布到npm仓库上
+
+
+### git lab  https://gitlab.datacanvas.com/APS/zet-component
