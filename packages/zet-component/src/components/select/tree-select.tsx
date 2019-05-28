@@ -1,9 +1,23 @@
 import * as React from "react";
 import { TreeSelect as TreeSelect_ } from 'antd';
-import { TreeNodeNormal } from 'antd/lib/tree-select/interface';
 import classnames from 'classnames';
 
 import './index.less';
+
+export interface TreeNodeNormal {
+  value: string | number;
+  /**
+   * @deprecated Please use `title` instead.
+   */
+  label?: React.ReactNode;
+  title?: React.ReactNode;
+  key: string;
+  isLeaf?: boolean;
+  disabled?: boolean;
+  disableCheckbox?: boolean;
+  selectable?: boolean;
+  children?: TreeNodeNormal[];
+}
 
 export interface TreeProps {
   /** 组件行行内样式 */
@@ -43,8 +57,10 @@ class TreeSelect  extends React.Component<TreeProps, any> {
   }
 
   render() {
-    const { style, className, treeData, showSearch, allowClear, treeDefaultExpandAll, treeNodeFilterProp, ...rest} = this.props;
-    const classNames = classnames('zetSelect', className);
+    const {
+      style, className, treeData, showSearch, allowClear, treeDefaultExpandAll,
+      treeNodeFilterProp, ...rest } = this.props;
+    const classNames = classnames('zet-select', className);
     const defuleStyle = {
       ...style,
     };
