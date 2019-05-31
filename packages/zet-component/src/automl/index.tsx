@@ -7,6 +7,7 @@ import Task from './taskPanel';
 import Chart from './modelChart/modelChart';
 import ModelList from './modelList/modelList';
 import MetricsSelect from './metricsSelect';
+import Derivative from './derivative';
 
 const AutoML = {
   Design,
@@ -17,6 +18,7 @@ const AutoML = {
   Layout,
   ModelList,
   MetricsSelect,
+  Derivative,
 };
 
 export default AutoML;

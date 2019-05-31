@@ -1,0 +1,53 @@
+---
+name: Derivative(特征衍生)
+menu: AutoML
+---
+
+import { Playground, PropsTable } from 'docz';
+import { State, Toggle } from 'react-powerplug';
+import { AutoML } from '../../index.tsx';
+import { LocaleProviderHoc } from '../../utils/hoc.js';
+import { data, value, collapseData } from './_mock/data'
+
+
+# Derivative
+
+## 使用
+Derivative
+
+
+## 参数模板
+
+### 组件输出接口数据
+```
+```
+
+## 案例介绍
+<Playground>
+  <State initial={{disabled: false, value: value}}>
+    {({ state, setState }) => {
+      const onChange = (newValue)=>{
+        console.log('mdx value >> ', newValue);
+        setState({
+          value:newValue
+        })
+      }
+      return (
+        LocaleProviderHoc(
+          <AutoML.Derivative 
+            data={data} 
+            collapseData={collapseData}
+            value={state.value} 
+            onChange={onChange}
+          >
+          </AutoML.Derivative>
+        )
+      )
+    }}
+  </State>
+</Playground>
+
+
+## API
+
+<PropsTable of={AutoML.Derivative} />
